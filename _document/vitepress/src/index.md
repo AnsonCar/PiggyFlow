@@ -4,15 +4,15 @@ layout: home
 
 hero:
   name: "Piggy Flow"
-  text: "記帳小工具"
+  text: "工作小工具"
   tagline: 說明及技術文檔
   # image:
   #   src: /logo.png
   #   alt: VitePress
-  # actions:
-  #   - theme: brand
-  #     text: 設計概念
-  #     link: /design/overview
+  actions:
+    - theme: brand
+      text: 技術文檔
+      link: /development/overview
   #   - theme: alt
   #     text: 模塊功能
   #     link: /module/overview
