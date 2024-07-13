@@ -1,13 +1,10 @@
 type TTTPSidebar = {
     text? : string
-    items : {
-        map: any
-        text: string 
-        link: string
-    }
+    items : TTPSidebarItem[]
 }
 
 type TTPSidebarItem = {
-    text: string 
+    text: string
     link: string
+    items?: TTTPSidebar[]
 }
