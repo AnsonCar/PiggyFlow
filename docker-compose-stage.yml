@@ -1,0 +1,7 @@
+include:
+  - path:
+    - backend/stage-compose.yml
+  - path:
+    - frontend/stage-compose.yml
+  - path:
+    - _document/stage-compose.yml
