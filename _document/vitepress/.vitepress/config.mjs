@@ -12,7 +12,9 @@ export default defineConfig({
     ],
 
     sidebar: {
-      
+      '/development' : [
+        { text: 'overview', link: '/development/overview'},
+      ]
     },
 
     footer: {
