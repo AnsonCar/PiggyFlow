@@ -4,6 +4,7 @@ type TTTPSidebar = {
 }
 
 type TTPSidebarItem = {
-    text: string 
+    text: string
     link: string
+    items?: TTTPSidebar[]
 }
