@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/components/vite-lit-components.css">
+    <script type="module" src="/static/components/vite-lit-components.js"></script>
+    <title>Test 2</title>
+</head>
+
+<body>
+    <!-- <my-test></my-test> -->
+    <tp-sidebar></tp-sidebar>
+    <script>
+        document.querySelector('tp-sidebar').item = [{
+            text: '設計理念',
+            items: [
+                { text: '設計概念', link: '/design/overview' },
+                { text: '設計價值觀', link: '/design/designValues' },
+                { text: '模組化', link: '/design/modularDesign' },
+                { text: '前後端分離', link: '/design/FBS' },
+                { text: 'API 風格', link: '/design/apiStyle' },
+            ]
+        },]
+        console.log(document.querySelector('tp-sidebar').item)
+    </script>
+</body>
+
+</html>

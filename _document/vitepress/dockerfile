@@ -1,0 +1,11 @@
+FROM node:20.7.0-slim
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm i
+
+EXPOSE 8082
+
+CMD [ "npm", "run", "docs:dev" ]

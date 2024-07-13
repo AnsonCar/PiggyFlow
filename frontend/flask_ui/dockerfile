@@ -1,0 +1,10 @@
+FROM python:3.10.12-slim
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install --upgrade pip
+RUN pip install flask
+RUN pip install requests
+CMD [ "python", "main.py" ]

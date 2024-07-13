@@ -1,0 +1,11 @@
+services:
+  vitepress_document:
+    build:
+      context: ./vitepress
+    container_name: vitepress_document
+    restart: always
+    ports:
+      - 8082:8082
+    volumes:
+      - ./vitepress/.vitepress/config.mjs:/app/.vitepress/config.mjs
+      - ./vitepress/src:/app/src
