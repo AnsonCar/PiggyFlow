@@ -1,6 +1,14 @@
 # Road Map
+# v0.0.6
+- [ ] 新增 用戶管理 ui
+  - [ ] 用戶
+  - [ ] 群組
+- [ ] 新增 user group api
+
 # v0.0.5
-- [ ] 完善 Auth API
+- [ ] 新增 frontend auth 功能
+- [ ] 新增 frontend acconut ui 
+- [ ] 新增 frontend todo ui
 
 # v0.0.4
 - [x] 優化API 
