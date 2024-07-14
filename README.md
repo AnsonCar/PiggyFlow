@@ -18,6 +18,20 @@ docker compose up -d
 
 ## 項目結構
 ```
+.
+├── README.md
+├── docker-compose-production.yml
+├── docker-compose-stage.yml
+├── docker-compose.yml // local compose
+├── _document
+│   ├── docker-compose.yml
+│   └── vitepress
+├── backend
+│   ├── db_api_ninja
+│   └── docker-compose.yml
+└── frontend
+    ├── docker-compose.yml
+    └── nuxt-ts-tailwind
 ```
 
 <!-- # db
