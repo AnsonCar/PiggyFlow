@@ -1,19 +1,31 @@
 services:
-  flask_ui:
-    build:
-      context: ./flask_ui
-    container_name: flask_ui
-    ports:
-      - 5005:5005
-    volumes:
-      - ./flask_ui:/app
+  # svelte-ts-tailwind:
+  #   build: 
+  #     context: ./svelte-ts-tailwind
+  #     dockerfile: dockerfile
+  #   container_name: svelte-ts-tailwind
+  #   ports:
+  #     - 5173:5173
+  #   volumes:
+  #     - ./svelte-ts-tailwind/src/lib:/app/src/lib
+  #     - ./svelte-ts-tailwind/src/routes:/app/src/routes
 
-  vite_lit_component:
-    build: ./vite_lit_component
-    container_name: vite_lit_component
+  nuxt-ts-tailwind:
+    build:
+      context: ./nuxt-ts-tailwind
+      dockerfile: dockerfile
+    container_name: nuxt-ts-tailwind
+    ports:
+      - 3000:3000
     volumes:
-      - ./flask_ui/static/components:/dist
-      - ./flask_ui/templates:/templates
-      - ./flask_ui/static:/static
-      - ./vite_lit_component/src:/src
-      - ./vite_lit_component/index.html:/index.html
+      - ./nuxt-ts-tailwind/pages:/app/pages
+      - ./nuxt-ts-tailwind/assets:/app/assets
+      - ./nuxt-ts-tailwind/utils:/app/utils
+      - ./nuxt-ts-tailwind/server:/app/server
+      - ./nuxt-ts-tailwind/components:/app/components
+      - ./nuxt-ts-tailwind/layouts:/app/layouts
+      - ./nuxt-ts-tailwind/middleware:/app/middleware
+    env_file:
+      - .env
+    environment:
+      - DB_API_BASE_URL=${DB_API_BASE_URL}
