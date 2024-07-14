@@ -34,6 +34,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: false,
+});
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { loginToken } from '~/utils/db/token'
