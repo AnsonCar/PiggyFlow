@@ -1,4 +1,4 @@
-type TTTPSidebar = {
+type TTPSidebar = {
     text? : string
     items : TTPSidebarItem[]
 }
