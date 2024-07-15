@@ -1,4 +1,4 @@
-import { setCookie } from '/static/js/utils/cookies.js'
+import { setCookie } from '~/utils/cookies'
 
 export function killToken() {
     setCookie("token", "", 0);
