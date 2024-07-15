@@ -19,7 +19,7 @@
         <!-- Sidebar content here -->
         <slot name="sidebaritem"></slot>
         <li class="mt-auto">
-          <div id="logoutBtn">
+          <div id="logoutBtn" @click="killToken">
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
               width="24px">
               <path
@@ -34,7 +34,11 @@
 </template>
 
 <script lang="ts" setup>
+import { killToken } from '~/utils/logout';
+
 const props = defineProps<{
   title: string
 }>()
+
+
 </script>
