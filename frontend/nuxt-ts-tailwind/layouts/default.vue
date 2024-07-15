@@ -23,7 +23,8 @@ const siderbaritems = [
     text: '工具箱',
     items: [
       // { text: '要事', link: '/todo' },
-      { text: '記帳', link: '/account' }
+      { text: '記帳', link: '/account' },
+      { text: 'QRCode', link: '/qrcode'}
     ]
   },
   // {
