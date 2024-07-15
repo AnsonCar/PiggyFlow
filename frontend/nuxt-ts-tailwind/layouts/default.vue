@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 const title = 'Piggy Flow'
+
 const siderbaritems = [
   {
     items: [
@@ -22,7 +23,8 @@ const siderbaritems = [
     text: '工具箱',
     items: [
       // { text: '要事', link: '/todo' },
-      // { text: '記帳', link: '/acccount' }
+      { text: '記帳', link: '/account' },
+      { text: 'QRCode', link: '/qrcode'}
     ]
   },
   // {

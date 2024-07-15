@@ -6,7 +6,7 @@
 - [ ] 新增 user group api
 
 # v0.0.5
-- [ ] 新增 frontend auth 功能
+- [x] 新增 frontend auth 功能
 - [ ] 新增 frontend acconut ui 
 - [ ] 新增 frontend todo ui
 
