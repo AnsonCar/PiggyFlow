@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 const title = 'Piggy Flow'
+
 const siderbaritems = [
   {
     items: [
