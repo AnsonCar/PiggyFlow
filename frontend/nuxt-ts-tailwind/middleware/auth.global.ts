@@ -1,14 +1,12 @@
-export default defineNuxtRouteMiddleware( (to, from) => {
-  (async () => {
-    const isLogin: boolean = await isAuthenticated();
-    // 如果未登入，全部返回Login Page
-    if (!isLogin && to.path !== "/login") {
-      return navigateTo("/login");
-    // 如果有登入同時在 Login Page，返回主頁
-    } else if (isLogin && to.path === "/login") {
-      return navigateTo("/");
-    }
-  })()
+export default defineNuxtRouteMiddleware( async (to, from) => {
+  const isLogin: boolean = await isAuthenticated();
+  // 如果未登入，全部返回Login Page
+  if (!isLogin && to.path !== "/login") {
+    return navigateTo("/login");
+  // 如果有登入同時在 Login Page，返回主頁
+  } else if (isLogin && to.path === "/login") {
+    return navigateTo("/");
+  }
 });
 
 async function isAuthenticated() {
