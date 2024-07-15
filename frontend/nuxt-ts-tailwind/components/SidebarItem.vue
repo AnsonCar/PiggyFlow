@@ -1,5 +1,5 @@
 <template>
-  <div v-for="item, index in items" :key="index">
+  <div v-for="item, index in props.items" :key="index">
     <li v-if="item.text">
       <details open>
         <summary>{{ item.text }}</summary>
@@ -11,14 +11,14 @@
       </details>
     </li>
     <li v-else v-for="i, num in item.items" :key="num">
-      <NuxtLink :to='i.link' class="active">{{ i.text }}</NuxtLink>
+      <NuxtLink :to='i.link' :class="{ active : i.link === path }">{{ i.text }}</NuxtLink>
     </li>
   </div>
 </template>
 
 <script lang="ts" setup>
 const route = useRoute()
-console.log(route.path)
+const path = route.path === '/login' ? '/' : route.path
 const props = defineProps<{
   items: TTPSidebar[]
 }>()
