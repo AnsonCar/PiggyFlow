@@ -13,7 +13,7 @@
 			<a class="btn btn-ghost text-xl lg:hidden">{{ props.title }}</a>
 		</div>
 		<div class="flex-none">
-			<slot></slot>
+			<slot name="navbarfuntion"></slot>
 		</div>
 	</nav>
 </template>

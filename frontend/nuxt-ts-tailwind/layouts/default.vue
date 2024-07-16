@@ -1,7 +1,11 @@
 <template class="size-full">
   <Sidebar :title>
     <template v-slot:navbar>
-      <Navbar :title></Navbar>
+      <Navbar :title>
+        <!-- <template v-slot:navbarfuntion>
+          <slot name="innavbarfuntion"></slot>
+        </template> -->
+      </Navbar>
     </template>
     <template v-slot:sidebaritem>
       <SidebarItem :items="siderbaritems" ></SidebarItem>

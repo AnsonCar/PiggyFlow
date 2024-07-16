@@ -1,24 +1,13 @@
 <template>
-  <main class="h-[calc(100%-64px)] overflow-y-scroll">
   <div class="overflow-y-scroll">
     <!-- add -->
     <div class="tp-card">
       <div class="tp-card-body">
-        <label class="tp-input">
-          Date
-          <input type="datetime-local" class="tp-input-body" id="datetime" />
-        </label>
-        <label class="tp-input">
-          Label
-          <input type="text" class="tp-input-body" id="label" />
-        </label>
-        <label class="tp-input">
-          Price
-          <span class="pl-2">$</span>
-          <input type="number" class="p-0 tp-input-body" id="price" />
-        </label>
+        <TPInput type="datetime-local" label="Date" :error="false" v-model="selectDateTime"></TPInput>
+        <TPInput type="text" label="Label" :error="hasLabel" v-model="selectLabel"></TPInput>
+        <TPInput type="number" label="Price" text="$" :error="hasPrice" v-model="selectPrice"></TPInput>
         <div class="card-actions justify-end">
-          <button class="btn" id="saveAccount">
+          <button class="btn" @click="saveAccount">
             Save
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
               width="24px">
@@ -30,13 +19,68 @@
       </div>
     </div>
     <br>
-    <!-- gets -->
-    <div id="accountBox">
-    </div>
+    <AccountHistory :data="accountHistoryData"></AccountHistory>
   </div>
-</main>
 </template>
 
 <script setup lang="ts">
+import AccountHistory from '~/components/account/AccountHistory.vue';
+import { getsTransaction, addTransaction, delTransaction, downloadTransactionCSV } from '~/utils/db/transaction'
+
+const selectDateTime = ref<string>('');
+const selectLabel = ref<string>('');
+const selectPrice = ref<string>('');
+
+const hasLabel = ref<boolean>(false);
+const hasPrice = ref<boolean>(false);
+
+const accountHistoryData = ref<any>({});
+
+async function saveAccount() {
+  console.log(123)
+  hasLabel.value = checkNull(selectLabel.value)
+  hasPrice.value = checkNull(selectPrice.value)
+
+  if (!hasLabel.value && !hasPrice.value) {
+    const data = {
+      "datetime": formatDateTimeZone(selectDateTime.value),
+      "label": selectLabel.value,
+      "price": selectPrice.value
+    }
+    const res = await addTransaction(data)
+    console.log(res)
+    if (res.id) {
+      initData()
+    }
+  }
+
+}
+
+async function delAccount(uuid: string) {
+  await delTransaction(uuid)
+  await initData()
+}
+
+async function initData() {
+  // data
+  const res = await getsTransaction()
+  let allUUid = []
+  const dataGroup: any = {}
+  for (const e of res.data.reverse()) {
+    const date = formatDate(e.datetime)
+    if (typeof dataGroup[date] === 'object') {
+      dataGroup[date] = [...dataGroup[date], e]
+    } else {
+      dataGroup[date] = [e]
+    }
+  }
+  Object.keys(dataGroup).reverse()
+  accountHistoryData.value = dataGroup
+}
+
+onMounted(() => {
+  selectDateTime.value = formatDateTime(new Date())
+  initData()
+})
 
 </script>
