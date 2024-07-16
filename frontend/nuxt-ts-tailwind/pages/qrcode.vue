@@ -3,7 +3,7 @@
 		<div class="tp-card-body">
 			<label class="tp-input">
 				URL
-				<input type="text" class="tp-input-body" v-model="url" @input="updateQrcode">
+				<input type="text" class="tp-input-body" v-model="url" >
 			</label>
 		</div>
 	</div>
