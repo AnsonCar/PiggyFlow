@@ -20,7 +20,7 @@ const title = 'Piggy Flow'
 const siderbaritems = [
   {
     items: [
-      { text: '儀表板', link: '/' },
+      // { text: '儀表板', link: '/' },
     ]
   },
   {

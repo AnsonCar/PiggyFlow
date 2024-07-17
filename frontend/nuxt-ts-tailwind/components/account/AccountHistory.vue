@@ -40,7 +40,7 @@
       <p class="py-4 flex justify-between">
         <span>Delect Data ?</span>
         <form method="dialog">
-          <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2" @click="delAccount()" />
+          <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
         </form>
       </p>
     </div>
