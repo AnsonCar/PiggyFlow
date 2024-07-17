@@ -40,3 +40,19 @@ const siderbaritems = [
   // }
 ]
 </script>
+
+<style>
+.page-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.page-leave-active {
+  transition: all 0.1s ease-in;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0.2;
+  filter: blur(1rem);
+}
+
+</style>
