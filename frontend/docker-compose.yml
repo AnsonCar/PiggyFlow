@@ -1,15 +1,4 @@
 services:
-  # svelte-ts-tailwind:
-  #   build: 
-  #     context: ./svelte-ts-tailwind
-  #     dockerfile: dockerfile
-  #   container_name: svelte-ts-tailwind
-  #   ports:
-  #     - 5173:5173
-  #   volumes:
-  #     - ./svelte-ts-tailwind/src/lib:/app/src/lib
-  #     - ./svelte-ts-tailwind/src/routes:/app/src/routes
-
   nuxt-ts-tailwind:
     build:
       context: ./nuxt-ts-tailwind
