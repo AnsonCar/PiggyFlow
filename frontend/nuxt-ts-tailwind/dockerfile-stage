@@ -6,9 +6,7 @@ COPY . .
 
 RUN npm ci
 
-# CMD [ "npm", "run", "dev" ]
 RUN npm run build
-# CMD [ "node", "./build/index.js" ]
 CMD ["node", ".output/server/index.mjs"]
 
 ENV NUXT_HOST=0.0.0.0
