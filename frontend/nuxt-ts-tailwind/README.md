@@ -72,4 +72,7 @@ yarn preview
 bun run preview
 ```
 
+<!-- npx nuxi Upgrade --force -->
+<!-- https://arc.net/l/quote/gxezbuov -->
+
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
