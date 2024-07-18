@@ -5,7 +5,17 @@ export function formatDateTime(date: Date) {
   var hours = date.getHours().toString().padStart(2, '0');
   var minutes = date.getMinutes().toString().padStart(2, '0');
 
+  // Get the GMT offset in hours and minutes
+  var offsetHours = Math.abs(date.getTimezoneOffset()) / 60;
+  var offsetSign = date.getTimezoneOffset() < 0 ? '+' : '-';
+  var offset = offsetSign + padZero(offsetHours) + '00';
+  // return `${year}-${month}-${day}T${hours}:${minutes}${offset}`
+  
   return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
+function padZero(num:number) {
+  return num.toString().padStart(2, '0');
 }
 
 // timezone
