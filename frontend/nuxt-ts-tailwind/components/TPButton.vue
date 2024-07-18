@@ -10,6 +10,6 @@ const props = defineProps<{
   label?: string
   icon?: string
   active?: boolean
-  size?: 'xs'
+  size?: 'xs' | 'sm'
 }>()
 </script>
