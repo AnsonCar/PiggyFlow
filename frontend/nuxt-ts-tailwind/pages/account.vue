@@ -15,12 +15,14 @@
       </div>
     </TPBox>
     <br>
+    <!-- Histoty -->
     <AccountHistory :data="accountHistoryData" :editMode="editMode" @initData="initData"></AccountHistory>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getsTransaction, addTransaction, downloadTransactionCSV } from '~/utils/db/transaction'
+import { groupDataByDay } from '~/utils/formatDate';
 
 const selectDateTime = ref<string>('');
 const selectLabel = ref<string>('');
@@ -43,7 +45,6 @@ async function saveAccount() {
       "price": selectPrice.value
     }
     const res = await addTransaction(data)
-    console.log(res)
     if (res.id) {
       initData()
     }
@@ -51,20 +52,10 @@ async function saveAccount() {
 }
 
 async function initData() {
-  console.log('init')
   // data
   const res = await getsTransaction()
-  let allUUid = []
-  const dataGroup: any = {}
-  for (const e of res.data.reverse()) {
-    const date = formatDate(e.datetime)
-    if (typeof dataGroup[date] === 'object') {
-      dataGroup[date] = [...dataGroup[date], e]
-    } else {
-      dataGroup[date] = [e]
-    }
-  }
-  Object.keys(dataGroup).reverse()
+  const dataGroup = groupDataByDay(res)
+  console.log(dataGroup)
   accountHistoryData.value = dataGroup
 }
 
