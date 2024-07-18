@@ -1,37 +1,39 @@
 <template>
   <!-- History Table -->
-  <div class="tp-card" v-for="tableData in inData" :key="tableData.date">
-    <div class="tp-card-body">
-      <div class="overflow-x-auto">
-        <div class="flex justify-between px-2 pb-2">
-          <div>{{ tableData.date }}</div>
-          <div>$ {{ tableData.total.toFixed(2) }}</div>
+  <div v-for="tableData, index in inData" :key="`card_${index}`">
+    <div class="tp-card">
+      <div class="tp-card-body">
+        <div class="overflow-x-auto">
+          <div class="flex justify-between px-2 pb-2">
+            <div>{{ tableData.date }}</div>
+            <div>$ {{ tableData.total.toFixed(2) }}</div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="">Label</th>
+                <th class="">Price</th>
+                <th class="w-10" v-if="props.editMode">Action</th>
+              </tr>
+            </thead>
+            <tbody v-for="i, index in tableData.item" :key="index">
+              <tr class=" h-14 ">
+                <td class="w-2/5 ">{{ i.label }}</td>
+                <td>{{ i.price }}</td>
+                <td v-if="props.editMode" class="flex">
+                  <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
+                    @click="() => openEditDiag(i)" />
+                  <TPButton icon="delect" size="xs" onclick="diag.showModal()" @click="openDelDiag(i.uuid)" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table class="table">
-          <!-- head -->
-          <thead>
-            <tr>
-              <th class="">Label</th>
-              <th class="">Price</th>
-              <th class="w-10" v-if="props.editMode">Action</th>
-            </tr>
-          </thead>
-          <!-- body -->
-          <tbody v-for="i, index in tableData.item" :key="index">
-            <tr class=" h-14 ">
-              <td class="w-2/5 ">{{ i.label }}</td>
-              <td>{{i.price}}</td>
-              <td v-if="props.editMode" class="flex">
-                <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()" @click="() => openEditDiag(i)" />
-                <TPButton icon="delect" size="xs" onclick="diag.showModal()" @click="openDelDiag(i.uuid)" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
+    <br>
   </div>
-  <br>
+
   <!-- Diag -->
   <TPDiag id="diag">
     <!-- Delect -->
@@ -39,9 +41,9 @@
       <h3 class="text-lg font-bold text-error">Delect Data</h3>
       <p class="py-4 flex justify-between">
         <span>Delect Data ?</span>
-        <form method="dialog">
-          <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
-        </form>
+      <form method="dialog">
+        <TPButton label="Delect" icon="delect" size="md" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
+      </form>
       </p>
     </div>
     <!-- Edit -->
@@ -67,7 +69,7 @@ const emit = defineEmits(['initData'])
 
 const selectDateTime = ref<string>('');
 const selectLabel = ref<string>('');
-const selectPrice = ref<string>('');
+const selectPrice = ref<number | string>('');
 const acconutUUID = ref<string>('')
 
 const hasLabel = ref<boolean>(false);
@@ -75,9 +77,9 @@ const hasPrice = ref<boolean>(false);
 
 const inData = computed(() => {
   let ret = []
-  let tableData: { date: string, total: number, item: { datetime: string, label: string, price: number, uuid: string }[] } = { date: '', total: 0, item: [] }
 
   for (const e in props.data) {
+    let tableData: { date: string, total: number, item: { datetime: string, label: string, price: number, uuid: string }[] } = { date: '', total: 0, item: [] }
     tableData.date = e
     for (const i of props.data[e]) {
       tableData.total += parseFloat(i.price)
@@ -92,7 +94,7 @@ const inData = computed(() => {
 const isDelData = ref<boolean>(false)
 
 // Delect Data
-async function openDelDiag(uuid:string) {
+async function openDelDiag(uuid: string) {
   isDelData.value = true
   acconutUUID.value = uuid
 }
@@ -105,7 +107,7 @@ async function delAccount() {
 // Edit Data
 async function openEditDiag(data: { datetime: string, label: string, price: number, uuid: string }) {
   isDelData.value = false
-  selectDateTime.value =  formatDateTime( new Date(data.datetime))
+  selectDateTime.value = formatDateTime(new Date(data.datetime))
   selectLabel.value = data.label
   selectPrice.value = data.price
   acconutUUID.value = data.uuid
@@ -113,7 +115,7 @@ async function openEditDiag(data: { datetime: string, label: string, price: numb
 
 async function eidtAcconut() {
   hasLabel.value = checkNull(selectLabel.value)
-  hasPrice.value = checkNull(selectPrice.value)
+  hasPrice.value = checkNull(selectPrice.value as string)
   if (!hasLabel.value && !hasPrice.value) {
     const data = {
       "datetime": formatDateTimeZone(selectDateTime.value),
