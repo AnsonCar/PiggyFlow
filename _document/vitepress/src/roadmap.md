@@ -1,14 +1,30 @@
 # Road Map
+# v0.0.9
+- [ ] 加入 AutoAnimate (考慮)
+- [ ] 加入 i18n
+
+# v0.0.8
+- [ ] 實時語音轉文字
+
+# v0.0.7
+- [ ] ocr 功能
+- [ ] 新增 固定支出 功能
+- [ ] 畫 前後端圖
+- [ ] docker local 版
+- [ ] docker stage 版
+- [ ] docker product 版
+
 # v0.0.6
 - [ ] 新增 用戶管理 ui
   - [ ] 用戶
   - [ ] 群組
 - [ ] 新增 user group api
+- [ ] 分開API Service file
 
 # v0.0.5
-- [ ] 新增 frontend auth 功能
-- [ ] 新增 frontend acconut ui 
-- [ ] 新增 frontend todo ui
+- [x] 新增 frontend auth 功能
+- [x] 新增 frontend acconut ui 
+- [x] 新增 frontend todo ui
 
 # v0.0.4
 - [x] 優化API 
