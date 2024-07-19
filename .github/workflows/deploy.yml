@@ -27,8 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: pwd
-      - run: cd ./_document/vitepress
-      - run: pwd
+      - run: ls
+      # - run: pwd
 #   # 构建工作
 #   build:
 #     runs-on: ubuntu-latest
