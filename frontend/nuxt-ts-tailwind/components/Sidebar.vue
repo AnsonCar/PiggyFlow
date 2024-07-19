@@ -4,7 +4,7 @@
     <div class="drawer-content h-[100vh]">
       <!-- Nav -->
       <slot name="navbar"></slot>
-      <main class="p-4 h-[calc(100%-64px)] lg:h-full">
+      <main class="p-4 h-[calc(100%-64px)] lg:h-full overflow-y-scroll">
         <!-- Main -->
         <slot></slot>
       </main>

@@ -6,7 +6,6 @@ from ninja import Schema
 class ToDoIn(Schema):
     datetime: str
     label: str
-    price: float
 
 
 class ToDoOut(Schema):
@@ -19,3 +18,6 @@ class ToDoOut(Schema):
 
 class ToDoList(Schema):
     data: list[ToDoOut]
+
+class ToDoDone(Schema):
+    done: bool

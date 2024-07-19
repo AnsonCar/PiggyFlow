@@ -2,6 +2,7 @@
   <div class="overflow-y-scroll">
     <!-- add -->
     <TPBox>
+      <h1 class="text-xl pl-1 flex items-center"><TPIcon icon="wallet" /><p class="pl-2">Account</p></h1>
       <TPInput type="datetime-local" label="Date" :error="false" v-model="selectDateTime"></TPInput>
       <TPInput type="text" label="Label" :error="hasLabel" v-model="selectLabel"></TPInput>
       <TPInput type="number" label="Price" text="$" :error="hasPrice" v-model="selectPrice"></TPInput>
@@ -15,12 +16,14 @@
       </div>
     </TPBox>
     <br>
+    <!-- Histoty -->
     <AccountHistory :data="accountHistoryData" :editMode="editMode" @initData="initData"></AccountHistory>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getsTransaction, addTransaction, downloadTransactionCSV } from '~/utils/db/transaction'
+import { groupDataByDay } from '~/utils/formatDate';
 
 const selectDateTime = ref<string>('');
 const selectLabel = ref<string>('');
@@ -43,7 +46,6 @@ async function saveAccount() {
       "price": selectPrice.value
     }
     const res = await addTransaction(data)
-    console.log(res)
     if (res.id) {
       initData()
     }
@@ -51,20 +53,10 @@ async function saveAccount() {
 }
 
 async function initData() {
-  console.log('init')
   // data
   const res = await getsTransaction()
-  let allUUid = []
-  const dataGroup: any = {}
-  for (const e of res.data.reverse()) {
-    const date = formatDate(e.datetime)
-    if (typeof dataGroup[date] === 'object') {
-      dataGroup[date] = [...dataGroup[date], e]
-    } else {
-      dataGroup[date] = [e]
-    }
-  }
-  Object.keys(dataGroup).reverse()
+  const dataGroup = groupDataByDay(res)
+  console.log(dataGroup)
   accountHistoryData.value = dataGroup
 }
 
