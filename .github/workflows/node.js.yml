@@ -25,6 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - working-directory: _document/vitepress  
     - run: npm ci
+      working-directory: _document/vitepress
     - run: npm run docs:build
+      working-directory: _document/vitepress  
