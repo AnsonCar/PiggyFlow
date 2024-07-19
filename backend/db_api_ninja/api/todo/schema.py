@@ -18,3 +18,6 @@ class ToDoOut(Schema):
 
 class ToDoList(Schema):
     data: list[ToDoOut]
+
+class ToDoDone(Schema):
+    done: bool

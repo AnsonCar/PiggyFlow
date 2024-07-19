@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from ninja import Router
 from django.shortcuts import get_object_or_404
 from .models import ToDo
-from .schema import ToDoIn, ToDoList, ToDoOut
+from .schema import ToDoIn, ToDoList, ToDoOut, ToDoDone
 from ninja_jwt.authentication import JWTAuth
 
 MyModel = ToDo
@@ -15,7 +15,7 @@ ModelList = ToDoList
 router = Router(tags=["todo"])
 
 
-@router.get("", auth=JWTAuth() , response=ModelList)
+@router.get("", auth=JWTAuth(), response=ModelList)
 def get_todos(request):
     data = MyModel.objects.all()
     return ModelList(data=data)
@@ -72,3 +72,16 @@ def download_todo_csv(request):
         row = [str(getattr(item, field)) for field in field_names]
         writer.writerow(row)
     return response
+
+
+router_done = Router(tags=["todo done"])
+
+
+@router_done.put("/{uuid}", auth=JWTAuth())
+def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
+    data = get_object_or_404(MyModel, uuid=uuid)
+    for attr, value in payload.dict().items():
+        if attr == "done":
+            setattr(data, attr, value)
+    data.save()
+    return {"success": True}
