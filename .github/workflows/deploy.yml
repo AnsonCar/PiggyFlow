@@ -31,26 +31,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: check-path
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Install dependencies
         working-directory: _document/vitepress
-        run:  pwd
+        run: npm ci
 
+      - name: Build with VitePress
+        working-directory: _document/vitepress
+        run: npm run docs:build
 
-      # - name: Setup Pages
-      #   uses: actions/configure-pages@v4
-
-      # - name: Install dependencies
-      #   working-directory: _document/vitepress
-      #   run: npm ci
-
-      # - name: Build with VitePress
-      #   working-directory: _document/vitepress
-      #   run: npm run docs:build
-
-      # - name: Upload artifact
-      #   uses: actions/upload-pages-artifact@v3
-      #   with:
-      #     path: _document/vitepress/.vitepress/dist
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _document/vitepress/.vitepress/dist
 
   # 部署工作
   # deploy:
