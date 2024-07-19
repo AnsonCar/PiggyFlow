@@ -2,6 +2,7 @@
   <div class="overflow-y-scroll">
     <!-- add -->
     <TPBox>
+      <h1 class="text-xl pl-1 flex items-center"><TPIcon icon="wallet" /><p class="pl-2">Account</p></h1>
       <TPInput type="datetime-local" label="Date" :error="false" v-model="selectDateTime"></TPInput>
       <TPInput type="text" label="Label" :error="hasLabel" v-model="selectLabel"></TPInput>
       <TPInput type="number" label="Price" text="$" :error="hasPrice" v-model="selectPrice"></TPInput>
