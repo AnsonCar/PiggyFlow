@@ -42,9 +42,6 @@ jobs:
         working-directory: _document/vitepress
         run: npm run docs:build
 
-      - name: Copy assets to build output
-        run: cp -R  _document/vitepress/.vitepress/dist/ _document/vitepress/.vitepress/dist/
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
