@@ -2,10 +2,12 @@
 # #
 # name: Deploy VitePress site to Pages
 
-on: push
-# on:
-#   push:
-#     branches: [main]
+# on: push
+on:
+  push:
+    branches:
+      - main
+      - ansontsang/feature/docs
 
 #   # 允许你从 Actions 选项卡手动运行此工作流程
 #   workflow_dispatch:
@@ -29,13 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+        run: pwd
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-          working-directory: _document/vitepress
+
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
