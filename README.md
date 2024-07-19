@@ -4,7 +4,7 @@
 <h1 align="center"><b>Piggy Flow</b></h1>
 
 <p align="center">小豬心流</p>
-<!-- <p align="center">V 0.0.X</p> -->
+<p align="center">V 0.0.5</p>
 
 <main style="text-align: center;">
 
@@ -19,18 +19,21 @@ docker compose up -d
 ## 項目結構
 ```
 .
+├── LICENSE
 ├── README.md
-├── docker-compose-production.yml
-├── docker-compose-stage.yml
-├── docker-compose.yml // local compose
 ├── _document
 │   ├── docker-compose.yml
 │   └── vitepress
 ├── backend
 │   ├── db_api_ninja
-│   └── docker-compose.yml
+│   ├── docker-compose.yml
+│   └── doocker-compose-stage.yml
+├── docker-compose-production.yml
+├── docker-compose-stage.yml
+├── docker-compose.yml
 └── frontend
     ├── docker-compose.yml
+    ├── doocker-compose-stage.yml
     └── nuxt-ts-tailwind
 ```
 
