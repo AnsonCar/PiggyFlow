@@ -40,10 +40,12 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install dependencies
-        run: cd _document/vitepress | npm ci
+        working-directory: _document/vitepress
+        run: npm ci
 
       - name: Build with VitePress
-        run: cd _document/vitepress | npm run docs:build
+        working-directory: _document/vitepress
+        run: npm run docs:build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
