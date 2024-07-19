@@ -40,34 +40,38 @@ jobs:
           cache: npm # 或 pnpm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Install dependencies
-        run: npm ci # 或 pnpm install / yarn install / bun install
-      - name: Build with VitePress
-        run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+      - name: check-path
+        uses: pwd
         with:
-          name: VitePress Site
           path: _document/vitepress/.vitepress/dist
+      # - name: Install dependencies
+      #   run: npm ci # 或 pnpm install / yarn install / bun install
+      # - name: Build with VitePress
+      #   run: npm run --prefix _document/vitepress docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: VitePress Site
+      #     path: _document/vitepress/.vitepress/dist
 
   # 部署工作
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: VitePress Site
-          path: _document/vitepress/.vitepress/dist
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _document/vitepress/.vitepress/dist
+  # deploy:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   name: Deploy
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: VitePress Site
+  #         path: _document/vitepress/.vitepress/dist
+  #     - name: Deploy to GitHub Pages
+  #       uses: peaceiris/actions-gh-pages@v4
+  #       with:
+  #         personal_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: _document/vitepress/.vitepress/dist
