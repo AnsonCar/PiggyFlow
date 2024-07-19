@@ -24,7 +24,7 @@
 # v0.0.5
 - [x] 新增 frontend auth 功能
 - [x] 新增 frontend acconut ui 
-- [ ] 新增 frontend todo ui
+- [x] 新增 frontend todo ui
 
 # v0.0.4
 - [x] 優化API 
