@@ -4,13 +4,16 @@ from .models import CustomUser
 
 MyModel = CustomUser
 
+
 def get_users_service():
     data = MyModel.objects.all()
     return data
 
+
 def get_user_service():
     data = get_object_or_404(MyModel, uuid=uuid)
     return data
+
 
 def create_user_service(payload):
     try:
@@ -18,8 +21,9 @@ def create_user_service(payload):
         return {"id": data.id}
     except:
         return {"msg": "UNIQUE constraint failed"}
-    
-def update_user_service(payload):
+
+
+def update_user_service(payload, uuid):
     try:
         data = get_object_or_404(MyModel, uuid=uuid)
         for attr, value in payload.dict().items():
@@ -28,7 +32,20 @@ def update_user_service(payload):
         return {"success": True}
     except:
         return {"msg": "UNIQUE constraint failed"}
-    
+
+
+def update_user_password_service(payload, uuid):
+    # try:
+    data = get_object_or_404(MyModel, uuid=uuid)
+    payload = payload.dict()
+    password = payload["password"]
+    data.set_password(password)
+    data.save()
+    return {"success": True}
+    # except:
+        # return {"msg": "UNIQUE constraint failed"}
+
+
 def delete_user_service(uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
     data.delete()

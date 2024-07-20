@@ -8,6 +8,9 @@ class UserIn(Schema):
 class UserPut(Schema):
     username: str
     
+class UserPutPassword(Schema):
+    password: str
+    
 class UserOut(Schema):
     id: int
     uuid: uuid.UUID
