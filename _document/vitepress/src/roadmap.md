@@ -19,7 +19,7 @@
 - [ ] 新增 用戶管理 ui
   - [ ] 用戶
   - [ ] 群組
-- [ ] 新增 user group api
+- [x] 新增 user group api
 - [x] 分開API Service file
 
 # v0.0.5
