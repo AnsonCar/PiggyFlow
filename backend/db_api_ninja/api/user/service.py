@@ -1,5 +1,6 @@
 import uuid
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import Group
 from .models import CustomUser
 
 MyModel = CustomUser
@@ -35,18 +36,38 @@ def update_user_service(payload, uuid):
 
 
 def update_user_password_service(payload, uuid):
-    # try:
     data = get_object_or_404(MyModel, uuid=uuid)
     payload = payload.dict()
     password = payload["password"]
     data.set_password(password)
     data.save()
     return {"success": True}
-    # except:
-        # return {"msg": "UNIQUE constraint failed"}
 
 
 def delete_user_service(uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
     data.delete()
+    return {"success": True}
+
+
+### group
+def get_user_groups_service(uuid):
+    data = get_object_or_404(MyModel, uuid=uuid)
+    groups = data.groups.all()
+    group_list = [group.name for group in groups]
+    return {"groups": group_list}
+
+
+def add_user_group_service(payload, uuid):
+    payload = payload.dict()
+    data = get_object_or_404(MyModel, uuid=uuid)
+    group = get_object_or_404(Group, id=payload["id"])
+    data.groups.add(group)
+    return {"success": True}
+
+
+def remove_user_group_service(payload, uuid):
+    data = get_object_or_404(MyModel, uuid=uuid)
+    group = get_object_or_404(Group, id=payload["id"])
+    data.groups.remove(group)
     return {"success": True}

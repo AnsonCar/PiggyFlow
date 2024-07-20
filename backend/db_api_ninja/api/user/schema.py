@@ -19,3 +19,6 @@ class UserOut(Schema):
     
 class UserList(Schema):
     data: list[UserOut]
+    
+class UserGroup(Schema):
+    id: int

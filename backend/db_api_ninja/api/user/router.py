@@ -2,7 +2,7 @@ import uuid
 from ninja import Router
 from ninja_jwt.authentication import JWTAuth
 
-from .schema import UserIn, UserList, UserOut, UserPut, UserPutPassword
+from .schema import UserIn, UserList, UserOut, UserPut, UserPutPassword, UserGroup
 from .service import (
     get_users_service,
     get_user_service,
@@ -10,6 +10,10 @@ from .service import (
     update_user_service,
     update_user_password_service,
     delete_user_service,
+    #
+    get_user_groups_service,
+    add_user_group_service,
+    remove_user_group_service,
 )
 
 ModelIn = UserIn
@@ -50,3 +54,18 @@ def update_user_password(request, uuid: uuid.UUID, payload: UserPutPassword):
 def delete_user(request, uuid: uuid.UUID):
     return delete_user_service(uuid)
 
+
+### group
+@router.get('/group/get/{uuid}' ,auth=JWTAuth())
+def get_user_groups(request, uuid: uuid.UUID):
+    return get_user_groups_service(uuid)
+
+
+@router.post("/group/add/{uuid}", auth=JWTAuth())
+def add_user_group(request, uuid: uuid.UUID, payload: UserGroup):
+    return add_user_group_service(payload, uuid)
+
+
+@router.post("/group/remove/{uuid}", auth=JWTAuth())
+def remove_user_group(request, uuid: uuid.UUID, payload: UserGroup):
+    return remove_user_group_service(payload, uuid)
