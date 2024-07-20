@@ -1,7 +1,8 @@
 import uuid
 from ninja import Router
-from api.utils.download import download_csv
+from ninja_jwt.authentication import JWTAuth
 
+from api.utils.download import download_csv
 from .models import ToDo
 from .schema import ToDoIn, ToDoList, ToDoOut, ToDoDone
 from .service import (
@@ -10,9 +11,8 @@ from .service import (
     update_todo_service,
     create_todo_service,
     delete_todo_service,
-    update_todo_done_service
+    update_todo_done_service,
 )
-from ninja_jwt.authentication import JWTAuth
 
 MyModel = ToDo
 ModelIn = ToDoIn
@@ -45,16 +45,16 @@ def update_todo(request, uuid: uuid.UUID, payload: ModelIn):
     return update_todo_service(uuid, payload)
 
 
-@router.delete("/{uuid}", auth=JWTAuth())
-def delete_todo(request, uuid: uuid.UUID):
-    return delete_todo_service(uuid)
-
-
 @router.put("/done/{uuid}", auth=JWTAuth())
 def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
     return update_todo_done_service(uuid, payload)
 
 
+@router.delete("/{uuid}", auth=JWTAuth())
+def delete_todo(request, uuid: uuid.UUID):
+    return delete_todo_service(uuid)
+
+
 @router.post("/download/csv", auth=JWTAuth())
 def download_todo_csv(request):
-    return download_csv( MyModel, "todo" )
+    return download_csv(MyModel, "todo")
