@@ -9,13 +9,15 @@
           <label class="label">
             <span class="label-text">Username</span>
           </label>
-          <input type="text" placeholder="Username" class="input input-bordered" :class="{'input-error' : hasUsername}" v-model="username" />
+          <input type="text" placeholder="Username" class="input input-bordered" :class="{ 'input-error': hasUsername }"
+            v-model="username" />
         </div>
         <div class="form-control">
           <label class="label">
             <span class="label-text">Password</span>
           </label>
-          <input type="password" placeholder="password" class="input input-bordered" :class="{'input-error' : hasPassword}" v-model="password" />
+          <input type="password" placeholder="password" class="input input-bordered"
+            :class="{ 'input-error': hasPassword }" v-model="password" />
           <label class="label">
             <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
           </label>
@@ -51,20 +53,21 @@ const isError = ref<boolean>(false);
 async function login() {
   hasUsername.value = await checkNull(username.value)
   hasPassword.value = await checkNull(password.value)
-  
-  if ( !hasUsername.value && !hasPassword.value ) {
+
+  if (!hasUsername.value && !hasPassword.value) {
     const res = await loginToken({
-        username: username.value,
-        password: password.value
+      username: username.value,
+      password: password.value
     })
-    if ( res.access && res.refresh ) {
-        setCookie("token", res.access, 1 )
-        setCookie("refresh", res.refresh, 1 )
-        location.reload()
-        // router.push('/');
-      } else {
-        isError.value = false
-      }
+    console.log(res)
+    if (res.access && res.refresh) {
+      setCookie("token", res.access, 1)
+      setCookie("refresh", res.refresh, 1)
+      location.reload()
+      // router.push('/');
+    } else {
+      isError.value = true
+    }
   }
 }
 </script>
