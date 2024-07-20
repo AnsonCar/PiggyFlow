@@ -19,7 +19,7 @@
   - [ ] 用戶
   - [ ] 群組
 - [ ] 新增 user group api
-- [ ] 分開API Service file
+- [x] 分開API Service file
 
 # v0.0.5
 - [x] 新增 frontend auth 功能
