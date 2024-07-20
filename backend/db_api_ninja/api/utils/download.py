@@ -1,9 +1,9 @@
 import csv
 from django.http import HttpResponse
 
-def download_csv(MyModel):
+def download_csv(MyModel, file_name:str):
     response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = f'attachment; filename="todo.csv"'
+    response["Content-Disposition"] = f'attachment; filename="{file_name}.csv"'
     writer = csv.writer(response)
     # data column
     model_fields = MyModel._meta.fields

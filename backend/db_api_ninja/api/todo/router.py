@@ -62,4 +62,4 @@ def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
 
 @router.post("/download/csv", auth=JWTAuth())
 def download_todo_csv(request):
-    return download_csv(MyModel)
+    return download_csv(MyModel, 'todo')
