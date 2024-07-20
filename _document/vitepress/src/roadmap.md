@@ -2,13 +2,14 @@
 # v0.0.9
 - [ ] 加入 AutoAnimate (考慮)
 - [ ] 加入 i18n
-
-# v0.0.8
 - [ ] 實時語音轉文字
 
-# v0.0.7
+# v0.0.8
 - [ ] ocr 功能
-- [ ] 新增 固定支出 功能
+- [ ] 上載文件功能
+- [ ] 新增 固定支出 功能 (考慮)
+
+# v0.0.7
 - [ ] 畫 前後端圖
 - [ ] docker local 版
 - [ ] docker stage 版
@@ -18,8 +19,8 @@
 - [ ] 新增 用戶管理 ui
   - [ ] 用戶
   - [ ] 群組
-- [ ] 新增 user group api
-- [ ] 分開API Service file
+- [x] 新增 user group api
+- [x] 分開API Service file
 
 # v0.0.5
 - [x] 新增 frontend auth 功能
