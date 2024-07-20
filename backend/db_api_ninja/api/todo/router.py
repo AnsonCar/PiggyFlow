@@ -1,8 +1,7 @@
-import csv
 import uuid
-from django.http import HttpResponse
 from ninja import Router
 from django.shortcuts import get_object_or_404
+from api.utils.download import download_csv
 from .models import ToDo
 from .schema import ToDoIn, ToDoList, ToDoOut, ToDoDone
 from ninja_jwt.authentication import JWTAuth
@@ -51,33 +50,7 @@ def delete_todo(request, uuid: uuid.UUID):
     return {"success": True}
 
 
-router_download = Router(tags=["todo download"])
-
-
-@router_download.post("/csv", auth=JWTAuth())
-def download_todo_csv(request):
-    response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = f'attachment; filename="todo.csv"'
-    writer = csv.writer(response)
-    # data column
-    model_fields = MyModel._meta.fields
-    field_names = [field.name for field in model_fields]
-    del field_names[field_names.index("id")]
-    del field_names[field_names.index("uuid")]
-    del field_names[field_names.index("user_uuid")]
-    writer.writerow(field_names)
-    # data rows
-    data = MyModel.objects.all()
-    for item in data:
-        row = [str(getattr(item, field)) for field in field_names]
-        writer.writerow(row)
-    return response
-
-
-router_done = Router(tags=["todo done"])
-
-
-@router_done.put("/{uuid}", auth=JWTAuth())
+@router.put("/done/{uuid}", auth=JWTAuth())
 def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
     data = get_object_or_404(MyModel, uuid=uuid)
     for attr, value in payload.dict().items():
@@ -85,3 +58,8 @@ def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
             setattr(data, attr, value)
     data.save()
     return {"success": True}
+
+
+@router.post("/download/csv", auth=JWTAuth())
+def download_todo_csv(request):
+    return download_csv(MyModel)
