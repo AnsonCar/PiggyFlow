@@ -16,9 +16,9 @@
 - [ ] docker product 版
 
 # v0.0.6
-- [ ] 新增 用戶管理 ui
-  - [ ] 用戶
-  - [ ] 群組
+- [x] 新增 用戶管理 ui
+  - [x] 用戶
+  - [x] 群組
 - [x] 新增 user group api
 - [x] 分開API Service file
 
