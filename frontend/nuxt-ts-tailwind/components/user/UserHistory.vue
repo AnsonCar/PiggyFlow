@@ -14,7 +14,8 @@
               <tr>
                 <th class="w-6"></th>
                 <th class="">User Name</th>
-                <th class="w-10" v-if="props.editMode">Action</th>
+                <th class="">Group</th>
+                <th class="w-10">{{props.editMode?'Action':''}}</th>
               </tr>
             </thead>
             <!-- <tbody v-for="i, index in tableData" :key="index"> -->
@@ -23,6 +24,7 @@
                 <td class="w-10">
                 </td>
                 <td class="pb-4">{{ i.username }}</td>
+                <td>{{ i.groups.toString() }}</td>
                 <td v-if="props.editMode" class="flex">
                   <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
                     @click="() => openEditDiag(i)" />

@@ -50,6 +50,20 @@ def delete_user_service(uuid):
     return {"success": True}
 
 
+def get_users_groups_service():
+    data = MyModel.objects.all()
+    users = []
+    for user in data:
+        user_dict = {
+            "id": user.id,
+            "uuid": user.uuid,
+            "username": user.username,
+            "groups": [group.name for group in user.groups.all()],
+        }
+        users.append(user_dict)
+    return {"data": users}
+
+
 ### group
 def get_user_groups_service(uuid):
     data = get_object_or_404(MyModel, uuid=uuid)

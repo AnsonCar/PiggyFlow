@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { getsUser, addUser } from '~/utils/db/user'
+import { getUsersGroups, addUser } from '~/utils/db/user'
 
 const selectUserName = ref<string>('');
 const selectPassword = ref<string>('');
@@ -57,7 +57,7 @@ async function saveAccount() {
 
 async function initData() {
   // data
-  const res = await getsUser()
+  const res = await getUsersGroups()
   historyData.value = res.data
 }
 

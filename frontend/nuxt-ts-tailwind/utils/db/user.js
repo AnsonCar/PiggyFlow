@@ -68,7 +68,17 @@ export function editUserPassword(data, uuid) {
   return api(url, options);
 }
 
+
 // group
+export function getUsersGroups() {
+  const url = "user/group/get"
+  const options = {
+    method: "GET",
+    headers: getHeaders(),
+  };
+  return api(url, options);
+}
+
 export function getUserGroup(uuid) {
   const url = "user/group/get/" + uuid;
   const options = {
