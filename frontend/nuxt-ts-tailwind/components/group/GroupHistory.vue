@@ -13,7 +13,7 @@
             <thead>
               <tr>
                 <th class="w-6"></th>
-                <th class="">Groupname</th>
+                <th class="">Group Name</th>
                 <th class="w-10" v-if="props.editMode">Action</th>
               </tr>
             </thead>

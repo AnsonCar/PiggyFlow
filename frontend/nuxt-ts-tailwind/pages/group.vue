@@ -2,7 +2,7 @@
     <div class="overflow-y-scroll">
       <TPBox>
         <h1 class="text-xl pl-1 flex items-center">
-          <TPIcon icon="Group_group" />
+          <TPIcon icon="user_group" />
           <p class="pl-2">Group</p>
         </h1>
         <TPInput type="text" placeholder="Group Name" :error="hasGroupName" v-model="selectGroupName" class="py-2"></TPInput>
@@ -12,7 +12,7 @@
             <!-- <TPButton icon="download" class="mr-2" @click="downloadGroupCSV" /> -->
             <!-- <TPButton icon="upload" class="mr-2"/> -->
           </div>
-          <TPButton label="Save" icon="Group_group_add" @click="saveAccount" />
+          <TPButton label="Save" icon="user_group_add" @click="saveAccount" />
         </div>
       </TPBox>
       <br>
