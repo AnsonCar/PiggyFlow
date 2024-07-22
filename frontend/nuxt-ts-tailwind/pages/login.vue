@@ -59,7 +59,6 @@ async function login() {
       username: username.value,
       password: password.value
     })
-    console.log(res)
     if (res.access && res.refresh) {
       setCookie("token", res.access, 1)
       setCookie("refresh", res.refresh, 1)

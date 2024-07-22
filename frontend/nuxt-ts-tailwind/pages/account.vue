@@ -56,7 +56,6 @@ async function initData() {
   // data
   const res = await getsTransaction()
   const dataGroup = groupDataByDay(res)
-  console.log(dataGroup)
   accountHistoryData.value = dataGroup
 }
 
