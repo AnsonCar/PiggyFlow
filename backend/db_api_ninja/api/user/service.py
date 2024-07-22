@@ -82,6 +82,6 @@ def add_user_group_service(payload, uuid):
 
 def remove_user_group_service(payload, uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
-    group = get_object_or_404(Group, id=payload["id"])
+    group = get_object_or_404(Group, id=payload.id)
     data.groups.remove(group)
     return {"success": True}

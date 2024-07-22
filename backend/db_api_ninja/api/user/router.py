@@ -57,8 +57,7 @@ def delete_user(request, uuid: uuid.UUID):
 
 
 ### group
-# ,auth=JWTAuth()
-@router.get('/group/get')
+@router.get('/group/get' ,auth=JWTAuth())
 def get_user_groups(request):
     return get_users_groups_service()
 
