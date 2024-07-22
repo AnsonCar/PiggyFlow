@@ -10,7 +10,7 @@ class UserPut(Schema):
     
 class UserPutPassword(Schema):
     password: str
-    
+
 class UserOut(Schema):
     id: int
     uuid: uuid.UUID
