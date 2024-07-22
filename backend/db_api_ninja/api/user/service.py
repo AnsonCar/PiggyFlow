@@ -69,7 +69,7 @@ def get_user_groups_service(uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
     groups = data.groups.all()
     group_list = [group.name for group in groups]
-    return {"groups": group_list}
+    return {"data": group_list}
 
 
 def add_user_group_service(payload, uuid):

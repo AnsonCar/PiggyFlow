@@ -63,7 +63,7 @@ def get_user_groups(request):
     return get_users_groups_service()
 
 @router.get('/group/get/{uuid}' ,auth=JWTAuth())
-def get_user_groups(request, uuid: uuid.UUID):
+def get_user_group(request, uuid: uuid.UUID):
     return get_user_groups_service(uuid)
 
 
