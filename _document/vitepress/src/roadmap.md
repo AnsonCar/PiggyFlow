@@ -21,7 +21,7 @@
   - [x] 用戶
   - [x] 群組
     - [ ] 加改密碼 ui
-    - [ ] 加加group同刪group
+    - [x] 加加group同刪group
 - [x] 新增 user group api
 - [x] 分開API Service file
 
