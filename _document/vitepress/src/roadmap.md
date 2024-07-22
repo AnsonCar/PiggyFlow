@@ -14,6 +14,7 @@
 - [ ] docker local 版
 - [ ] docker stage 版
 - [ ] docker product 版
+- [ ] 寫明點分放係前定後 (同咩相關大啲咪放邊, CMS一定係frontend先)
 
 # v0.0.6
 - [x] 新增 用戶管理 ui
