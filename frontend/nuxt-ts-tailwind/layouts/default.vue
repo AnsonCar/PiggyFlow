@@ -31,13 +31,13 @@ const siderbaritems = [
       { text: 'QRCode', link: '/qrcode'}
     ]
   },
-  // {
-  //   text: '用戶管理',
-  //   items: [
-  //     { text: '每日要事', link: '/todo' },
-  //     { text: '記帳', link: '/acccount' }
-  //   ]
-  // }
+  {
+    text: '身份管理',
+    items: [
+      { text: '用戶', link: '/user' },
+      { text: '組別', link: '/group' }
+    ]
+  }
 ]
 </script>
 

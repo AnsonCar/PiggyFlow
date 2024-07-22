@@ -19,4 +19,5 @@ class CustomUser(AbstractUser):
         help_text='Specific permissions for this user.',
         verbose_name='user permissions',
     )
-
+    class Meta:
+        db_table = "auth_user"

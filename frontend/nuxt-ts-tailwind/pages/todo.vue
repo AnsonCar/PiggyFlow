@@ -50,7 +50,6 @@ async function initData() {
   // data
   const res = await getsTodo()
   const dataGroup = groupDataByDay(res)
-  console.log(dataGroup)
   historyData.value = dataGroup
 }
 
