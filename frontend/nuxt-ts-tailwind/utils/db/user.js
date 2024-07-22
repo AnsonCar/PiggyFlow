@@ -88,20 +88,22 @@ export function getUserGroup(uuid) {
   return api(url, options);
 }
 
-export function addUserGroup(uuid) {
+export function addUserGroup(data, uuid) {
   const url = "user/group/add/" + uuid;
   const options = {
     method: "POST",
     headers: getHeaders(),
+    body: JSON.stringify(data)
   };
   return api(url, options);
 }
 
-export function removeUserGroup(uuid) {
+export function removeUserGroup(data, uuid) {
   const url = "user/group/remove/" + uuid;
   const options = {
     method: "POST",
     headers: getHeaders(),
+    body: JSON.stringify(data)
   };
   return api(url, options);
 }
