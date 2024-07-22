@@ -28,6 +28,8 @@
                   <!-- Edit -->
                   <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
                     @click="() => openEditDiag(i)" />
+                  <TPButton icon="password" size="xs" class="mr-2" onclick="diag_password.showModal()"
+                    @click="() => openPassworddDiag(i.uuid)" />
                   <!-- Group -->
                   <TPButton icon="user_group" size="xs" class="mr-2" onclick="diag_group.showModal()"
                     @click="openGroupDiag(i.uuid)" />
@@ -63,7 +65,20 @@
       <TPButton label="Edit" icon="edit2" class="w-full" @click="() => eidtData()" />
     </div>
   </TPDiag>
+  <!-- password -->
+  <TPDiag id="diag_password">
+    <!-- Edit -->
+    <div class="flex flex-col justify-between min-h-64 ">
+      <h3 class="text-lg font-bold">Edit Data - Password</h3>
+      Edit The User password
+      <TPInput type="text" placeholder="Password" :error="hasPassword" v-model="selectPassword"></TPInput>
+      <TPInput type="text" placeholder="Again Password" :error="hasAgainPassword" v-model="selectAgainPassword"></TPInput>
+      <TPButton label="Edit" icon="edit2" class="w-full" @click="() => eidtPassword()" />
+      <p class="h-10 text-error" v-if="passwordNotSame">password not same</p>
+    </div>
+  </TPDiag>
 
+  <!-- Group -->
   <TPDiag id="diag_group">
     <div class="min-h-36">
       <h3 class="text-lg font-bold">User Group</h3>
@@ -87,13 +102,12 @@
         </tbody>
       </table>
       <br>
-      <!-- <TPButton label="update group" icon="edit2" class="w-full" @click="editGroup()" /> -->
     </div>
   </TPDiag>
 </template>
 
 <script lang="ts" setup>
-import { editUser, delUser, addUserGroup, removeUserGroup, getUserGroup } from '~/utils/db/user'
+import { editUser, delUser, editUserPassword, addUserGroup, removeUserGroup, getUserGroup } from '~/utils/db/user'
 import { getsGroup } from '~/utils/db/group'
 
 const props = defineProps<{
@@ -102,20 +116,25 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['initData'])
-
-const selectDateTime = ref<string>('');
-const selectUserName = ref<string>('');
-const userGorup = ref<string[]>([])
-const groupList = ref<any[]>([])
-const itemUUID = ref<string>('')
-
-const hasUserName = ref<boolean>(false);
-
 const inData = computed(() => {
   return props.data
 })
 
-// Mode
+// eidt 
+const selectDateTime = ref<string>('');
+const selectUserName = ref<string>('');
+const hasUserName = ref<boolean>(false);
+// edit password
+const selectPassword = ref<string>('');
+const selectAgainPassword = ref<string>('');
+const hasPassword = ref<boolean>(false);
+const hasAgainPassword = ref<boolean>(false);
+const passwordNotSame = ref<boolean>(false);
+// group
+const userGorup = ref<string[]>([])
+const groupList = ref<any[]>([])
+const itemUUID = ref<string>('')
+// Edit Mode
 const isDelData = ref<boolean>(false)
 
 // Delect Data
@@ -147,6 +166,24 @@ async function eidtData() {
     emit('initData')
   }
 }
+// password Data
+async function openPassworddDiag(uuid:string) {
+  itemUUID.value = uuid
+}
+
+async function eidtPassword() {
+  hasPassword.value = checkNull(selectPassword.value)
+  hasAgainPassword.value = checkNull(selectAgainPassword.value)
+  if ( hasPassword && hasAgainPassword) {
+    if ( selectPassword.value !== selectAgainPassword.value ) {
+      passwordNotSame.value = true
+      return
+    }
+    const res = await editUserPassword({password:selectPassword.value}, itemUUID.value)
+  }
+  emit('initData')
+}
+    
 
 // Group Name
 async function openGroupDiag(uuid:string) {
@@ -159,17 +196,19 @@ async function openGroupDiag(uuid:string) {
 }
 
 async function editGroup(groupID:number) {
+  // change has group
   let hasGroup = false
   for ( const group of groupList.value) {
     if ( userGorup.value.includes(group.name) ) {
       hasGroup = true
-      userGorup.value.filter(name => name !== group.name);
       await removeUserGroup({id:groupID}, itemUUID.value)
     } 
   }
+  // if not, add the group
   if ( !hasGroup ) {
     await addUserGroup({id:groupID}, itemUUID.value)
   }
+  // init data
   openGroupDiag(itemUUID.value)
   emit('initData')
 }
