@@ -82,4 +82,4 @@ docker compose up -d
 <!-- https://python.plainenglish.io/title-user-groups-with-custom-permissions-in-django-a-guide-to-fine-grained-access-control-486e32c86cee -->
 
 ## 查閱更多
-查看 [Change Log(更新日志)](_document/changelog.md)
+<!-- 查看 [Change Log(更新日志)](_document/changelog.md) -->
