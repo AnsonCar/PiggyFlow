@@ -11,10 +11,13 @@ from .transaction.router import router as transactionRouter
 from .todo.router import router as todoRouter
 # from .translate.router import router as translateRouter
 
+from .ocr.router import router as OcrRouter
 api.add_router("/user", userRouter)
 # api.add_router("/auth", authRouter)
 api.add_router("/group", groupRouter)
 
 api.add_router("/transaction", transactionRouter)
 api.add_router("/todo", todoRouter)
+
+api.add_router("/ocr", OcrRouter)
 # api.add_router("/translate", translateRouter)
