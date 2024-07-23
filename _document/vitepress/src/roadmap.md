@@ -19,6 +19,9 @@
 - [ ] 地圖
 - [ ] NLP
 - [ ] openapi 生成 cli-side js
+- [ ] test case
+  - [ ] backend
+  - [ ] frontend
 
 # v0.0.7
 - [ ] 畫 前後端圖
