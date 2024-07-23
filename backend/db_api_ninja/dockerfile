@@ -12,8 +12,8 @@ RUN apt-get install -y opencc
 RUN pip install --upgrade pip
 
 RUN pip install opencc
-RUN pip install hyper
-RUN pip install googletrans==4.0.0-rc1
+# RUN pip install hyper
+# RUN pip install googletrans==4.0.0-rc1
 
 RUN pip install Django==4.2.7
 RUN pip install django-ninja
@@ -28,5 +28,6 @@ RUN pip install uvicorn
 # RUN python manage.py makemigrations
 # RUN python manage.py migrate
 
+# python manage.py runserver 0.0.0.0:8000 
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 # CMD ["python", "main.py"]
