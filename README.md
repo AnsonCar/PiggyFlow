@@ -4,7 +4,7 @@
 <h1 align="center"><b>Piggy Flow</b></h1>
 
 <p align="center">小豬心流</p>
-<p align="center">V 0.0.5</p>
+<p align="center">V 0.0.6</p>
 
 <main style="text-align: center;">
 
