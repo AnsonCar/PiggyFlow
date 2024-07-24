@@ -4,7 +4,6 @@
 <h1 align="center"><b>Piggy Flow</b></h1>
 
 <p align="center">小豬心流</p>
-<p align="center">V 0.0.6</p>
 
 <main style="text-align: center;">
 
@@ -83,3 +82,5 @@ docker compose up -d
 
 ## 查閱更多
 <!-- 查看 [Change Log(更新日志)](_document/changelog.md) -->
+
+<!-- pip freeze > requirements.txt -->
