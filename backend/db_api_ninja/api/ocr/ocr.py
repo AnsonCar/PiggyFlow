@@ -20,7 +20,7 @@ scores = [line[1][1] for line in result]
 im_show = draw_ocr(image, boxes, txts, scores, font_path='./fonts/simfang.ttf')
 im_show = Image.fromarray(im_show)
 im_show.save('result.jpg')"""
-
+'''
 import os
 #os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
@@ -30,4 +30,4 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 img = Image.open(r'C:\Users\susu\PiggyFlow\backend\db_api_ninja\api\imgs\1.jpg')
 #img = Image.open('./11.jpg')
 text = pytesseract.image_to_string(img, lang='eng')
-print(text)
+print(text)'''
