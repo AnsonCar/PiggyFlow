@@ -1,5 +1,5 @@
 include:
   - path:
     - backend/doocker-compose-stage.yml
-  - path:
-    - frontend/doocker-compose-stage.yml
+  # - path:
+  #   - frontend/doocker-compose-stage.yml

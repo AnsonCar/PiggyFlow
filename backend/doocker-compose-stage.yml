@@ -1,8 +1,8 @@
 services:
   db_api_ninja:
-    build: 
+    build:
       context: ./db_api_ninja
-      dockerfile: dockerfile
+      dockerfile: ./docker/dockerfile-stage
     container_name: db_api_ninja
     restart: always
     ports:
@@ -19,22 +19,22 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - DJANGO_PORT=${DJANGO_PORT}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
-    # depends_on:
-    #   - db
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+    command: sh -c "python manage.py migrate && python main.py"
 
-  # db:
-  #   image: postgres:12
-  #   container_name: pgsql
-  #   restart: always
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - ./db:/var/lib/postgresql/data/pgdata
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - PGDATA=/var/lib/postgresql/data/pgdata
-  #     - POSTGRES_DB=${POSTGRES_DB?Variable not set}
-  #     - POSTGRES_USER=${POSTGRES_USER?Variable not set}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+  db:
+    image: postgres:12
+    container_name: pgsql
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/stage:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}

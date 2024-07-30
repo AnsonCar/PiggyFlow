@@ -9,3 +9,19 @@ services:
     volumes:
       - ./vitepress/.vitepress/config.mjs:/app/.vitepress/config.mjs
       - ./vitepress/src:/app/src
+  
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin4
+  #   restart: always
+  #   ports:
+  #     - 8888:80
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL?Variable not set}
+  #     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD?Variable not set}
+  #   volumes:
+  #     - ./pgadmin:/var/lib/pgadmin
+  #   depends_on:
+  #     - db
