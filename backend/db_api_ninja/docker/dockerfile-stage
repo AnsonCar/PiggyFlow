@@ -1,0 +1,29 @@
+FROM python:3.10.12-slim
+
+WORKDIR /app
+COPY . .
+
+# Basis
+RUN apt-get update -y
+RUN apt-get install -y build-essential
+RUN apt-get install -y libpq-dev
+RUN pip install --upgrade pip
+
+# api tool
+RUN apt-get install -y opencc
+RUN pip install opencc
+RUN pip install hyper
+RUN pip install googletrans==4.0.0-rc1
+
+# server
+RUN pip install Django==4.2.7
+RUN pip install django-ninja
+RUN pip install django-ninja-jwt
+RUN pip install django-cors-headers
+
+# db
+RUN pip install psycopg2-binary
+RUN pip install python-dotenv
+RUN pip install uvicorn
+RUN python manage.py makemigrations
+

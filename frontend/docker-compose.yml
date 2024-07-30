@@ -16,6 +16,4 @@ services:
       - ./nuxt-ts-tailwind/middleware:/app/middleware
       - ./nuxt-ts-tailwind/plugins:/app/plugins
     env_file:
-      - .env
-    environment:
-      - DB_API_BASE_URL=${DB_API_BASE_URL}
+      - ./env/.env

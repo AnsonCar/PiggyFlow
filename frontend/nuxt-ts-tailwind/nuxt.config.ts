@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   typescript: {
-    typeCheck: false
+    typeCheck: true
   },
   devtools: { enabled: true },
   app: {

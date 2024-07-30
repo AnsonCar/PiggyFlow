@@ -1,7 +1,10 @@
 from ninja_jwt.controller import NinjaJWTDefaultController
 from ninja_extra import NinjaExtraAPI
+import os
+MODE = os.getenv('DJANGO_DEPLOY', 'Null')
+NAME = f"DataBase NinjaExtra API | {MODE.capitalize()} "
 
-api = NinjaExtraAPI(app_name="DataBase NinjaExtra API" ,title="DataBase NinjaExtra API")
+api = NinjaExtraAPI(app_name=NAME,title=NAME)
 api.register_controllers(NinjaJWTDefaultController)
 
 from .user.router import router as userRouter
@@ -12,8 +15,8 @@ from .transaction.router import router as transactionRouter
 from .todo.router import router as todoRouter
 from .translate.router import router as translateRouter
 
+# auth
 api.add_router("/user", userRouter)
-# api.add_router("/auth", authRouter)
 api.add_router("/group", groupRouter)
 
 api.add_router("/transaction", transactionRouter)

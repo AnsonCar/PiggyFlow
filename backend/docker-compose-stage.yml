@@ -1,0 +1,42 @@
+services:
+  db_api_ninja:
+    build:
+      context: ./db_api_ninja
+      dockerfile: ./docker/dockerfile-stage
+    container_name: db_api_ninja
+    restart: always
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env/.env.stage
+    volumes:
+      - ./db_api_ninja:/app
+    depends_on:
+      - db
+    command: sh -c "python manage.py migrate && python main.py"
+
+  db:
+    image: postgres:12
+    container_name: pgsql
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/stage:/var/lib/postgresql/data/pgdata
+    env_file:
+      - ./env/.env.stage
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - 8888:80
+    env_file:
+      - ./env/.env.stage
+    volumes:
+      - ./db/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - db
