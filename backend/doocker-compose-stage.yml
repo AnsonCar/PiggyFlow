@@ -10,15 +10,17 @@ services:
     volumes:
       - ./db_api_ninja:/app
     env_file:
-      - .env
+      - ".env.stage"
     environment:
+      # postgresql setting
       - POSTGRES_SERVER=db
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
-      - DJANGO_PORT=${DJANGO_PORT}
+      # django setting
       - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_DEPLOY=${DJANGO_DEPLOY}
     depends_on:
       - db
     command: sh -c "python manage.py migrate && python main.py"

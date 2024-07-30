@@ -27,5 +27,3 @@ RUN pip install python-dotenv
 RUN pip install uvicorn
 RUN python manage.py makemigrations
 
-CMD ["python", "main.py"]
-
