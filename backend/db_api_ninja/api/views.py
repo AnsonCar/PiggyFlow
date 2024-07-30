@@ -1,7 +1,7 @@
 from ninja_jwt.controller import NinjaJWTDefaultController
 from ninja_extra import NinjaExtraAPI
 
-api = NinjaExtraAPI(app_name="DataBase NinjaExtra API" ,title="DataBase NinjaExtra API")
+api = NinjaExtraAPI(app_name="DataBase NinjaExtra API Test" ,title="DataBase NinjaExtra API")
 api.register_controllers(NinjaJWTDefaultController)
 
 from .user.router import router as userRouter
