@@ -3,6 +3,3 @@ include:
     - backend/production-compose.yml
   - path:
     - frontend/production-compose.yml
-  - path:
-    - _document/production-compose.yml
-
