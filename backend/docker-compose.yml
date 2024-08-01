@@ -10,9 +10,5 @@ services:
     volumes:
       - ./db_api_ninja:/app
     env_file:
-      - .env
-    environment:
-      # django setting
-      - DJANGO_DEBUG=${DJANGO_DEBUG}
-      - DJANGO_DEPLOY=${DJANGO_DEPLOY}
+      - ./env/.env.local
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:${DJANGO_PORT}"

@@ -89,7 +89,7 @@ WSGI_APPLICATION = "db_api_ninja.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if os.getenv("DJANGO_MODE") == "local":
+if os.getenv("DJANGO_DEPLOY") == "local":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
