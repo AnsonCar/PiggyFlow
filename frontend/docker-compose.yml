@@ -16,4 +16,4 @@ services:
       - ./nuxt-ts-tailwind/middleware:/app/middleware
       - ./nuxt-ts-tailwind/plugins:/app/plugins
     env_file:
-      - ./env/.env
+      - ./env/.env.local
