@@ -30,8 +30,8 @@
 - [ ] 寫文檔
   - [ ] 簡介
   - [ ] 功能
-- [ ] docker local 版
-- [ ] docker stage 版
+- [x] docker local 版
+- [x] docker stage 版
 - [ ] docker product 版
 - [ ] github action
 
