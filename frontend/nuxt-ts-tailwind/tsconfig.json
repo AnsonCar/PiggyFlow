@@ -1,5 +1,17 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
+  "compilerOptions": {
+      "sourceMap": true,
+      "target": "es6",
+      "experimentalDecorators": true,
+      "noImplicitAny": false
+  },
+  "exclude": [
+      "node_modules"
+  ],
   "extends": "./.nuxt/tsconfig.json",
-  "include":  ["./types/type.d.ts"]
+  "filesGlob": [
+      "src/**/*.ts",
+      "test/**/*.ts",
+      "./types/type.d.ts"
+  ]
 }
