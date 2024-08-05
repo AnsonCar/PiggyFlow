@@ -1,3 +1,4 @@
+// https://stackoverflow.com/questions/38268776/why-does-typescript-ignore-my-tsconfig-json-inside-visual-studio-code
 {
   "compilerOptions": {
       "sourceMap": true,
