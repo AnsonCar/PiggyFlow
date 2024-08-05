@@ -42,7 +42,7 @@
       <p class="py-4 flex justify-between">
         <span>Delect Data ?</span>
       <form method="dialog">
-        <TPButton label="Delect" icon="delect" size="md" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
+        <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
       </form>
       </p>
     </div>
@@ -60,8 +60,12 @@
 <script lang="ts" setup>
 import { editTransaction, delTransaction } from '~/utils/db/transaction'
 
+type TTableFormData = { [key:string]: {uuid:string, user_uuid:string, datetime:string, label:string, price:number }[]}
+type TTabeData = { date: string, total: number, item: { datetime: string, label: string, price: number, uuid: string }[] }
+
+
 const props = defineProps<{
-  data: any
+  data: TTableFormData
   editMode: boolean
 }>()
 
@@ -76,13 +80,12 @@ const hasLabel = ref<boolean>(false);
 const hasPrice = ref<boolean>(false);
 
 const inData = computed(() => {
-  let ret = []
-
+  let ret : TTabeData[] = []
   for (const e in props.data) {
-    let tableData: { date: string, total: number, item: { datetime: string, label: string, price: number, uuid: string }[] } = { date: '', total: 0, item: [] }
+    let tableData: TTabeData = { date: '', total: 0, item: [] }
     tableData.date = e
     for (const i of props.data[e]) {
-      tableData.total += parseFloat(i.price)
+      tableData.total += i.price
       tableData.item.push({ datetime: i.datetime, label: i.label, price: i.price, uuid: i.uuid })
     }
     ret.push(tableData)

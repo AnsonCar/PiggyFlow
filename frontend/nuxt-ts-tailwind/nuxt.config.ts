@@ -5,7 +5,12 @@ export default defineNuxtConfig({
   },
 
   devtools: { enabled: true },
-
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false, // [!code ++]
+    },
+  ],
   app: {
     head: {
       charset: 'utf-8',
