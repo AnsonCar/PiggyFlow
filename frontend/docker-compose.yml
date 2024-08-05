@@ -2,7 +2,7 @@ services:
   nuxt-ts-tailwind:
     build:
       context: ./nuxt-ts-tailwind
-      dockerfile: dockerfile
+      dockerfile: ./docker/dockerfile
     container_name: nuxt-ts-tailwind
     ports:
       - 3000:3000
