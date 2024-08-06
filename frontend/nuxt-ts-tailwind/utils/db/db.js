@@ -1,3 +1,14 @@
+import { getCookie } from "~/utils/cookies.js";
+
+export function getHeaders() {
+    return {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
+    };
+  }
+
+  
 export async function api(url, options, local=false) {
     // 取得 url 資源 和 選項
     const BasisApiURL = "http://localhost:8000"
