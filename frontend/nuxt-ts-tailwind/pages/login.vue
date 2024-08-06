@@ -41,7 +41,6 @@ definePageMeta({
 });
 
 import { useRouter } from 'vue-router';
-import { loginToken } from '~/utils/db/token'
 
 const router = useRouter();
 const username = ref<string>('');
@@ -55,7 +54,7 @@ async function login() {
   hasPassword.value = await checkNull(password.value)
 
   if (!hasUsername.value && !hasPassword.value) {
-    const res = await loginToken({
+    const res = await obtainToken({
       username: username.value,
       password: password.value
     })

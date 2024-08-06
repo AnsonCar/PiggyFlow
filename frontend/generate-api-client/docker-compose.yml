@@ -1,0 +1,3 @@
+services:
+  generate-api-client:
+    
