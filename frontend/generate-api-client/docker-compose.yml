@@ -5,3 +5,5 @@ services:
       dockerfile: ./docker/dockerfile
     container_name: generate-api-client
     network_mode: host
+    volumes:
+      - ../nuxt-ts-tailwind/utils:/app/dist
