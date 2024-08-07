@@ -1,5 +1,5 @@
 include:
   - path:
     - ./generate-api-client/docker-compose.yml
-  # - path:
-  #   - ./nuxt-ts-tailwind/docker-compose.yml
+  - path:
+    - ./nuxt-ts-tailwind/docker-compose.yml

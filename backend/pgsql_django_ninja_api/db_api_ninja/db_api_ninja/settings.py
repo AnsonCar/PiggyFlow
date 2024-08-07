@@ -59,7 +59,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:*",
     "http://127.0.0.1:*",
-    "http://172.*",
+    "http://127.0.0.1:3000",
 ]
 
 ALLOWED_HOSTS = ["*"]
