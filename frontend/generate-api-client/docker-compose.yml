@@ -1,3 +1,6 @@
 services:
   generate-api-client:
-    
+    build:
+      context: ./generate-api-client
+      dockerfile: ./docker/dockerfile
+    container_name: generate-api-client

@@ -9,5 +9,7 @@ RUN pip install --upgrade pip
 
 # 
 RUN pip install schedule
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+RUN pip install requests
+
+CMD [ "python", "main.py" ]
 
