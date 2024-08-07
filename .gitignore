@@ -1,4 +1,4 @@
-*db
+backend/*/db
 db.sqlite3
 pgadmin
 .venv
@@ -10,7 +10,7 @@ node_modules
 /build
 .DS_Store
 Thumbs.db
-
+test
 # .env
 # .env.*
 # !.env.example
