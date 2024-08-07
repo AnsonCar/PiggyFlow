@@ -67,10 +67,9 @@ type %s = {
 }
 """
 
-# 定义模板字符串 tem_api
 temp_api = """
 export async function %s {
-  const url = "%s";
+  const url = %s;
   const options = {
     method: "%s",
     headers: getHeaders(),%s
