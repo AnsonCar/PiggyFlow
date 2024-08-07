@@ -5,18 +5,18 @@ from .template import temp_header, temp_schemas, temp_api
 
 url = "http://127.0.0.1:8000/api/openapi.json"
 
-
-    
 def get_openapi_json():
     try:
+        print('get url:', url)
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             return data
-        else:
-            print("Failed to retrieve data. Status code:", response.status_code)
+        # else:
+            # print("Failed to retrieve data. Status code:", response.status_code)
     except requests.RequestException as e:
-        print("Error during request:", e)
+        pass
+        # print("Error during request:", e)
         
     # file_path = './openapi.json'
     # with open(file_path, 'r') as file:
