@@ -154,4 +154,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "api.CustomUser"
 
-# os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://admin:admin@redis:6379",
+#     }
+# }
