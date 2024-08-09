@@ -26,8 +26,8 @@ router = Router(tags=["user"])
 
 
 @router.get("", response=ModelList)
-def get_users(request):
-    data = get_users_service()
+async def get_users(request):
+    data = await get_users_service()
     return ModelList(data=data)
 
 

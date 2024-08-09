@@ -6,7 +6,7 @@ from .models import CustomUser
 MyModel = CustomUser
 
 
-def get_users_service():
+async def get_users_service():
     data = MyModel.objects.all()
     return data
 
