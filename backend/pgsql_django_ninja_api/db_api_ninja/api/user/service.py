@@ -6,9 +6,15 @@ from .models import CustomUser
 
 MyModel = CustomUser
 
+from django.core.cache import cache
 
 async def get_users_service():
-    return [data async for data in MyModel.objects.all()]
+    data = cache.get("users")
+    if not data:
+        data = [data async for data in MyModel.objects.all()]
+        cache.set("users", data, timeout=25)
+    # data = [data async for data in MyModel.objects.all()]
+    return data
 
 
 def get_user_service():

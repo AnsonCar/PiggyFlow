@@ -1,14 +1,10 @@
 services:
   redis:
-    image: redis:latest
-    restart: always
-    container_name: redis
+    image: redis:6
     ports:
       - 6379:6379
-    volumes:
-      - ./dаta:/root/redis
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    environment:
-      - REDIS_PASSWORD=admin
-      - REDIS_PORT=6379
-      - REDIS_DATABASES=16
+    restart: always
+    container_name: redis
+
+# https://docs.retool.com/self-hosted/reference/environment-variables/redis
+# https://django-redis-chs.readthedocs.io/zh-cn/latest/
