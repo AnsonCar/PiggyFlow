@@ -5,10 +5,10 @@ from .models import CustomUser
 
 MyModel = CustomUser
 
+from asgiref.sync import sync_to_async
 
 async def get_users_service():
-    data = MyModel.objects.all()
-    return data
+    return [ data async for data in MyModel.objects.all()]
 
 
 def get_user_service():
