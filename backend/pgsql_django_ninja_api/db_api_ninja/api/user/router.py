@@ -22,13 +22,12 @@ ModelIn = UserIn
 ModeOut = UserOut
 ModelPut = UserPut
 ModelList = UserList
-MyModel = CustomUser
+
 router = Router(tags=["user"])
-from asgiref.sync import sync_to_async
 
 @router.get("", response=ModelList)
 async def get_users(request):
-    data = get_users_service()
+    data = await get_users_service()
     return ModelList(data=data)
 
 

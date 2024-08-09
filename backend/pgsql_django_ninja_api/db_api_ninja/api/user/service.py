@@ -1,3 +1,4 @@
+from asgiref.sync import sync_to_async
 import uuid
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
@@ -5,10 +6,9 @@ from .models import CustomUser
 
 MyModel = CustomUser
 
-from asgiref.sync import sync_to_async
 
 async def get_users_service():
-    return [ data async for data in MyModel.objects.all()]
+    return [data async for data in MyModel.objects.all()]
 
 
 def get_user_service():
@@ -64,7 +64,7 @@ def get_users_groups_service():
     return {"data": users}
 
 
-### group
+# group
 def get_user_groups_service(uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
     groups = data.groups.all()
