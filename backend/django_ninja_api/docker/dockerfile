@@ -2,7 +2,7 @@
 FROM python:3.12.5-slim
 
 WORKDIR /app
-COPY . .
+COPY ./db_api_ninja .
 
 # Basis
 RUN apt-get update -y

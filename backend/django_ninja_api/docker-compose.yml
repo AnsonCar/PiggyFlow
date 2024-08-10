@@ -1,9 +1,9 @@
 services:
-  db_api_ninja:
+  django_ninja_api:
     build:
-      context: ./db_api_ninja
+      context: .
       dockerfile: ./docker/dockerfile
-    container_name: db_api_ninja
+    container_name: django_ninja_api
     restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}
