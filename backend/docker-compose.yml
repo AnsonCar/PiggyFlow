@@ -1,5 +1,5 @@
 include:
   - path:
-    - ./pgsql_django_ninja_api/docker-compose.yml
+    - ./django_ninja_api/docker-compose.yml
   - path :
     - ./redis/docker-compose.yml
