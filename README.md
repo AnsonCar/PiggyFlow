@@ -22,64 +22,9 @@ docker compose up -d
 ├── LICENSE
 ├── README.md
 ├── _document
-│   ├── docker-compose.yml
-│   └── vitepress
 ├── backend
-│   ├── db_api_ninja
-│   ├── docker-compose.yml
-│   └── doocker-compose-stage.yml
+├── frontend 
 ├── docker-compose-production.yml
 ├── docker-compose-stage.yml
-├── docker-compose.yml
-└── frontend
-    ├── docker-compose.yml
-    ├── doocker-compose-stage.yml
-    └── nuxt-ts-tailwind
+└── docker-compose.yml
 ```
-
-<!-- # db
-# mysql
-# ssqlite
-# postgessql
-
-# backend
-# django
-# django-ninja
-# dajngo-ninja-jwt
-
-# restful api
-# swagger ui
-
-# frontend
-# flask
-# html
-
-# lit
-
-# js cookie, fetch
-# json
-
-# other
-# markdown
-# git
-# docker
-# cloud(linux)
-# .env
-
-# ```
-# server - cloud - ip
-# domain - dns
-
-# RestFul API - HTTP (GET, POST, PUT, DELECT)
-# MVC
-
-# git
-
-# docker compose up
-# backend - django
-# ``` -->
-
-<!-- https://python.plainenglish.io/title-user-groups-with-custom-permissions-in-django-a-guide-to-fine-grained-access-control-486e32c86cee -->
-
-## 查閱更多
-<!-- 查看 [Change Log(更新日志)](_document/changelog.md) -->
