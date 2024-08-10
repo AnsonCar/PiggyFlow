@@ -1,14 +1,14 @@
 services:
-  db_api_ninja:
+  django_ninja_api:
     build:
-      context: ./db_api_ninja
+      context: ./django_ninja_api
       dockerfile: ./docker/dockerfile-stage
-    container_name: db_api_ninja
+    container_name: django_ninja_api
     restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}
     volumes:
-      - ./db_api_ninja:/app
+      - ./django_ninja_api:/app
     env_file:
       - ./env/.env.stage
     depends_on:

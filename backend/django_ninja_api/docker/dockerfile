@@ -2,7 +2,7 @@
 FROM python:3.12.5-slim
 
 WORKDIR /app
-COPY ./db_api_ninja .
+COPY ./django_ninja_api .
 
 # Basis
 RUN apt-get update -y
