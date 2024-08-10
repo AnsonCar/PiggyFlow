@@ -17,4 +17,4 @@ if __name__ == "__main__":
     print(f"ANSC:\t  API SERVER DEBUG MODE: {DEBUG}")
     print(f"ANSC:\t  API SERVER WORKERS: {WORKERS}")
     print('-'*50)
-    uvicorn.run("django_ninja_api.asgi:application", host="0.0.0.0", port=PORT, reload=DEBUG, workers=WORKERS)
+    uvicorn.run("django-ninja-api.asgi:application", host="0.0.0.0", port=PORT, reload=DEBUG, workers=WORKERS)

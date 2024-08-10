@@ -1,0 +1,3 @@
+include:
+  - path:
+    - ./nuxt-ts-tailwind/docker-compose-stage.yml

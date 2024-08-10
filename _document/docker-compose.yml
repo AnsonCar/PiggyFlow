@@ -1,8 +1,8 @@
 services:
-  vitepress_document:
+  vitepress-document:
     build:
       context: ./vitepress
-    container_name: vitepress_document
+    container_name: vitepress-document
     restart: always
     ports:
       - 8082:8082

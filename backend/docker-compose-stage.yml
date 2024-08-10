@@ -1,6 +1,6 @@
 include:
   - path :
-    - ./django_ninja_api/docker-compose-stage.yml
+    - ./django-ninja-api/docker-compose-stage.yml
   - path:
     - ./postgresql/docker-compose-stage.yml
   - path :
