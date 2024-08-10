@@ -1,19 +1,18 @@
-from asgiref.sync import sync_to_async
 import uuid
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import Group
 from .models import CustomUser
+from django.contrib.auth.models import Group
+
 
 MyModel = CustomUser
 
-from django.core.cache import cache
 
 async def get_users_service():
     data = cache.get("users")
     if not data:
         data = [data async for data in MyModel.objects.all()]
-        cache.set("users", data, timeout=25)
-    # data = [data async for data in MyModel.objects.all()]
+        cache.set("users", data, timeout=4)
     return data
 
 

@@ -1,12 +1,14 @@
 import uuid
-from .models import ToDo
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404
+from .models import ToDo
 
 MyModel = ToDo
 
 
 async def get_todos_service():
-    return await MyModel.objects.all()
+    data = [data async for data in MyModel.objects.all()]
+    return data
 
 
 async def get_todo_service(uuid: uuid.UUID):
@@ -15,7 +17,7 @@ async def get_todo_service(uuid: uuid.UUID):
 
 
 async def create_todo_service(addData):
-    data = await MyModel.objects.create(**addData)
+    data = await MyModel.objects.acreate(**addData)
     return {"id": data.id}
 
 

@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ./docker/dockerfile-stage
     container_name: django-ninja-api
-    restart: always
+    # restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}
     volumes:

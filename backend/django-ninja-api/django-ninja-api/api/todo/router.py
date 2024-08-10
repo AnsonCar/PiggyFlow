@@ -1,6 +1,7 @@
+from multiprocessing import AuthenticationError
 import uuid
 from ninja import Router
-from ninja_jwt.authentication import JWTAuth
+from ninja_jwt.authentication import JWTAuth, AsyncJWTAuth, AsyncJWTAuth
 
 from api.utils.download import download_csv
 from .models import ToDo
@@ -22,39 +23,39 @@ ModelList = ToDoList
 router = Router(tags=["todo"])
 
 
-@router.get("", auth=JWTAuth(), response=ModelList)
+@router.get("", response=ModelList, auth=AsyncJWTAuth())
 async def get_todos(request):
     data = await get_todos_service()
     return ModelList(data=data)
 
 
-@router.get("/{uuid}", auth=JWTAuth(), response=ModeOut)
+@router.get("/{uuid}", auth=AsyncJWTAuth(), response=ModeOut)
 async def get_todo(request, uuid: uuid.UUID):
     return await get_todo_service(uuid)
 
 
-@router.post("", auth=JWTAuth())
+@router.post("", auth=AsyncJWTAuth())
 async def create_todo(request, payload: ModelIn):
-    addData = await payload.dict()
+    addData = payload.dict()
     addData["user_uuid"] = request.user.uuid
     return await create_todo_service(addData)
 
 
-@router.put("/{uuid}", auth=JWTAuth())
+@router.put("/{uuid}", auth=AsyncJWTAuth())
 async def update_todo(request, uuid: uuid.UUID, payload: ModelIn):
     return await update_todo_service(uuid, payload)
 
 
-@router.put("/done/{uuid}", auth=JWTAuth())
+@router.put("/done/{uuid}", auth=AsyncJWTAuth())
 async def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
     return await update_todo_done_service(uuid, payload)
 
 
-@router.delete("/{uuid}", auth=JWTAuth())
+@router.delete("/{uuid}", auth=AsyncJWTAuth())
 async def delete_todo(request, uuid: uuid.UUID):
     return await delete_todo_service(uuid)
 
 
-@router.post("/download/csv", auth=JWTAuth())
+@router.post("/download/csv", auth=AsyncJWTAuth())
 async def download_todo_csv(request):
     return await download_csv(MyModel, "todo")
