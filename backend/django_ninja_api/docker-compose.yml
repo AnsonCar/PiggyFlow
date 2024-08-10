@@ -12,4 +12,3 @@ services:
     env_file:
       - ./env/.env.local
     command: sh -c "python manage.py migrate && python main.py"
-    # command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:${DJANGO_PORT}"

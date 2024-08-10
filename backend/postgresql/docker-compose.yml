@@ -1,0 +1,26 @@
+services:
+  pgsql:
+    image: postgres:12
+    container_name: pgsql
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/local:/var/lib/postgresql/data/pgdata
+    env_file:
+      - ./env/.env.local
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - 8888:80
+    env_file:
+      - ./env/.env.local
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    depends_on:
+      - pgsql
