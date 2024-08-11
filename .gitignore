@@ -1,4 +1,8 @@
 backend/*/db
+backend/*/data/local
+backend/*/data/stage
+backend/postgresql/data
+
 db.sqlite3
 pgadmin
 .venv

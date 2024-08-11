@@ -1,0 +1,14 @@
+services:
+  django-ninja-api:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile
+    container_name: django-ninja-api
+    # restart: always
+    ports:
+      - ${DJANGO_PORT}:${DJANGO_PORT}
+    volumes:
+      - ./django-ninja-api:/app
+    env_file:
+      - ./env/.env.local
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python main.py"
