@@ -109,7 +109,7 @@ export async function createUser(data: UserIn ) {
 }
 
 export async function getUser(uuid : string): Promise<UserOut> {
-  const url = "/api/user/{uuid}";
+  const url = "/api/user/" + uuid ;
   const options = {
     method: "GET",
     headers: getHeaders(),
@@ -118,7 +118,7 @@ export async function getUser(uuid : string): Promise<UserOut> {
 }
 
 export async function updateUser(data: UserPut  ,uuid : string) {
-  const url = "/api/user/{uuid}";
+  const url = "/api/user/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -128,7 +128,7 @@ export async function updateUser(data: UserPut  ,uuid : string) {
 }
 
 export async function deleteUser(uuid : string) {
-  const url = "/api/user/{uuid}";
+  const url = "/api/user/" + uuid ;
   const options = {
     method: "DELETE",
     headers: getHeaders(),
@@ -137,7 +137,7 @@ export async function deleteUser(uuid : string) {
 }
 
 export async function updateUserPassword(data: UserPutPassword  ,uuid : string) {
-  const url = "/api/user/password/{uuid}";
+  const url = "/api/user/password/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -156,7 +156,7 @@ export async function getUserGroups() {
 }
 
 export async function getUserGroup(uuid : string) {
-  const url = "/api/user/group/get/{uuid}";
+  const url = "/api/user/group/get/" + uuid ;
   const options = {
     method: "GET",
     headers: getHeaders(),
@@ -165,7 +165,7 @@ export async function getUserGroup(uuid : string) {
 }
 
 export async function addUserGroup(data: UserGroup  ,uuid : string) {
-  const url = "/api/user/group/add/{uuid}";
+  const url = "/api/user/group/add/" + uuid ;
   const options = {
     method: "POST",
     headers: getHeaders(),
@@ -175,7 +175,7 @@ export async function addUserGroup(data: UserGroup  ,uuid : string) {
 }
 
 export async function removeUserGroup(data: UserGroup  ,uuid : string) {
-  const url = "/api/user/group/remove/{uuid}";
+  const url = "/api/user/group/remove/" + uuid ;
   const options = {
     method: "POST",
     headers: getHeaders(),
@@ -204,7 +204,7 @@ export async function createGroup(data: GroupIn ) {
 }
 
 export async function getGroup(uuid : number): Promise<GroupOut> {
-  const url = "/api/group/{uuid}";
+  const url = "/api/group/" + uuid ;
   const options = {
     method: "GET",
     headers: getHeaders(),
@@ -213,7 +213,7 @@ export async function getGroup(uuid : number): Promise<GroupOut> {
 }
 
 export async function updateGroup(data: GroupPut  ,uuid : number) {
-  const url = "/api/group/{uuid}";
+  const url = "/api/group/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -223,7 +223,7 @@ export async function updateGroup(data: GroupPut  ,uuid : number) {
 }
 
 export async function deleteGroup(uuid : number) {
-  const url = "/api/group/{uuid}";
+  const url = "/api/group/" + uuid ;
   const options = {
     method: "DELETE",
     headers: getHeaders(),
@@ -251,7 +251,7 @@ export async function createTransaction(data: TransactionIn ) {
 }
 
 export async function getTransaction(uuid : string): Promise<TransactionOut> {
-  const url = "/api/transaction/{uuid}";
+  const url = "/api/transaction/" + uuid ;
   const options = {
     method: "GET",
     headers: getHeaders(),
@@ -260,7 +260,7 @@ export async function getTransaction(uuid : string): Promise<TransactionOut> {
 }
 
 export async function updateTransaction(data: TransactionIn  ,uuid : string) {
-  const url = "/api/transaction/{uuid}";
+  const url = "/api/transaction/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -270,7 +270,7 @@ export async function updateTransaction(data: TransactionIn  ,uuid : string) {
 }
 
 export async function deleteTransaction(uuid : string) {
-  const url = "/api/transaction/{uuid}";
+  const url = "/api/transaction/" + uuid ;
   const options = {
     method: "DELETE",
     headers: getHeaders(),
@@ -307,7 +307,7 @@ export async function createTodo(data: ToDoIn ) {
 }
 
 export async function getTodo(uuid : string): Promise<ToDoOut> {
-  const url = "/api/todo/{uuid}";
+  const url = "/api/todo/" + uuid ;
   const options = {
     method: "GET",
     headers: getHeaders(),
@@ -316,7 +316,7 @@ export async function getTodo(uuid : string): Promise<ToDoOut> {
 }
 
 export async function updateTodo(data: ToDoIn  ,uuid : string) {
-  const url = "/api/todo/{uuid}";
+  const url = "/api/todo/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -326,7 +326,7 @@ export async function updateTodo(data: ToDoIn  ,uuid : string) {
 }
 
 export async function deleteTodo(uuid : string) {
-  const url = "/api/todo/{uuid}";
+  const url = "/api/todo/" + uuid ;
   const options = {
     method: "DELETE",
     headers: getHeaders(),
@@ -335,7 +335,7 @@ export async function deleteTodo(uuid : string) {
 }
 
 export async function updateTodoDone(data: ToDoDone  ,uuid : string) {
-  const url = "/api/todo/done/{uuid}";
+  const url = "/api/todo/done/" + uuid ;
   const options = {
     method: "PUT",
     headers: getHeaders(),
@@ -351,46 +351,6 @@ export async function downloadTodoCsv() {
     headers: getHeaders(),
   };
   return await apiFile(url, options);
-}
-
-export async function cn2t(data: TranslateIn ): Promise<TranslateOut> {
-  const url = "/api/translate/cn2t";
-  const options = {
-    method: "POST",
-    headers: getHeaders(),
-		body: JSON.stringify(data)
-  };
-  return await api(url, options);
-}
-
-export async function t2cn(data: TranslateIn ): Promise<TranslateOut> {
-  const url = "/api/translate/t2cn";
-  const options = {
-    method: "POST",
-    headers: getHeaders(),
-		body: JSON.stringify(data)
-  };
-  return await api(url, options);
-}
-
-export async function en2t(data: TranslateIn ): Promise<TranslateOut> {
-  const url = "/api/translate/en2t";
-  const options = {
-    method: "POST",
-    headers: getHeaders(),
-		body: JSON.stringify(data)
-  };
-  return await api(url, options);
-}
-
-export async function t2en(data: TranslateIn ): Promise<TranslateOut> {
-  const url = "/api/translate/t2en";
-  const options = {
-    method: "POST",
-    headers: getHeaders(),
-		body: JSON.stringify(data)
-  };
-  return await api(url, options);
 }
 
 type TokenObtainPairOutputSchema = {
@@ -524,15 +484,5 @@ type ToDoIn = {
 
 type ToDoDone = {
   done: boolean
-
-}
-
-type TranslateOut = {
-  data: string
-
-}
-
-type TranslateIn = {
-  data: string
 
 }
