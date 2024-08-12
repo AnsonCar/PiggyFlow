@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./src:/src
