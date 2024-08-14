@@ -1,7 +1,9 @@
 include:
   - path:
-    - ./django-ninja-api/docker-compose.yml
-  - path:
-    - ./postgresql/docker-compose.yml
-  - path :
-    - ./redis/docker-compose.yml
+    - ./nginx/docker-compose.yml
+  # - path:
+  #   - ./django-ninja-api/docker-compose.yml
+  # - path:
+  #   - ./postgresql/docker-compose.yml
+  # - path :
+  #   - ./redis/docker-compose.yml

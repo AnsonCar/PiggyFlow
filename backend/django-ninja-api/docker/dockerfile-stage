@@ -25,7 +25,8 @@ RUN pip install django-redis
 RUN pip install orjson
 
 # db
-RUN pip install psycopg2-binary
+# RUN pip install psycopg2-binary
+RUN pip install "psycopg[binary]"
 RUN pip install python-dotenv
 
 RUN pip install uvicorn
