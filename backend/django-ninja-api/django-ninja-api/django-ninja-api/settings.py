@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-yd@f7r7azj0z*))6g=z_6(scgfq*m#ib5pp#i8_n9l&xx6ywyl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.getenv("DJANGO_DEBUG"),
+DEBUG = os.getenv("DJANGO_DEBUG"),
 
 # Application definition
 INSTALLED_APPS = [
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.gzip.GZipMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
 
@@ -100,7 +101,7 @@ else:
             "HOST": os.getenv("POSTGRES_SERVER"),
             "PORT": os.getenv("POSTGRES_PORT"),
             "CONN_MAX_AGE": 60,
-            "client_encoding":'UTF8'
+            "client_encoding": 'UTF8'
         }
     }
 
