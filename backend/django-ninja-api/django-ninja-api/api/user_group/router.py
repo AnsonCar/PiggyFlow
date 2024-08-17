@@ -20,29 +20,29 @@ router = Router(tags=["group"])
 
 
 @router.get("", response=ModelList)
-def get_groups(request):
+async def get_groups(request):
     data = get_groups_service()
     return ModelList(data=data)
 
 
 @router.get("/{uuid}", response=ModeOut)
-def get_group(request, uuid: int):
-# def get_group(request, uuid: uuid.UUID):
+async def get_group(request, uuid: int):
+# async def get_group(request, uuid: uuid.UUID):
     return get_group_service(uuid)
 
 
 @router.post("")
-def create_group(request, payload: ModelIn):
+async def create_group(request, payload: ModelIn):
     return create_group_service(payload)
 
 
 @router.put("/{uuid}", auth=AsyncJWTAuth())
-def update_group(request, uuid: int, payload: ModelPut):
-# def update_group(request, uuid: uuid.UUID, payload: ModelPut):
+async def update_group(request, uuid: int, payload: ModelPut):
+# async def update_group(request, uuid: uuid.UUID, payload: ModelPut):
     return update_group_service(payload, uuid)
 
 
 @router.delete("/{uuid}", auth=AsyncJWTAuth())
-def delete_group(request, uuid: int):
-# def delete_group(request, uuid: uuid.UUID):
+async def delete_group(request, uuid: int):
+# async def delete_group(request, uuid: uuid.UUID):
     return delete_group_service(uuid)

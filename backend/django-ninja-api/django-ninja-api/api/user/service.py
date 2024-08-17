@@ -3,27 +3,29 @@ from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from .models import CustomUser
 from django.contrib.auth.models import Group
-
+from asgiref.sync import sync_to_async
 
 MyModel = CustomUser
 
 
 async def get_users_service():
-    data = cache.get("users")
-    if not data:
-        data = [data async for data in MyModel.objects.all()]
-        cache.set("users", data, timeout=4)
+    # data = cache.get("users")
+    # if not data:
+    #     data = [data async for data in MyModel.objects.all()]
+    #     cache.set("users", data, timeout=4)
+    data = [data async for data in MyModel.objects.all()]
     return data
 
 
-def get_user_service():
+async def get_user_service():
     data = get_object_or_404(MyModel, uuid=uuid)
     return data
 
 
-def create_user_service(payload):
+async def create_user_service(payload):
     try:
-        data = MyModel.objects.create_user(**payload.dict())
+        # data = MyModel.objects.create_user(**payload.dict())
+        data = await sync_to_async(MyModel.objects.create_user)(**payload.dict())
         return {"id": data.id}
     except:
         return {"msg": "UNIQUE constraint failed"}
@@ -49,10 +51,9 @@ def update_user_password_service(payload, uuid):
     return {"success": True}
 
 
-def delete_user_service(uuid):
-    data = get_object_or_404(MyModel, uuid=uuid)
-    data.delete()
-    return {"success": True}
+async def delete_user_service(uuid):
+    data = await MyModel.objects.filter(uuid=uuid).adelete()
+    return {"success": True} if data[0] != 0 else {"success": False}
 
 
 def get_users_groups_service():

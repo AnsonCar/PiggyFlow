@@ -21,13 +21,12 @@ NAME = f"DataBase NinjaExtra API | {MODE.capitalize()} "
 api = NinjaExtraAPI(app_name=NAME, title=NAME, parser=ORJSONParser())
 api.register_controllers(NinjaJWTDefaultController)
 
-# from .auth.router import authRouter as authRouter
-
 # auth
 api.add_router("/user", userRouter)
 api.add_router("/group", groupRouter)
-# 
+#
 api.add_router("/transaction", transactionRouter)
 api.add_router("/todo", todoRouter)
+
 #
 # api.add_router("/translate", translateRouter)

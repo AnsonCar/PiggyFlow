@@ -32,45 +32,47 @@ async def get_users(request):
 
 
 @router.get("/{uuid}", response=ModeOut)
-def get_user(request, uuid: uuid.UUID):
+async def get_user(request, uuid: uuid.UUID):
     return get_user_service(uuid)
 
 
 @router.post("")
-def create_user(request, payload: ModelIn):
-    return create_user_service(payload)
+async def create_user(request, payload: ModelIn):
+    return await create_user_service(payload)
 
 
 @router.put("/{uuid}", auth=AsyncJWTAuth())
-def update_user(request, uuid: uuid.UUID, payload: ModelPut):
-    return update_user_service(payload, uuid)
-
-
-@router.put("/password/{uuid}", auth=AsyncJWTAuth())
-def update_user_password(request, uuid: uuid.UUID, payload: UserPutPassword):
-    return update_user_password_service(payload, uuid)
+async def update_user(request, uuid: uuid.UUID, payload: ModelPut):
+    return await update_user_service(payload, uuid)
 
 
 @router.delete("/{uuid}", auth=AsyncJWTAuth())
-def delete_user(request, uuid: uuid.UUID):
-    return delete_user_service(uuid)
+async def delete_user(request, uuid: uuid.UUID):
+    return await delete_user_service(uuid)
 
 
-### group
-@router.get('/group/get' ,auth=AsyncJWTAuth())
-def get_user_groups(request):
+@router.patch("{uuid}/password", auth=AsyncJWTAuth())
+async def update_user_password(request, uuid: uuid.UUID, payload: UserPutPassword):
+    return update_user_password_service(payload, uuid)
+
+# group
+
+
+@router.get('/group/get', auth=AsyncJWTAuth())
+async def get_user_groups(request):
     return get_users_groups_service()
 
-@router.get('/group/get/{uuid}' ,auth=AsyncJWTAuth())
-def get_user_group(request, uuid: uuid.UUID):
+
+@router.get('{uuid}/group', auth=AsyncJWTAuth())
+async def get_user_group(request, uuid: uuid.UUID):
     return get_user_groups_service(uuid)
 
 
-@router.post("/group/add/{uuid}", auth=AsyncJWTAuth())
-def add_user_group(request, uuid: uuid.UUID, payload: UserGroup):
+@router.post("{uuid}/group", auth=AsyncJWTAuth())
+async def create_user_group(request, uuid: uuid.UUID, payload: UserGroup):
     return add_user_group_service(payload, uuid)
 
 
-@router.post("/group/remove/{uuid}", auth=AsyncJWTAuth())
-def remove_user_group(request, uuid: uuid.UUID, payload: UserGroup):
+@router.delete("{uuid}/group", auth=AsyncJWTAuth())
+async def delete_user_group(request, uuid: uuid.UUID, payload: UserGroup):
     return remove_user_group_service(payload, uuid)
