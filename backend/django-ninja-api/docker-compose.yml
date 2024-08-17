@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ./docker/dockerfile
     container_name: django-ninja-api
-    # restart: always
+    restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}
     volumes:
@@ -12,3 +12,29 @@ services:
     env_file:
       - ./env/.env.local
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python main.py"
+    expose:
+      - 8000
+    depends_on:
+      - traefik
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`api.localhost`)"
+      # - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=test:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/,test2:$$apr1$$d9hr9HBB$$4HxwgUir3HP4EsggP/QNo0"
+
+  traefik:
+    image: 'traefik:v3.1'
+    command: --api.insecure=true --providers.docker
+    volumes:
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '80:80'
+      - '8080:8080'
+  
+  whoami:
+    image: traefik/whoami
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+
+# https://testdriven.io/blog/django-docker-traefik/#lets-encrypt

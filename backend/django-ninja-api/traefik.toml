@@ -1,0 +1,8 @@
+[providers.docker]
+    useBindPortIP = true
+    exposedByDefault = true
+    watch = true
+    endpoint = "unix:///var/run/docker.sock"
+[api]
+    insecure = true
+    dashboard = true
