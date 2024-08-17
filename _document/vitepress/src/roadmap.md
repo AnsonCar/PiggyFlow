@@ -10,16 +10,6 @@
 - [ ] 卡名 - 生成器
 - [ ] 新增 固定支出 功能 (考慮)
 
-# v0.0.7-ds
-- [ ] 實時語音轉文字
-- [ ] 文字云
-- [ ] 地圖
-- [ ] NLP
-- [ ] openapi 生成 cli-side js
-- [ ] test case
-  - [ ] backend
-  - [ ] frontend
-
 # v0.0.7
 ## basis
 - [ ] 畫 前後端圖
@@ -33,12 +23,22 @@
 ## backend
 - [ ] 所有api 使用async 
 - [ ] ⁠所有api 使用 cache redis（必要的api）
+- [ ] 加入api datetime ( create & update time) 
 - [ ] ⁠統一接格式程名
 - [ ] ⁠寫test case同 swagger example
 ## rex
 - [ ] 實時翻釋
 - [ ] 上載文件功能
 - [ ] ocr 功能
+## ds
+- [ ] 實時語音轉文字
+- [ ] 文字云
+- [ ] 地圖
+- [ ] NLP
+- [ ] openapi 生成 cli-side js
+- [ ] test case
+  - [ ] backend
+  - [ ] frontend
 
 
 # v0.0.6
