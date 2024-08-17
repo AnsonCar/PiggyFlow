@@ -20,12 +20,8 @@
   - [ ] backend
   - [ ] frontend
 
-# v0.0.7-rex
-- [ ] 實時翻釋
-- [ ] 上載文件功能
-- [ ] ocr 功能
-
 # v0.0.7
+## basis
 - [ ] 畫 前後端圖
 - [ ] 寫文檔
   - [ ] 簡介
@@ -34,6 +30,16 @@
 - [x] docker stage 版
 - [ ] docker product 版
 - [ ] github action
+## backend
+- [ ] 所有api 使用async 
+- [ ] ⁠所有api 使用 cache redis（必要的api）
+- [ ] ⁠統一接格式程名
+- [ ] ⁠寫test case同 swagger example
+## rex
+- [ ] 實時翻釋
+- [ ] 上載文件功能
+- [ ] ocr 功能
+
 
 # v0.0.6
 - [x] 新增 用戶管理 ui
