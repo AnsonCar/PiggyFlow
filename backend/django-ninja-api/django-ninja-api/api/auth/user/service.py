@@ -13,12 +13,12 @@ async def get_users_service():
     # if not data:
     #     data = [data async for data in MyModel.objects.all()]
     #     cache.set("users", data, timeout=4)
-    data = [data async for data in MyModel.objects.all()]
+    data = [data async for data in MyModel.objects.prefetch_related('groups').all()]
     return data
 
 
 async def get_user_service(uuid):
-    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    data = await sync_to_async(get_object_or_404)(MyModel.objects.prefetch_related('groups'), uuid=uuid)
     return data
 
 
@@ -51,37 +51,18 @@ async def delete_user_service(uuid):
     return {"success": True} if data[0] != 0 else {"success": False}
 
 
-def get_users_groups_service():
-    data = MyModel.objects.all()
-    users = []
-    for user in data:
-        user_dict = {
-            "id": user.id,
-            "uuid": user.uuid,
-            "username": user.username,
-            "groups": [group.name for group in user.groups.all()],
-        }
-        users.append(user_dict)
-    return {"data": users}
-
-
 # group
-def get_user_groups_service(uuid):
-    data = get_object_or_404(MyModel, uuid=uuid)
-    groups = data.groups.all()
-    group_list = [group.name for group in groups]
-    return {"data": group_list}
 
 
-def add_user_group_service(payload, uuid):
+async def add_user_group_service(payload, uuid):
     payload = payload.dict()
-    data = get_object_or_404(MyModel, uuid=uuid)
-    group = get_object_or_404(Group, id=payload["id"])
-    data.groups.add(group)
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    group = await sync_to_async(get_object_or_404)(Group, id=payload["id"])
+    await sync_to_async(data.groups.add)(group)
     return {"success": True}
 
 
-def remove_user_group_service(payload, uuid):
+async def remove_user_group_service(payload, uuid):
     data = get_object_or_404(MyModel, uuid=uuid)
     group = get_object_or_404(Group, id=payload.id)
     data.groups.remove(group)

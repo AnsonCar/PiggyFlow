@@ -1,6 +1,6 @@
 import uuid
 from ninja import Router
-from ninja_jwt.authentication import JWTAuth, AsyncJWTAuth
+from ninja_jwt.authentication import AsyncJWTAuth
 
 from .schema import GroupIn, GroupList, GroupOut, GroupPut
 from .service import (
@@ -21,28 +21,27 @@ router = Router(tags=["auth"])
 
 @router.get("", response=ModelList)
 async def get_groups(request):
-    data = get_groups_service()
+    data = await get_groups_service()
     return ModelList(data=data)
 
 
 @router.get("/{uuid}", response=ModeOut)
 async def get_group(request, uuid: int):
-# async def get_group(request, uuid: uuid.UUID):
-    return get_group_service(uuid)
+    return await get_group_service(uuid)
 
 
 @router.post("")
 async def create_group(request, payload: ModelIn):
-    return create_group_service(payload)
+    return await create_group_service(payload)
 
 
 @router.put("/{uuid}", auth=AsyncJWTAuth())
 async def update_group(request, uuid: int, payload: ModelPut):
-# async def update_group(request, uuid: uuid.UUID, payload: ModelPut):
-    return update_group_service(payload, uuid)
+    # async def update_group(request, uuid: uuid.UUID, payload: ModelPut):
+    return await update_group_service(payload, uuid)
 
 
 @router.delete("/{uuid}", auth=AsyncJWTAuth())
 async def delete_group(request, uuid: int):
-# async def delete_group(request, uuid: uuid.UUID):
-    return delete_group_service(uuid)
+    # async def delete_group(request, uuid: uuid.UUID):
+    return await delete_group_service(uuid)

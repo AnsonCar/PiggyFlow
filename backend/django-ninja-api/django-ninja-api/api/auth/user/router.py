@@ -1,6 +1,6 @@
 import uuid
 from ninja import Router
-from ninja_jwt.authentication import JWTAuth, AsyncJWTAuth
+from ninja_jwt.authentication import AsyncJWTAuth
 from .models import CustomUser
 
 from .schema import UserIn, UserList, UserOut, UserPut, UserPutPassword, UserGroup
@@ -11,9 +11,6 @@ from .service import (
     update_user_service,
     update_user_password_service,
     delete_user_service,
-    #
-    get_users_groups_service,
-    get_user_groups_service,
     add_user_group_service,
     remove_user_group_service,
 )
@@ -24,6 +21,7 @@ ModelPut = UserPut
 ModelList = UserList
 
 router = Router(tags=["auth"])
+
 
 @router.get("", response=ModelList)
 async def get_users(request):
@@ -55,24 +53,14 @@ async def delete_user(request, uuid: uuid.UUID):
 async def update_user_password(request, uuid: uuid.UUID, payload: UserPutPassword):
     return await update_user_password_service(payload, uuid)
 
-# group
-
-
-@router.get('/group/get', auth=AsyncJWTAuth())
-async def get_user_groups(request):
-    return get_users_groups_service()
-
-
-@router.get('{uuid}/group', auth=AsyncJWTAuth())
-async def get_user_group(request, uuid: uuid.UUID):
-    return get_user_groups_service(uuid)
+# user group
 
 
 @router.post("{uuid}/group", auth=AsyncJWTAuth())
 async def create_user_group(request, uuid: uuid.UUID, payload: UserGroup):
-    return add_user_group_service(payload, uuid)
+    return await add_user_group_service(payload, uuid)
 
 
 @router.delete("{uuid}/group", auth=AsyncJWTAuth())
 async def delete_user_group(request, uuid: uuid.UUID, payload: UserGroup):
-    return remove_user_group_service(payload, uuid)
+    return await remove_user_group_service(payload, uuid)

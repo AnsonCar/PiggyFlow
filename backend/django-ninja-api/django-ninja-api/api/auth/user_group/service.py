@@ -1,38 +1,38 @@
 import uuid
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
+from asgiref.sync import sync_to_async
 
 MyModel = Group
 
-def get_groups_service():
-    data = MyModel.objects.all()
+
+async def get_groups_service():
+    data = [data async for data in MyModel.objects.all()]
     return data
 
-def get_group_service(uuid):
-    # data = get_object_or_404(MyModel, uuid=uuid)
-    data = get_object_or_404(MyModel, id=uuid)
+
+async def get_group_service(uuid):
+    data = await sync_to_async(get_object_or_404)(MyModel, id=uuid)
     return data
 
-def create_group_service(payload):
+
+async def create_group_service(payload):
     try:
-        data = MyModel.objects.create(**payload.dict())
+        data = await MyModel.objects.acreate(**payload.dict())
         return {"id": data.id}
-    except:
-        return {"msg": "UNIQUE constraint failed"}
-    
-def update_group_service(payload, uuid):
-    try:
-        # data = get_object_or_404(MyModel, uuid=uuid)
-        data = get_object_or_404(MyModel, id=uuid)
-        for attr, value in payload.dict().items():
-            setattr(data, attr, value)
-        data.save()
-        return {"success": True}
-    except:
-        return {"msg": "UNIQUE constraint failed"}
-    
-def delete_group_service(uuid):
-    # data = get_object_or_404(MyModel, uuid=uuid)
-    data = get_object_or_404(MyModel, id=uuid)
-    data.delete()
+    except Exception as e:
+        return {"detail": str(e)}
+
+
+async def update_group_service(payload, uuid):
+    data = await sync_to_async(get_object_or_404)(MyModel, id=uuid)
+    for attr, value in payload.dict().items():
+        setattr(data, attr, value)
+    await data.asave()
+    return {"success": True}
+
+
+async def delete_group_service(uuid):
+    data = await sync_to_async(get_object_or_404)(MyModel, id=uuid)
+    await data.adelete()
     return {"success": True}
