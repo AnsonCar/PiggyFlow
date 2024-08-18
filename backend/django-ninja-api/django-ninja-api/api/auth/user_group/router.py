@@ -16,7 +16,7 @@ ModeOut = GroupOut
 ModelPut = GroupPut
 ModelList = GroupList
 
-router = Router(tags=["group"])
+router = Router(tags=["auth"])
 
 
 @router.get("", response=ModelList)

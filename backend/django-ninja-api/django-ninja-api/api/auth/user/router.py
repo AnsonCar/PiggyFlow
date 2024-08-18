@@ -23,7 +23,7 @@ ModeOut = UserOut
 ModelPut = UserPut
 ModelList = UserList
 
-router = Router(tags=["user"])
+router = Router(tags=["auth"])
 
 @router.get("", response=ModelList)
 async def get_users(request):
