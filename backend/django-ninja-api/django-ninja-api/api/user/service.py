@@ -17,8 +17,8 @@ async def get_users_service():
     return data
 
 
-async def get_user_service():
-    data = get_object_or_404(MyModel, uuid=uuid)
+async def get_user_service(uuid):
+    data =  await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
     return data
 
 

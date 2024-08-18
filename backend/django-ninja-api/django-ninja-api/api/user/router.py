@@ -33,7 +33,7 @@ async def get_users(request):
 
 @router.get("/{uuid}", response=ModeOut)
 async def get_user(request, uuid: uuid.UUID):
-    return get_user_service(uuid)
+    return await get_user_service(uuid)
 
 
 @router.post("")
