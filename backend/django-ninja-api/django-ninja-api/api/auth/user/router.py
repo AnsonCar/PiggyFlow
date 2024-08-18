@@ -11,7 +11,7 @@ from .service import (
     update_user_service,
     update_user_password_service,
     delete_user_service,
-    add_user_group_service,
+    create_user_group_service,
     remove_user_group_service,
 )
 
@@ -58,7 +58,7 @@ async def update_user_password(request, uuid: uuid.UUID, payload: UserPutPasswor
 
 @router.post("{uuid}/group", auth=AsyncJWTAuth())
 async def create_user_group(request, uuid: uuid.UUID, payload: UserGroup):
-    return await add_user_group_service(payload, uuid)
+    return await create_user_group_service(payload, uuid)
 
 
 @router.delete("{uuid}/group", auth=AsyncJWTAuth())
