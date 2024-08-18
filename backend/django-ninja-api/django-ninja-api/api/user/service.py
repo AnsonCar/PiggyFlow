@@ -18,36 +18,31 @@ async def get_users_service():
 
 
 async def get_user_service(uuid):
-    data =  await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
     return data
 
 
 async def create_user_service(payload):
     try:
-        # data = MyModel.objects.create_user(**payload.dict())
         data = await sync_to_async(MyModel.objects.create_user)(**payload.dict())
         return {"id": data.id}
-    except:
-        return {"msg": "UNIQUE constraint failed"}
+    except Exception as e:
+        return {"detail": str(e)}
 
 
-def update_user_service(payload, uuid):
-    try:
-        data = get_object_or_404(MyModel, uuid=uuid)
-        for attr, value in payload.dict().items():
-            setattr(data, attr, value)
-        data.save()
-        return {"success": True}
-    except:
-        return {"msg": "UNIQUE constraint failed"}
+async def update_user_service(payload, uuid):
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    for attr, value in payload.dict().items():
+        setattr(data, attr, value)
+    await data.asave()
+    return {"success": True}
 
 
-def update_user_password_service(payload, uuid):
-    data = get_object_or_404(MyModel, uuid=uuid)
-    payload = payload.dict()
-    password = payload["password"]
-    data.set_password(password)
-    data.save()
+async def update_user_password_service(payload, uuid):
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    password = (payload.dict())["password"]
+    await sync_to_async(data.set_password)(password)
+    await data.asave()
     return {"success": True}
 
 

@@ -53,7 +53,7 @@ async def delete_user(request, uuid: uuid.UUID):
 
 @router.patch("{uuid}/password", auth=AsyncJWTAuth())
 async def update_user_password(request, uuid: uuid.UUID, payload: UserPutPassword):
-    return update_user_password_service(payload, uuid)
+    return await update_user_password_service(payload, uuid)
 
 # group
 
