@@ -20,7 +20,7 @@ ModeOut = UserOut
 ModelPut = UserPut
 ModelList = UserList
 
-router = Router(tags=["auth"])
+router = Router(tags=["auth user"])
 
 
 @router.get("", response=ModelList)

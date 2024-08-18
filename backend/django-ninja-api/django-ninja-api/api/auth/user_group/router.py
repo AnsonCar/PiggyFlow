@@ -16,7 +16,7 @@ ModeOut = GroupOut
 ModelPut = GroupPut
 ModelList = GroupList
 
-router = Router(tags=["auth"])
+router = Router(tags=["auth group"])
 
 
 @router.get("", response=ModelList)
@@ -37,11 +37,9 @@ async def create_group(request, payload: ModelIn):
 
 @router.put("/{uuid}", auth=AsyncJWTAuth())
 async def update_group(request, uuid: int, payload: ModelPut):
-    # async def update_group(request, uuid: uuid.UUID, payload: ModelPut):
     return await update_group_service(payload, uuid)
 
 
 @router.delete("/{uuid}", auth=AsyncJWTAuth())
 async def delete_group(request, uuid: int):
-    # async def delete_group(request, uuid: uuid.UUID):
     return await delete_group_service(uuid)

@@ -63,7 +63,6 @@ async def add_user_group_service(payload, uuid):
 
 
 async def remove_user_group_service(payload, uuid):
-    data = get_object_or_404(MyModel, uuid=uuid)
-    group = get_object_or_404(Group, id=payload.id)
-    data.groups.remove(group)
+    data = await sync_to_async(get_object_or_404)(MyModel.objects.prefetch_related('groups'), uuid=uuid)
+    await sync_to_async(data.groups.remove)(payload.id)
     return {"success": True}
