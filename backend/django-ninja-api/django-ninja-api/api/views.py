@@ -7,8 +7,9 @@ from ninja_jwt.controller import NinjaJWTDefaultController
 from .translate.router import router as translateRouter
 from .todo.router import router as todoRouter
 from .transaction.router import router as transactionRouter
-from .user_group.router import router as groupRouter
-from .user.router import router as userRouter
+
+from .auth.user_group.router import router as groupRouter
+from .auth.user.router import router as userRouter
 
 
 class ORJSONParser(Parser):
@@ -27,6 +28,5 @@ api.add_router("/group", groupRouter)
 #
 api.add_router("/transaction", transactionRouter)
 api.add_router("/todo", todoRouter)
-
 #
 # api.add_router("/translate", translateRouter)
