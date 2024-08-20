@@ -1,33 +1,38 @@
 import uuid
 from .models import Transaction
 from django.shortcuts import get_object_or_404
+from asgiref.sync import sync_to_async
 
 MyModel = Transaction
 
 
-def get_transactions_service():
-    return MyModel.objects.all()
-
-
-def get_transaction_service(uuid: uuid.UUID):
-    data = get_object_or_404(MyModel, uuid=uuid)
+async def get_transactions_service():
+    data = [data async for data in MyModel.objects.all()]
     return data
 
 
-def create_transaction_service(addData):
-    data = MyModel.objects.create(**addData)
-    return {"id": data.id}
+async def get_transaction_service(uuid: uuid.UUID):
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    return data
 
 
-def update_transaction_service(uuid: uuid.UUID, payload):
-    data = get_object_or_404(MyModel, uuid=uuid)
+async def create_transaction_service(addData):
+    try:
+        data = await sync_to_async(MyModel.objects.acreate)(**addData)
+        return {"id": data.id}
+    except Exception as e:
+        return {"detail": str(e)}
+
+
+async def update_transaction_service(uuid: uuid.UUID, payload):
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
     for attr, value in payload.dict().items():
         setattr(data, attr, value)
-    data.save()
+    await data.asave()
     return {"success": True}
 
 
-def delete_transaction_service(uuid: uuid.UUID):
-    data = get_object_or_404(MyModel, uuid=uuid)
-    data.delete()
+async def delete_transaction_service(uuid: uuid.UUID):
+    data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
+    await data.adelete()
     return {"success": True}

@@ -46,7 +46,7 @@ async def update_todo(request, uuid: uuid.UUID, payload: ModelIn):
     return await update_todo_service(uuid, payload)
 
 
-@router.put("/done/{uuid}", auth=AsyncJWTAuth())
+@router.patch("{uuid}/done", auth=AsyncJWTAuth())
 async def update_todo_done(request, uuid: uuid.UUID, payload: ToDoDone):
     return await update_todo_done_service(uuid, payload)
 

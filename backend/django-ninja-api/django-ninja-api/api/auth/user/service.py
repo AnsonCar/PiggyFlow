@@ -54,7 +54,7 @@ async def delete_user_service(uuid):
 # group
 
 
-async def add_user_group_service(payload, uuid):
+async def create_user_group_service(payload, uuid):
     payload = payload.dict()
     data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
     group = await sync_to_async(get_object_or_404)(Group, id=payload["id"])
