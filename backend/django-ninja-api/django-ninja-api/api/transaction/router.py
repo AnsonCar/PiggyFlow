@@ -23,8 +23,8 @@ router = Router(tags=["transaction"])
 
 @router.get("", auth=AsyncJWTAuth(), response=ModelList)
 async def get_transactions(request):
-    data = get_transactions_service()
-    return await ModelList(data=data)
+    data = await get_transactions_service()
+    return ModelList(data=data)
 
 
 @router.get("/{uuid}", auth=AsyncJWTAuth(), response=ModeOut)
