@@ -10,7 +10,27 @@
 - [ ] 卡名 - 生成器
 - [ ] 新增 固定支出 功能 (考慮)
 
-# v0.0.7-ds
+# v0.0.7
+## basis
+- [ ] 畫 前後端圖
+- [ ] 寫文檔
+  - [ ] 簡介
+  - [ ] 功能
+- [x] docker local 版
+- [x] docker stage 版
+- [ ] docker product 版
+- [ ] github action
+## backend
+- [ ] 所有api 使用async 
+- [ ] ⁠所有api 使用 cache redis（必要的api）
+- [ ] 加入api datetime ( create & update time) 
+- [ ] ⁠統一接格式程名
+- [ ] ⁠寫test case同 swagger example
+## rex
+- [ ] 實時翻釋
+- [ ] 上載文件功能
+- [ ] ocr 功能
+## ds
 - [ ] 實時語音轉文字
 - [ ] 文字云
 - [ ] 地圖
@@ -20,20 +40,6 @@
   - [ ] backend
   - [ ] frontend
 
-# v0.0.7-rex
-- [ ] 實時翻釋
-- [ ] 上載文件功能
-- [ ] ocr 功能
-
-# v0.0.7
-- [ ] 畫 前後端圖
-- [ ] 寫文檔
-  - [ ] 簡介
-  - [ ] 功能
-- [x] docker local 版
-- [x] docker stage 版
-- [ ] docker product 版
-- [ ] github action
 
 # v0.0.6
 - [x] 新增 用戶管理 ui

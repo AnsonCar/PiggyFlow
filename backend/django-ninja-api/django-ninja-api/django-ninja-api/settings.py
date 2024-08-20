@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
+Database, see
+https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 """
 
 import os
@@ -24,10 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-yd@f7r7azj0z*))6g=z_6(scgfq*m#ib5pp#i8_n9l&xx6ywyl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG"),
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -35,9 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    #
     "corsheaders",
-    #
     "ninja_extra",
     "ninja_jwt",
     "api",
@@ -51,9 +51,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    #
+    "django.middleware.gzip.GZipMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -63,7 +62,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 ALLOWED_HOSTS = ["*"]
-
 
 ROOT_URLCONF = "django-ninja-api.urls"
 
@@ -85,31 +83,42 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django-ninja-api.wsgi.application"
 
-
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-if os.getenv("DJANGO_DEPLOY") == "local":
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_SERVER"),
+        "PORT": os.getenv("POSTGRES_PORT"),
+        "CONN_MAX_AGE": 60,
+        "client_encoding": 'UTF8'
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB"),
-            "USER": os.getenv("POSTGRES_USER"),
-            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-            "HOST": os.getenv("POSTGRES_SERVER"),
-            "PORT": os.getenv("POSTGRES_PORT"),
-        }
-    }
-NINJA_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
+        
+# if os.getenv("DJANGO_DEPLOY") == "local":
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": os.getenv("POSTGRES_DB"),
+#             "USER": os.getenv("POSTGRES_USER"),
+#             "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+#             "HOST": os.getenv("POSTGRES_SERVER"),
+#             "PORT": os.getenv("POSTGRES_PORT"),
+#             "CONN_MAX_AGE": 60,
+#             "client_encoding": 'UTF8'
+#         }
+#     }
+
+NINJA_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=60)}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,13 +143,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
-USE_I18N = True
-
+USE_I18N = False
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -158,11 +163,9 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://redis:6379",
-        # env("REDIS_URL")
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
-            # "IGNORE_EXCEPTIONS": True,
         }
     }
 }
