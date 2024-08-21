@@ -7,10 +7,10 @@ def get_api_path(api_path: str) -> str:
     path_list_len: int = len(path_list)
     for index, path_item in enumerate(path_list):
         if path_item.startswith("{") and path_item.endswith("}"):
-            path_item = f"' + '{path_item}" + \
-                ("' + '" if index + 1 < path_list_len else "")
-        path_parts.append(path_item if index + 1 <
-                          path_list_len else path_item + "'")
+            path_item = f"' + {path_item[1:-1]}" + (" + '" if index + 1 < path_list_len else "")
+            path_parts.append(path_item)
+        else:
+            path_parts.append(path_item if index + 1 < path_list_len else path_item + "'")
     return '/'.join(path_parts)
 
 
