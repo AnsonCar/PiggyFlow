@@ -10,11 +10,11 @@ export function formatDateTime(date: Date) {
   var offsetSign = date.getTimezoneOffset() < 0 ? '+' : '-';
   var offset = offsetSign + padZero(offsetHours) + '00';
   // return `${year}-${month}-${day}T${hours}:${minutes}${offset}`
-  
+
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
-function padZero(num:number) {
+function padZero(num: number) {
   return num.toString().padStart(2, '0');
 }
 
@@ -45,10 +45,9 @@ export function formatTime(datetime: string) {
   return `${hours}:${minutes}:${seconds}`
 }
 
-export function groupDataByDay(res:any) {
-  console.log('groupDatabyDay')
+export function groupDataByDay(res: any) {
   const dataGroup: any = {}
-  for (const e of res.data) {
+  for (const e of res) {
     const date = formatDate(e.datetime)
     if (typeof dataGroup[date] === 'object') {
       dataGroup[date] = [...dataGroup[date], e]

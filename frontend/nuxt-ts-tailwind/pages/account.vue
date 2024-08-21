@@ -2,15 +2,18 @@
   <div class="overflow-y-scroll">
     <!-- add -->
     <TPBox>
-      <h1 class="text-xl pl-1 flex items-center"><TPIcon icon="wallet" /><p class="pl-2">Account</p></h1>
+      <h1 class="text-xl pl-1 flex items-center">
+        <TPIcon icon="wallet" />
+        <p class="pl-2">Account</p>
+      </h1>
       <TPInput type="datetime-local" label="Date" :error="false" v-model="selectDateTime"></TPInput>
       <TPInput type="text" label="Label" :error="hasLabel" v-model="selectLabel"></TPInput>
       <TPInput type="number" label="Price" text="$" :error="hasPrice" v-model="selectPrice"></TPInput>
-      <div class="card-actions justify-between ">
+      <div class="card-actions justify-between">
         <div>
-          <TPButton icon="edit" :active="editMode" @click="() => editMode = !editMode" class="mr-2"/>
-          <TPButton icon="download" class="mr-2" @click="downloadTransactionCSV" />
-          <!-- <TPButton icon="upload" class="mr-2"/> -->
+          <TPButton icon="edit" :active="editMode" @click="() => editMode = !editMode" class="mr-2" />
+          <TPButton icon="download" class="mr-2" @click="downloalCsv(downloadTransactionCsv(), 'account.csv')" />
+          <TPButton icon="upload" class="mr-2" />
         </div>
         <TPButton label="Save" icon="pig" @click="saveAccount" />
       </div>
@@ -22,10 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { getsTransaction, addTransaction, downloadTransactionCSV } from '~/utils/db/transaction'
-import { groupDataByDay } from '~/utils/formatDate';
-
-const selectDateTime = ref<string>('');
+const selectDateTime = ref<string>(formatDateTime(new Date()));
 const selectLabel = ref<string>('');
 const selectPrice = ref<string>('');
 
@@ -33,34 +33,28 @@ const hasLabel = ref<boolean>(false);
 const hasPrice = ref<boolean>(false);
 const editMode = ref<boolean>(false);
 
-const accountHistoryData = ref<any>({});
+const accountHistoryData = ref<TransactionOut[]>([]);
 
 async function saveAccount() {
-  hasLabel.value = checkNull(selectLabel.value)
-  hasPrice.value = checkNull(selectPrice.value)
+  hasLabel.value = await checkNull(selectLabel.value)
+  hasPrice.value = await checkNull(selectPrice.value)
 
   if (!hasLabel.value && !hasPrice.value) {
-    const data = {
-      "datetime": formatDateTimeZone(selectDateTime.value),
+    const data: TransactionIn = {
+      "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
       "label": selectLabel.value,
-      "price": selectPrice.value
+      "price": parseFloat(selectPrice.value)
     }
-    const res = await addTransaction(data)
-    if (res.id) {
-      initData()
-    }
+    const res = await createTransaction(data)
+    if (res.id) initData()
   }
 }
 
 async function initData() {
-  // data
-  const res = await getsTransaction()
-  const dataGroup = groupDataByDay(res)
-  accountHistoryData.value = dataGroup
+  accountHistoryData.value = (await getTransactions()).data
 }
 
 onMounted(() => {
-  selectDateTime.value = formatDateTime(new Date())
   initData()
 })
 

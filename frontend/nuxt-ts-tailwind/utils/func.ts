@@ -19,3 +19,14 @@ export function killToken() {
 // darkModeQuery.addEventListener('change', (e) => {
 //     document.body.setAttribute('data-theme', e.matches ? 'black' : 'lofi');
 // });
+
+export async function downloalCsv(data: any, filename: string) {
+    const url = window.URL.createObjectURL(new Blob([await data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
