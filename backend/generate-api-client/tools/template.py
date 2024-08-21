@@ -23,7 +23,7 @@ export async function apiFile(url: string, options: RequestInit | undefined) {
   const BasisApiURL = "http://localhost:8000"
   try {
     // 請求
-    const res = await fetch(`${BasisApiURL}/api/${url}`, options)
+    const res = await fetch(`${BasisApiURL}${url}`, options)
     const blob = await res.blob(); // 提取实际的文件内容
     return blob;
   } catch (error) {

@@ -35,7 +35,7 @@ async def get_transaction(request, uuid: uuid.UUID):
 @router.post("", auth=AsyncJWTAuth())
 async def create_transaction(request, payload: ModelIn):
     addData = payload.dict()
-    addData["user_uuid"] = request.user.uuid
+    addData["user_uuid"] = request.auth.uuid
     return await create_transaction_service(addData)
 
 
