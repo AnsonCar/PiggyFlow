@@ -9,7 +9,6 @@ type TokenObtainPairOutputSchema = {
 type TokenObtainPairInputSchema = {
   password: string
   username: string
-
 }
 
 type TokenRefreshOutputSchema = {
