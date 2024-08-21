@@ -59,6 +59,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:*",
     "http://127.0.0.1:*",
     "http://127.0.0.1:3000",
+    "http://localhost:3000"
 ]
 
 ALLOWED_HOSTS = ["*"]
@@ -96,7 +97,7 @@ DATABASES = {
         "client_encoding": 'UTF8'
     }
 }
-        
+
 # if os.getenv("DJANGO_DEPLOY") == "local":
 #     DATABASES = {
 #         "default": {
