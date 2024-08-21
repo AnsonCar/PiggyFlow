@@ -1,35 +1,18 @@
-
-export function getCookie(cname: string) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 export async function api(url: string, options: RequestInit | undefined) {
   // 取得 url 資源 和 選項
   const BasisApiURL = "http://localhost:8000"
   try {
-      // 請求
-      const res = await fetch(`${BasisApiURL}${url}`, options)
-      const data = await res.json()
-      return data
+    // 請求
+    const res = await fetch(`${BasisApiURL}${url}`, options)
+    const data = await res.json()
+    return data
   } catch (error) {
-      // 如果 請求失敗（Server 死咗 ）
-      return {
-          "error": "An error occurred.",
-          "code": 500,
-          "message": "Server Error."
-      }
+    // 如果 請求失敗（Server 死咗 ）
+    return {
+      "error": "An error occurred.",
+      "code": 500,
+      "message": "Server Error."
+    }
   }
 }
 
@@ -37,54 +20,54 @@ export async function apiFile(url: string, options: RequestInit | undefined) {
   // 取得 url 資源 和 選項
   const BasisApiURL = "http://localhost:8000"
   try {
-      // 請求
-      const res = await fetch(`${BasisApiURL}/api/${url}`, options)
-      const blob = await res.blob(); // 提取实际的文件内容
-      return blob;
+    // 請求
+    const res = await fetch(`${BasisApiURL}/api/${url}`, options)
+    const blob = await res.blob(); // 提取实际的文件内容
+    return blob;
   } catch (error) {
-      // 如果 請求失敗（Server 死咗 ）
-      return {
-          "error": "An error occurred.",
-          "code": 500,
-          "message": "Server Error."
-      }
+    // 如果 請求失敗（Server 死咗 ）
+    return {
+      "error": "An error occurred.",
+      "code": 500,
+      "message": "Server Error."
+    }
   }
 }
 
 export function getHeaders() {
-    return {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getCookie("token")}`,
-    };
+  return {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${useCookie("token")}`,
+  };
 }
 
-export async function obtainToken(data: TokenObtainPairInputSchema ): Promise<TokenObtainPairOutputSchema> {
+export async function obtainToken(data: TokenObtainPairInputSchema): Promise<TokenObtainPairOutputSchema> {
   const url = '/api/token/pair';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function refreshToken(data: TokenRefreshInputSchema ): Promise<TokenRefreshOutputSchema> {
+export async function refreshToken(data: TokenRefreshInputSchema): Promise<TokenRefreshOutputSchema> {
   const url = '/api/token/refresh';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function verifyToken(data: TokenVerifyInputSchema ): Promise<Schema> {
+export async function verifyToken(data: TokenVerifyInputSchema): Promise<Schema> {
   const url = '/api/token/verify';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
@@ -98,17 +81,17 @@ export async function getUsers(): Promise<UserList> {
   return await api(url, options);
 }
 
-export async function createUser(data: UserIn ) {
+export async function createUser(data: UserIn) {
   const url = '/api/user';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function getUser(uuid : string): Promise<UserOut> {
+export async function getUser(uuid: string): Promise<UserOut> {
   const url = '/api/user/' + uuid;
   const options = {
     method: "GET",
@@ -117,17 +100,17 @@ export async function getUser(uuid : string): Promise<UserOut> {
   return await api(url, options);
 }
 
-export async function updateUser(data: UserPut  ,uuid : string) {
+export async function updateUser(data: UserPut, uuid: string) {
   const url = '/api/user/' + uuid;
   const options = {
     method: "PUT",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function deleteUser(uuid : string) {
+export async function deleteUser(uuid: string) {
   const url = '/api/user/' + uuid;
   const options = {
     method: "DELETE",
@@ -136,32 +119,32 @@ export async function deleteUser(uuid : string) {
   return await api(url, options);
 }
 
-export async function updateUserPassword(data: UserPutPassword  ,uuid : string) {
+export async function updateUserPassword(data: UserPutPassword, uuid: string) {
   const url = '/api/user/' + uuid + '/password';
   const options = {
     method: "PATCH",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function createUserGroup(data: UserGroup  ,uuid : string) {
+export async function createUserGroup(data: UserGroup, uuid: string) {
   const url = '/api/user/' + uuid + '/group';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function deleteUserGroup(data: UserGroup  ,uuid : string) {
+export async function deleteUserGroup(data: UserGroup, uuid: string) {
   const url = '/api/user/' + uuid + '/group';
   const options = {
     method: "DELETE",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
@@ -175,17 +158,17 @@ export async function getGroups(): Promise<GroupList> {
   return await api(url, options);
 }
 
-export async function createGroup(data: GroupIn ) {
+export async function createGroup(data: GroupIn) {
   const url = '/api/group';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function getGroup(uuid : number): Promise<GroupOut> {
+export async function getGroup(uuid: number): Promise<GroupOut> {
   const url = '/api/group/' + uuid;
   const options = {
     method: "GET",
@@ -194,17 +177,17 @@ export async function getGroup(uuid : number): Promise<GroupOut> {
   return await api(url, options);
 }
 
-export async function updateGroup(data: GroupPut  ,uuid : number) {
+export async function updateGroup(data: GroupPut, uuid: number) {
   const url = '/api/group/' + uuid;
   const options = {
     method: "PUT",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function deleteGroup(uuid : number) {
+export async function deleteGroup(uuid: number) {
   const url = '/api/group/' + uuid;
   const options = {
     method: "DELETE",
@@ -222,17 +205,17 @@ export async function getTransactions(): Promise<TransactionList> {
   return await api(url, options);
 }
 
-export async function createTransaction(data: TransactionIn ) {
+export async function createTransaction(data: TransactionIn) {
   const url = '/api/transaction';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function getTransaction(uuid : string): Promise<TransactionOut> {
+export async function getTransaction(uuid: string): Promise<TransactionOut> {
   const url = '/api/transaction/' + uuid;
   const options = {
     method: "GET",
@@ -241,17 +224,17 @@ export async function getTransaction(uuid : string): Promise<TransactionOut> {
   return await api(url, options);
 }
 
-export async function updateTransaction(data: TransactionIn  ,uuid : string) {
+export async function updateTransaction(data: TransactionIn, uuid: string) {
   const url = '/api/transaction/' + uuid;
   const options = {
     method: "PUT",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function deleteTransaction(uuid : string) {
+export async function deleteTransaction(uuid: string) {
   const url = '/api/transaction/' + uuid;
   const options = {
     method: "DELETE",
@@ -278,17 +261,17 @@ export async function getTodos(): Promise<ToDoList> {
   return await api(url, options);
 }
 
-export async function createTodo(data: ToDoIn ) {
+export async function createTodo(data: ToDoIn) {
   const url = '/api/todo';
   const options = {
     method: "POST",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function getTodo(uuid : string): Promise<ToDoOut> {
+export async function getTodo(uuid: string): Promise<ToDoOut> {
   const url = '/api/todo/' + uuid;
   const options = {
     method: "GET",
@@ -297,17 +280,17 @@ export async function getTodo(uuid : string): Promise<ToDoOut> {
   return await api(url, options);
 }
 
-export async function updateTodo(data: ToDoIn  ,uuid : string) {
+export async function updateTodo(data: ToDoIn, uuid: string) {
   const url = '/api/todo/' + uuid;
   const options = {
     method: "PUT",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
 
-export async function deleteTodo(uuid : string) {
+export async function deleteTodo(uuid: string) {
   const url = '/api/todo/' + uuid;
   const options = {
     method: "DELETE",
@@ -316,12 +299,12 @@ export async function deleteTodo(uuid : string) {
   return await api(url, options);
 }
 
-export async function updateTodoDone(data: ToDoDone  ,uuid : string) {
+export async function updateTodoDone(data: ToDoDone, uuid: string) {
   const url = '/api/todo/' + uuid + '/done';
   const options = {
     method: "PATCH",
     headers: getHeaders(),
-		body: JSON.stringify(data)
+    body: JSON.stringify(data)
   };
   return await api(url, options);
 }
