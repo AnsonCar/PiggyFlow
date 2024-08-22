@@ -16,16 +16,14 @@
                 <th class="w-10" v-if="props.editMode"></th>
               </tr>
             </thead>
-            <template v-for="(i, inIndex) in tableData.item" :key="`${inIndex}-${i.uuid}`">
+            <template v-for="i in tableData.item" :key="`data-${i.uuid}`">
               <tbody>
                 <tr class="h-14">
                   <td class="w-10">
                     <input type="checkbox" class="checkbox checkbox-sm" :checked="i.done"
                       @click="editDone(!i.done, i.uuid)">
                   </td>
-                  <td> {{ i.done }} {{ i.label }} {{ i.uuid }}
-                  </td>
-                  <!-- <td class="pb-4" :class="{ 'line-through contrast-50 dark:brightness-50': i.done }">{{ i.label }}</td> -->
+                  <td class="pb-4" :class="{ 'line-through contrast-50 dark:brightness-50': i.done }">{{ i.label }}</td>
                   <td v-if="props.editMode" class="flex">
                     <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
                       @click="() => openEditDiag(i)" />
@@ -35,14 +33,6 @@
               </tbody>
             </template>
           </table>
-          <template v-for="(i, inIndex) in tableData.item" :key="`${inIndex}-${i.uuid}`">
-            <div>
-              {{ inIndex }}
-              <div>
-                {{ i }}
-              </div>
-            </div>
-          </template>
         </div>
       </div>
     </div>
