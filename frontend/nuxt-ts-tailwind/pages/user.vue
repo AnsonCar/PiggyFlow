@@ -35,7 +35,7 @@ const hasPasswordAgain = ref<boolean>(false);
 
 const editMode = ref<boolean>(false);
 
-const historyData = ref<any>({});
+const historyData = ref<UserOut[]>([]);
 
 async function saveAccount() {
   hasUserName.value = await checkNull(selectUserName.value)
