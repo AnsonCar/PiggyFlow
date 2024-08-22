@@ -1,9 +1,6 @@
 <template>
   <!-- History Table -->
   <div>
-    <code>
-      {{ props.data }}
-    </code>
     <div class="tp-card">
       <div class="tp-card-body">
         <div class="overflow-x-auto">
