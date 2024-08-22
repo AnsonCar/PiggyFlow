@@ -19,7 +19,7 @@ async def get_todo_service(uuid: uuid.UUID):
 
 async def create_todo_service(addData):
     try:
-        data = await sync_to_async(MyModel.objects.acreate)(**addData)
+        data = await MyModel.objects.acreate(**addData)
         return {"id": data.id}
     except Exception as e:
         return {"detail": str(e)}
