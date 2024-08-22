@@ -21,7 +21,7 @@
 import QrcodeVue from 'qrcode.vue'
 import { useWindowSize } from '@vueuse/core'
 
-const { width, height } = useWindowSize()
+const { width } = useWindowSize()
 
 const url = ref<string>('http://localhost:3000/qrcode')
 const size = ref<number>(400)

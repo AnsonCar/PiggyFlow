@@ -1,6 +1,6 @@
 <template>
   <!-- History Table -->
-  <div v-for="tableData, index in inData" :key="`card_${index}`">
+  <div v-for="tableData, index in inData" :key="`card_${index.toString()}`">
     <div class="tp-card">
       <div class="tp-card-body">
         <div class="overflow-x-auto">
@@ -58,14 +58,8 @@
 </template>
 
 <script lang="ts" setup>
-import { editTransaction, delTransaction } from '~/utils/db/transaction'
-
-type TTableFormData = { [key:string]: {uuid:string, user_uuid:string, datetime:string, label:string, price:number }[]}
-type TTabeData = { date: string, total: number, item: { datetime: string, label: string, price: number, uuid: string }[] }
-
-
 const props = defineProps<{
-  data: TTableFormData
+  data: TransactionIn[]
   editMode: boolean
 }>()
 
@@ -73,25 +67,27 @@ const emit = defineEmits(['initData'])
 
 const selectDateTime = ref<string>('');
 const selectLabel = ref<string>('');
-const selectPrice = ref<number | string>('');
+const selectPrice = ref<string>('');
 const acconutUUID = ref<string>('')
 
 const hasLabel = ref<boolean>(false);
 const hasPrice = ref<boolean>(false);
 
-const inData = computed(() => {
-  let ret : TTabeData[] = []
-  for (const e in props.data) {
-    let tableData: TTabeData = { date: '', total: 0, item: [] }
-    tableData.date = e
-    for (const i of props.data[e]) {
-      tableData.total += i.price
-      tableData.item.push({ datetime: i.datetime, label: i.label, price: i.price, uuid: i.uuid })
+const inData = computed<TransactionDisplay[]>(() => {
+  const dataGroup: TTransactionTableFormData = groupDataByDay(props.data)
+  const ret: TransactionDisplay[] = [];
+  for (const e in dataGroup) {
+    let tableData: TransactionDisplay = { date: '', total: 0, item: [] };
+    tableData.date = e;
+    for (const i of dataGroup[e]) {
+      tableData.total += i.price;
+      tableData.item.push({ datetime: i.datetime, label: i.label, price: i.price, uuid: i.uuid });
     }
-    ret.push(tableData)
+
+    ret.push(tableData);
   }
-  return ret
-})
+  return ret;
+});
 
 // Mode
 const isDelData = ref<boolean>(false)
@@ -103,7 +99,7 @@ async function openDelDiag(uuid: string) {
 }
 
 async function delAccount() {
-  await delTransaction(acconutUUID.value)
+  await deleteTransaction(acconutUUID.value)
   await emit('initData')
 }
 
@@ -112,21 +108,22 @@ async function openEditDiag(data: { datetime: string, label: string, price: numb
   isDelData.value = false
   selectDateTime.value = formatDateTime(new Date(data.datetime))
   selectLabel.value = data.label
-  selectPrice.value = data.price
+  selectPrice.value = data.price.toString()
   acconutUUID.value = data.uuid
 }
 
 async function eidtAcconut() {
-  hasLabel.value = checkNull(selectLabel.value)
-  hasPrice.value = checkNull(selectPrice.value as string)
+  hasLabel.value = await checkNull(selectLabel.value)
+  hasPrice.value = await checkNull(selectPrice.value as string)
+
   if (!hasLabel.value && !hasPrice.value) {
-    const data = {
-      "datetime": formatDateTimeZone(selectDateTime.value),
+    const data: TransactionIn = {
+      "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
       "label": selectLabel.value,
-      "price": selectPrice.value
+      "price": parseFloat(selectPrice.value)
     }
-    const res = await editTransaction(data, acconutUUID.value)
-    await emit('initData')
+    const res = await updateTransaction(data, acconutUUID.value)
+    emit('initData')
   }
 }
 

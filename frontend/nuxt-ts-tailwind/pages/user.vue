@@ -7,12 +7,13 @@
       </h1>
       <TPInput type="text" placeholder="User Name" :error="hasUserName" v-model="selectUserName"></TPInput>
       <TPInput type="password" placeholder="Password" :error="hasPassword" v-model="selectPassword"></TPInput>
-      <TPInput type="password" placeholder="Again Password" :error="hasPasswordAgain" v-model="selectPasswordAgain"></TPInput>
+      <TPInput type="password" placeholder="Again Password" :error="hasPasswordAgain" v-model="selectPasswordAgain">
+      </TPInput>
       <div class="card-actions justify-between">
         <div>
           <TPButton icon="edit" :active="editMode" @click="() => editMode = !editMode" class="mr-2" />
           <!-- <TPButton icon="download" class="mr-2" @click="downloadUserCSV" /> -->
-          <!-- <TPButton icon="upload" class="mr-2"/> -->
+          <!-- <TPButton icon="upload" class="mr-2" /> -->
         </div>
         <TPButton label="Save" icon="user_add" @click="saveAccount" />
       </div>
@@ -24,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { getUsersGroups, addUser } from '~/utils/db/user'
-
 const selectUserName = ref<string>('');
 const selectPassword = ref<string>('');
 const selectPasswordAgain = ref<string>('');
@@ -36,19 +35,20 @@ const hasPasswordAgain = ref<boolean>(false);
 
 const editMode = ref<boolean>(false);
 
-const historyData = ref<any>({});
+const historyData = ref<UserOut[]>([]);
 
 async function saveAccount() {
-  hasUserName.value = checkNull(selectUserName.value)
-  hasPassword.value = checkNull(selectPassword.value)
-  hasPasswordAgain.value = checkNull(selectPasswordAgain.value)
+  hasUserName.value = await checkNull(selectUserName.value)
+  hasPassword.value = await checkNull(selectPassword.value)
+  hasPasswordAgain.value = await checkNull(selectPasswordAgain.value)
+
   const noteNullValue = !hasUserName.value && !hasPassword.value && !hasPasswordAgain.value
   if (noteNullValue) {
     const data = {
       username: selectUserName.value,
       password: selectPassword.value
     }
-    const res = await addUser(data)
+    const res = await createUser(data)
     if (res.id) {
       initData()
     }
@@ -56,8 +56,7 @@ async function saveAccount() {
 }
 
 async function initData() {
-  // data
-  const res = await getUsersGroups()
+  const res = await getUsers()
   historyData.value = res.data
 }
 

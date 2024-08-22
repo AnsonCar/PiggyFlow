@@ -36,13 +36,8 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: false,
-});
+definePageMeta({ layout: false });
 
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
 const username = ref<string>('');
 const password = ref<string>('');
 const hasUsername = ref<boolean>(false);
@@ -54,15 +49,14 @@ async function login() {
   hasPassword.value = await checkNull(password.value)
 
   if (!hasUsername.value && !hasPassword.value) {
-    const res = await obtainToken({
+    const res: TokenObtainPairOutputSchema = await obtainToken({
       username: username.value,
       password: password.value
     })
     if (res.access && res.refresh) {
       setCookie("token", res.access, 1)
       setCookie("refresh", res.refresh, 1)
-      location.reload()
-      // router.push('/');
+      navigateTo('/', { external: true })
     } else {
       isError.value = true
     }

@@ -6,7 +6,7 @@
         <div class="overflow-x-auto">
           <div class="flex justify-between px-2 pb-2">
             <div>{{ tableData.date }}</div>
-            <div>{{ (tableData.total/tableData.item.length * 100).toFixed(0) }} %</div>
+            <div>{{ (tableData.total / tableData.item.length * 100).toFixed(0) }} %</div>
           </div>
           <table class="table">
             <thead>
@@ -19,7 +19,8 @@
             <tbody v-for="i, index in tableData.item" :key="index">
               <tr class="h-14">
                 <td class="w-10">
-                  <input type="checkbox" class="checkbox checkbox-sm" :checked="i.done" @click="editDone(!i.done, i.uuid)">
+                  <input type="checkbox" class="checkbox checkbox-sm" :checked="i.done"
+                    @click="editDone(!i.done, i.uuid)">
                 </td>
                 <td class="pb-4" :class="{ 'line-through contrast-50 dark:brightness-50': i.done }">{{ i.label }}</td>
                 <td v-if="props.editMode" class="flex">
@@ -44,8 +45,7 @@
       <p class="py-4 flex justify-between">
         <span>Delect Data ?</span>
       <form method="dialog">
-        <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error"
-          @click="delAccount()" />
+        <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" />
       </form>
       </p>
     </div>
@@ -60,10 +60,8 @@
 </template>
 
 <script lang="ts" setup>
-import { editTodo, delTodo, editTodoDone } from '~/utils/db/todo'
-
 const props = defineProps<{
-  data: any
+  data: ToDoIn[]
   editMode: boolean
 }>()
 
@@ -71,19 +69,18 @@ const emit = defineEmits(['initData'])
 
 const selectDateTime = ref<string>('');
 const selectLabel = ref<string>('');
-const selectPrice = ref<number | string>('');
 const itemUUID = ref<string>('')
 
 const hasLabel = ref<boolean>(false);
 const hasPrice = ref<boolean>(false);
 
-const inData = computed(() => {
-  let ret = []
-
-  for (const e in props.data) {
-    let tableData: { date: string, total: number, item: { datetime: string, label: string, done: boolean, uuid: string }[] } = { date: '', total: 0, item: [] }
+const inData = computed<TodoDisplay[]>(() => {
+  const dataGroup: TTodoTableFormData = groupDataByDay(props.data)
+  let ret: TodoDisplay[] = []
+  for (const e in dataGroup) {
+    let tableData: TodoDisplay = { date: '', total: 0, item: [] }
     tableData.date = e
-    for (const i of props.data[e]) {
+    for (const i of dataGroup[e]) {
       tableData.total += i.done ? 1 : 0
       tableData.item.push({ datetime: i.datetime, label: i.label, done: i.done, uuid: i.uuid })
     }
@@ -102,7 +99,7 @@ async function openDelDiag(uuid: string) {
 }
 
 async function delAccount() {
-  await delTodo(itemUUID.value)
+  await deleteTodo(itemUUID.value)
   emit('initData')
 }
 
@@ -115,20 +112,19 @@ async function openEditDiag(data: { datetime: string, label: string, done?: bool
 }
 
 async function eidtData() {
-  hasLabel.value = checkNull(selectLabel.value)
-
+  hasLabel.value = await checkNull(selectLabel.value)
   if (!hasLabel.value) {
     const data = {
-      "datetime": formatDateTimeZone(selectDateTime.value),
+      "datetime": formatDateTimeZone(selectDateTime.value).toString(),
       "label": selectLabel.value
     }
-    const res = await editTodo(data, itemUUID.value)
+    const res = await updateTodo(data, itemUUID.value)
     emit('initData')
   }
 }
 
-async function editDone(done:boolean, uuid:string ) {
-  await editTodoDone({done:done}, uuid)
+async function editDone(done: boolean, uuid: string) {
+  await updateTodoDone({ done: done }, uuid)
   emit('initData')
 }
 

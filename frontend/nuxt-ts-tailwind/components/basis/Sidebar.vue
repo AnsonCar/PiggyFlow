@@ -34,11 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { killToken } from '~/utils/logout';
-
 const props = defineProps<{
   title: string
 }>()
-
-
 </script>

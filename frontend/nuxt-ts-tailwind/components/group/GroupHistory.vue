@@ -45,8 +45,7 @@
       <p class="py-4 flex justify-between">
         <span>Delect Data ?</span>
       <form method="dialog">
-        <TPButton label="Can't Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" />
-        <!-- <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delAccount()" /> -->
+        <TPButton label="Delect" icon="delect" class="absolute bottom-2 right-2 btn-error" @click="delGroup()" />
       </form>
       </p>
     </div>
@@ -61,9 +60,6 @@
 </template>
 
 <script lang="ts" setup>
-import { editGroup, delGroup } from '~/utils/db/group'
-// import { killToken } from "~/utils/logout.js";
-
 const props = defineProps<{
   data: any
   editMode: boolean
@@ -71,14 +67,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['initData'])
 
-const selectDateTime = ref<string>('');
 const selectGroupName = ref<string>('');
-const selectPrice = ref<number | string>('');
-const itemUUID = ref<string>('')
-
+const itemUUID = ref<number>(0)
 const hasGroupName = ref<boolean>(false);
-const hasPrice = ref<boolean>(false);
-
 const inData = computed(() => {
   return props.data
 })
@@ -87,31 +78,31 @@ const inData = computed(() => {
 const isDelData = ref<boolean>(false)
 
 // Delect Data
-async function openDelDiag(uuid: string | number) {
+async function openDelDiag(uuid: number) {
   isDelData.value = true
-  itemUUID.value = uuid.toString()
+  itemUUID.value = uuid
 }
 
-async function delAccount() {
-  await delGroup(itemUUID.value)
+async function delGroup() {
+  await deleteGroup(itemUUID.value)
   emit('initData')
 }
 
 // Edit Data
-async function openEditDiag(data: { name: string, id: string }) {
+async function openEditDiag(data: { name: string, id: number }) {
   isDelData.value = false
   selectGroupName.value = data.name
   itemUUID.value = data.id
 }
 
 async function eidtData() {
-  hasGroupName.value = checkNull(selectGroupName.value)
+  hasGroupName.value = await checkNull(selectGroupName.value)
 
   if (!hasGroupName.value) {
     const data = {
       "name": selectGroupName.value
     }
-    const res = await editGroup(data, itemUUID.value)
+    const res = await updateGroup(data, itemUUID.value)
     emit('initData')
   }
 }

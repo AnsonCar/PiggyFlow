@@ -18,8 +18,8 @@ async def get_transaction_service(uuid: uuid.UUID):
 
 async def create_transaction_service(addData):
     try:
-        data = await sync_to_async(MyModel.objects.acreate)(**addData)
-        return {"id": data.id}
+        data = await MyModel.objects.acreate(**addData)
+        return {"id":  data.id}
     except Exception as e:
         return {"detail": str(e)}
 

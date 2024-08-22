@@ -13,6 +13,7 @@
   "filesGlob": [
       "src/**/*.ts",
       "test/**/*.ts",
-      "./types/type.d.ts"
+      "./types/type.d.ts",
+      "./types/api_type.d.ts"
   ]
 }
