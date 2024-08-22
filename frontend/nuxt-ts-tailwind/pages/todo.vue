@@ -37,10 +37,9 @@ async function saveTodo() {
   if (!hasLabel.value) {
     const data: ToDoIn = {
       "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
-      "label": selectLabel.value,
+      "label": selectLabel.value
     }
     const res = await createTodo(data)
-    console.log(res)
     if (res.id) initData()
   }
 }

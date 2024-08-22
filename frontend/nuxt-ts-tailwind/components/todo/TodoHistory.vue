@@ -72,10 +72,10 @@ const selectLabel = ref<string>('');
 const itemUUID = ref<string>('')
 
 const hasLabel = ref<boolean>(false);
-const hasPrice = ref<boolean>(false);
 
 const inData = computed<TodoDisplay[]>(() => {
   const dataGroup: TTodoTableFormData = groupDataByDay(props.data)
+  console.log(dataGroup)
   let ret: TodoDisplay[] = []
   for (const e in dataGroup) {
     let tableData: TodoDisplay = { date: '', total: 0, item: [] }
