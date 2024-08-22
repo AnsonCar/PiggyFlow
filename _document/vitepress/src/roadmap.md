@@ -11,11 +11,13 @@
 
 # v0.0.8
 
+- [ ] 上載文件功能
 - [ ] 卡名 - 生成器
 - [ ] 新增 固定支出 功能 (考慮)
 - [ ] test case
   - [ ] backend
   - [ ] frontend
+- [ ] ⁠ 所有 api 使用 cache redis（必要的 api）
 
 # v0.0.7
 
@@ -33,16 +35,13 @@
 ## backend
 
 - [x] 所有 api 使用 async
-- [ ] ⁠ 所有 api 使用 cache redis（必要的 api）
-- [ ] 加入 api datetime ( create & update time)
+- [x] 加入 api datetime ( create & update time)
 - [x] ⁠ 統一接格式程名
-- [ ] ⁠ 寫 test case 同 swagger example
 - [x] openapi 生成 cli-side js
 
 ## rex
 
 - [ ] 實時翻釋
-- [ ] 上載文件功能
 - [ ] ocr 功能
 
 ## ds
