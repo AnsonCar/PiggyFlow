@@ -11,9 +11,9 @@ MyModel = CustomUser
 async def get_users_service():
     # data = cache.get("users")
     # if not data:
-    #     data = [data async for data in MyModel.objects.all()]
+    #     data = [data async for data in MyModel.objects.all().order_by('id')]
     #     cache.set("users", data, timeout=4)
-    data = [data async for data in MyModel.objects.prefetch_related('groups').all()]
+    data = [data async for data in MyModel.objects.prefetch_related('groups').all().order_by('id')]
     return data
 
 

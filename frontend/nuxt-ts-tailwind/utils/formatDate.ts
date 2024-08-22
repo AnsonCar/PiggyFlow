@@ -55,10 +55,5 @@ export function groupDataByDay(res: any) {
       dataGroup[date] = [e]
     }
   }
-  for (const group of Object.keys(dataGroup)) {
-    dataGroup[group].map(e => console.log(e))
-    dataGroup[group] = dataGroup[group].sort((a, b) => a.label - b.label)
-  }
-
   return dataGroup
 }

@@ -16,7 +16,7 @@ async def download_csv(MyModel, file_name: str):
     writer.writerow(field_names)
 
     # fetch data asynchronously
-    data = await sync_to_async(list)(MyModel.objects.all())
+    data = await sync_to_async(list)(MyModel.objects.all().order_by('id'))
 
     for item in data:
         row = [str(getattr(item, field)) for field in field_names]

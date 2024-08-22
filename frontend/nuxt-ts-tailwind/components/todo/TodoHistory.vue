@@ -1,6 +1,6 @@
 <template>
   <!-- History Table -->
-  <div v-for="tableData, index in inData" :key="`card_${index}`">
+  <div v-for="(tableData, index) in inData" :key="`card_${index}`">
     <div class="tp-card">
       <div class="tp-card-body">
         <div class="overflow-x-auto">
@@ -16,21 +16,33 @@
                 <th class="w-10" v-if="props.editMode"></th>
               </tr>
             </thead>
-            <tbody v-for="i, index in tableData.item" :key="index">
-              <tr class="h-14">
-                <td class="w-10">
-                  <input type="checkbox" class="checkbox checkbox-sm" :checked="i.done"
-                    @click="editDone(!i.done, i.uuid)">
-                </td>
-                <td class="pb-4" :class="{ 'line-through contrast-50 dark:brightness-50': i.done }">{{ i.label }}</td>
-                <td v-if="props.editMode" class="flex">
-                  <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
-                    @click="() => openEditDiag(i)" />
-                  <TPButton icon="delect" size="xs" onclick="diag.showModal()" @click="openDelDiag(i.uuid)" />
-                </td>
-              </tr>
-            </tbody>
+            <template v-for="(i, inIndex) in tableData.item" :key="`${inIndex}-${i.uuid}`">
+              <tbody>
+                <tr class="h-14">
+                  <td class="w-10">
+                    <input type="checkbox" class="checkbox checkbox-sm" :checked="i.done"
+                      @click="editDone(!i.done, i.uuid)">
+                  </td>
+                  <td> {{ i.done }} {{ i.label }} {{ i.uuid }}
+                  </td>
+                  <!-- <td class="pb-4" :class="{ 'line-through contrast-50 dark:brightness-50': i.done }">{{ i.label }}</td> -->
+                  <td v-if="props.editMode" class="flex">
+                    <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
+                      @click="() => openEditDiag(i)" />
+                    <TPButton icon="delect" size="xs" onclick="diag.showModal()" @click="openDelDiag(i.uuid)" />
+                  </td>
+                </tr>
+              </tbody>
+            </template>
           </table>
+          <template v-for="(i, inIndex) in tableData.item" :key="`${inIndex}-${i.uuid}`">
+            <div>
+              {{ inIndex }}
+              <div>
+                {{ i }}
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -75,7 +87,6 @@ const hasLabel = ref<boolean>(false);
 
 const inData = computed<TodoDisplay[]>(() => {
   const dataGroup: TTodoTableFormData = groupDataByDay(props.data)
-  console.log(dataGroup)
   let ret: TodoDisplay[] = []
   for (const e in dataGroup) {
     let tableData: TodoDisplay = { date: '', total: 0, item: [] }
@@ -124,6 +135,7 @@ async function eidtData() {
 }
 
 async function editDone(done: boolean, uuid: string) {
+  console.log(uuid)
   await updateTodoDone({ done: done }, uuid)
   emit('initData')
 }

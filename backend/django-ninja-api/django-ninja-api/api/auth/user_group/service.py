@@ -7,7 +7,7 @@ MyModel = Group
 
 
 async def get_groups_service():
-    data = [data async for data in MyModel.objects.all()]
+    data = [data async for data in MyModel.objects.all().order_by('id')]
     return data
 
 
