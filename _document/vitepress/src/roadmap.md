@@ -35,9 +35,9 @@
 - [x] 所有 api 使用 async
 - [ ] ⁠ 所有 api 使用 cache redis（必要的 api）
 - [ ] 加入 api datetime ( create & update time)
-- [ ] ⁠ 統一接格式程名
+- [x] ⁠ 統一接格式程名
 - [ ] ⁠ 寫 test case 同 swagger example
-- [ ] openapi 生成 cli-side js
+- [x] openapi 生成 cli-side js
 
 ## rex
 
