@@ -23,9 +23,7 @@
                 </td>
                 <td class="pb-4">{{ i.username }}</td>
                 <td>
-                  <span v-for="group in i.groups">
-                    {{ group.name }}
-                  </span>
+                  {{ i.groups.map(e => e.name).toString() }}
                 </td>
                 <td v-if="props.editMode" class="flex">
                   <!-- Edit -->
@@ -94,11 +92,11 @@
             <th class="w-10"></th>
           </tr>
         </thead>
-        <tbody v-for="i, index in groupList" :key="index">
+        <tbody v-for="i, index in groupList" :key="`${i.id}${i.name}`">
           <tr class="h-14">
             <td class="w-10">
-              <input type="checkbox" class="checkbox checkbox-sm" :checked="userGorup.includes(i.name)"
-                @click="editGroup(i.id)" :id="i.id" :value="i.name">
+              <input type="checkbox" class="checkbox checkbox-sm" :checked="userGroup.includes(i.name)"
+                @click="editGroup(i.id, i.name)" :id="i.id" :value="i.name">
             </td>
             <td class="pb-4">{{ i.name }}</td>
             <td class="flex">
@@ -131,7 +129,7 @@ const hasPassword = ref<boolean>(false);
 const hasAgainPassword = ref<boolean>(false);
 const passwordNotSame = ref<boolean>(false);
 // group
-const userGorup = ref<string[]>([])
+const userGroup = ref<string[]>([])
 const groupList = ref<any[]>([])
 const itemUUID = ref<string>('')
 // Edit Mode
@@ -187,40 +185,43 @@ async function eidtPassword() {
 
 // Group Name
 async function openGroupDiag(uuid: string, userGroups: string[]) {
-  userGorup.value = userGroups
+  userGroup.value = userGroups
   groupList.value = (await getGroups()).data
   if (itemUUID.value != uuid) itemUUID.value = uuid
 }
 
-async function editGroup(groupID: number) {
-  console.log('editGroup')
-
+async function editGroup(groupID: number, groupName: string) {
   let hasGroup: boolean = false
+  let myGroup = [...userGroup.value]
   let name = ''
 
+  console.log('-------------------------------------')
+  console.log('now', myGroup)
+
   for (const group of groupList.value) {
-    // console.log('-----------------------------')
-    // console.log('userGorup', userGorup.value)
-    // console.log('groupName', group.name)
-    if (userGorup.value.includes(group.name)) {
-      // console.log('hasGroup')
-      userGorup.value = userGorup.value.filter((e: string) => e !== group.name)
+    if (myGroup.includes(group.name) && group.name === groupName) {
+      console.log('---- includes', group.name)
       hasGroup = true
-    } else if (group.id === groupID) {
-      // console.log('no Group ans is this!', group.name)
-      name = group.name
+    }
+
+    if (groupID === group.id) {
+      name = group.name;
     }
   }
 
   if (hasGroup) {
-    // console.log('delete')
+    console.log('del')
+    myGroup = myGroup.filter(e => e !== name)
     await deleteUserGroup({ id: groupID }, itemUUID.value)
   } else {
-    // console.log('add', name)
-    userGorup.value.push(name)
+    console.log('add')
+    console.log('push name', name)
+    myGroup.push(name)
     await createUserGroup({ id: groupID }, itemUUID.value)
   }
+  console.log('update', myGroup)
+  console.log('-------------------------------------')
+  await openGroupDiag(itemUUID.value, myGroup)
   emit('initData')
-  openGroupDiag(itemUUID.value, userGorup.value)
 }
 </script>
