@@ -1,9 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   typescript: {
-    typeCheck: false
+    typeCheck: true
   },
+
   devtools: { enabled: true },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false, // [!code ++]
+    },
+  ],
   app: {
     head: {
       charset: 'utf-8',
@@ -12,16 +19,21 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' }
   },
+
   runtimeConfig: {
     public: {
       DB_API_BASE_URL: process.env.DB_API_BASE_URL,
     },
   },
+
   css: ['~/assets/css/main.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
-  }
+  },
+
+  compatibilityDate: '2024-08-06'
 })

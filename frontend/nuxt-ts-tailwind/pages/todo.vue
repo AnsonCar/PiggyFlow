@@ -1,16 +1,19 @@
 <template>
   <div class="overflow-y-scroll">
     <TPBox>
-      <h1 class="text-xl pl-1 flex items-center"><TPIcon icon="edit_note" /><p class="pl-2">Todo</p></h1>
+      <h1 class="text-xl pl-1 flex items-center">
+        <TPIcon icon="edit_note" />
+        <p class="pl-2">Todo</p>
+      </h1>
       <TPInput type="datetime-local" label="Date" :error="false" v-model="selectDateTime"></TPInput>
       <TPInput type="text" label="Event" :error="hasLabel" v-model="selectLabel"></TPInput>
       <div class="card-actions justify-between ">
         <div>
           <TPButton icon="edit" :active="editMode" @click="() => editMode = !editMode" class="mr-2" />
-          <TPButton icon="download" class="mr-2" @click="downloadTodoCSV" />
-          <!-- <TPButton icon="upload" class="mr-2"/> -->
+          <TPButton icon="download" class="mr-2" @click="downloalCsv(downloadTodoCsv(), 'todo.csv')" />
+          <TPButton icon="upload" class="mr-2" />
         </div>
-        <TPButton label="Save" icon="note" @click="saveAccount" />
+        <TPButton label="Save" icon="note" @click="saveTodo" />
       </div>
     </TPBox>
     <br>
@@ -20,41 +23,32 @@
 </template>
 
 <script setup lang="ts">
-import { getsTodo, addTodo, downloadTodoCSV } from '~/utils/db/todo'
-import { groupDataByDay } from '~/utils/formatDate';
-
-const selectDateTime = ref<string>('');
+const selectDateTime = ref<string>(getDateTime(new Date()));
 const selectLabel = ref<string>('');
 
 const hasLabel = ref<boolean>(false);
 const editMode = ref<boolean>(false);
 
-const historyData = ref<any>({});
+const historyData = ref<ToDoOut[]>([]);
 
-async function saveAccount() {
-  hasLabel.value = checkNull(selectLabel.value)
-
+async function saveTodo() {
+  hasLabel.value = await checkNull(selectLabel.value)
   if (!hasLabel.value) {
-    const data = {
-      "datetime": formatDateTimeZone(selectDateTime.value),
-      "label": selectLabel.value,
+    console.log(selectDateTime.value)
+    const data: ToDoIn = {
+      "datetime": selectDateTime.value,
+      "label": selectLabel.value
     }
-    const res = await addTodo(data)
-    if (res.id) {
-      initData()
-    }
+    const res = await createTodo(data)
+    if (res.id) initData()
   }
 }
 
 async function initData() {
-  // data
-  const res = await getsTodo()
-  const dataGroup = groupDataByDay(res)
-  historyData.value = dataGroup
+  historyData.value = (await getTodos()).data
 }
 
 onMounted(() => {
-  selectDateTime.value = formatDateTime(new Date())
   initData()
 })
 

@@ -1,55 +1,7 @@
-services:
-  db_api_ninja:
-    build: 
-      context: ./db_api_ninja
-    container_name: db_api_ninja
-    restart: always
-    ports:
-      - 8000:8000
-    volumes:
-      - ./db_api_ninja:/app
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_SERVER=db
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
-      - DJANGO_PORT=${DJANGO_PORT}
-      - DJANGO_DEBUG=${DJANGO_DEBUG}
-    # depends_on:
-    #   - db
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-
-  # db:
-  #   image: postgres:12
-  #   container_name: pgsql
-  #   restart: always
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - ./db:/var/lib/postgresql/data/pgdata
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - PGDATA=/var/lib/postgresql/data/pgdata
-  #     - POSTGRES_DB=${POSTGRES_DB?Variable not set}
-  #     - POSTGRES_USER=${POSTGRES_USER?Variable not set}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
-
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: pgadmin4
-  #   restart: always
-  #   ports:
-  #     - 8888:80
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL?Variable not set}
-  #     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD?Variable not set}
-  #   volumes:
-  #     - ./pgadmin:/var/lib/pgadmin
-  #   depends_on:
-  #     - db
+include:
+  - path:
+    - ./django-ninja-api/docker-compose.yml
+  - path:
+    - ./postgresql/docker-compose.yml
+  - path :
+    - ./redis/docker-compose.yml

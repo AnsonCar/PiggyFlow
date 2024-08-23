@@ -1,0 +1,10 @@
+services:
+  redis:
+    image: redis:6
+    ports:
+      - 6379:6379
+    restart: always
+    container_name: redis
+
+# https://docs.retool.com/self-hosted/reference/environment-variables/redis
+# https://django-redis-chs.readthedocs.io/zh-cn/latest/

@@ -1,6 +1,5 @@
 <template>
   <!-- History Table -->
-  <!-- <div v-for="tableData, index in inData" :key="`card_${index}`"> -->
   <div>
     <div class="tp-card">
       <div class="tp-card-body">
@@ -18,12 +17,14 @@
                 <th class="w-10">{{ props.editMode ? 'Action' : '' }}</th>
               </tr>
             </thead>
-            <tbody v-for="i, index in inData" :key="index">
+            <tbody v-for="i, index in props.data " :key="index">
               <tr class="h-14">
                 <td class="w-10">
                 </td>
                 <td class="pb-4">{{ i.username }}</td>
-                <td>{{ i.groups.toString() }}</td>
+                <td>
+                  {{ i.groups.map(e => e.name).toString() }}
+                </td>
                 <td v-if="props.editMode" class="flex">
                   <!-- Edit -->
                   <TPButton icon="edit2" size="xs" class="mr-2" onclick="diag.showModal()"
@@ -32,7 +33,7 @@
                     @click="() => openPassworddDiag(i.uuid)" />
                   <!-- Group -->
                   <TPButton icon="user_group" size="xs" class="mr-2" onclick="diag_group.showModal()"
-                    @click="openGroupDiag(i.uuid)" />
+                    @click="openGroupDiag(i.uuid, i.groups.map(e => e.name))" />
                   <!-- Delect -->
                   <TPButton icon="delect" size="xs" onclick="diag.showModal()" @click="openDelDiag(i.uuid)" />
                 </td>
@@ -72,7 +73,8 @@
       <h3 class="text-lg font-bold">Edit Data - Password</h3>
       Edit The User password
       <TPInput type="text" placeholder="Password" :error="hasPassword" v-model="selectPassword"></TPInput>
-      <TPInput type="text" placeholder="Again Password" :error="hasAgainPassword" v-model="selectAgainPassword"></TPInput>
+      <TPInput type="text" placeholder="Again Password" :error="hasAgainPassword" v-model="selectAgainPassword">
+      </TPInput>
       <TPButton label="Edit" icon="edit2" class="w-full" @click="() => eidtPassword()" />
       <p class="h-10 text-error" v-if="passwordNotSame">password not same</p>
     </div>
@@ -90,10 +92,11 @@
             <th class="w-10"></th>
           </tr>
         </thead>
-        <tbody v-for="i, index in groupList" :key="index">
+        <tbody v-for="i, index in groupList" :key="`${i.id}${i.name}`">
           <tr class="h-14">
             <td class="w-10">
-              <input type="checkbox" class="checkbox checkbox-sm" :checked="userGorup.includes(i.name)" @click="editGroup(i.id)" :id="i.id" :value="i.name">
+              <input type="checkbox" class="checkbox checkbox-sm" :checked="userGroup.includes(i.name)"
+                @click="editGroup(i.id, i.name)" :id="i.id" :value="i.name">
             </td>
             <td class="pb-4">{{ i.name }}</td>
             <td class="flex">
@@ -107,21 +110,14 @@
 </template>
 
 <script lang="ts" setup>
-import { editUser, delUser, editUserPassword, addUserGroup, removeUserGroup, getUserGroup } from '~/utils/db/user'
-import { getsGroup } from '~/utils/db/group'
-
 const props = defineProps<{
   data: any
   editMode: boolean
 }>()
 
 const emit = defineEmits(['initData'])
-const inData = computed(() => {
-  return props.data
-})
 
 // eidt 
-const selectDateTime = ref<string>('');
 const selectUserName = ref<string>('');
 const hasUserName = ref<boolean>(false);
 // edit password
@@ -131,7 +127,7 @@ const hasPassword = ref<boolean>(false);
 const hasAgainPassword = ref<boolean>(false);
 const passwordNotSame = ref<boolean>(false);
 // group
-const userGorup = ref<string[]>([])
+const userGroup = ref<string[]>([])
 const groupList = ref<any[]>([])
 const itemUUID = ref<string>('')
 // Edit Mode
@@ -144,72 +140,75 @@ async function openDelDiag(uuid: string) {
 }
 
 async function delAccount() {
-  await delUser(itemUUID.value)
+  await deleteUser(itemUUID.value)
   emit('initData')
 }
 
 // Edit Data
 async function openEditDiag(data: { datetime: string, label: string, done?: boolean, uuid: string }) {
   isDelData.value = false
-  selectDateTime.value = formatDateTime(new Date(data.datetime))
   selectUserName.value = data.label
   itemUUID.value = data.uuid
 }
 
 async function eidtData() {
-  hasUserName.value = checkNull(selectUserName.value)
+  hasUserName.value = await checkNull(selectUserName.value)
   if (!hasUserName.value) {
     const data = {
       "username": selectUserName.value
     }
-    const res = await editUser(data, itemUUID.value)
+    const res = await updateUser(data, itemUUID.value)
     emit('initData')
   }
 }
 // password Data
-async function openPassworddDiag(uuid:string) {
+async function openPassworddDiag(uuid: string) {
   itemUUID.value = uuid
 }
 
 async function eidtPassword() {
-  hasPassword.value = checkNull(selectPassword.value)
-  hasAgainPassword.value = checkNull(selectAgainPassword.value)
-  if ( hasPassword && hasAgainPassword) {
-    if ( selectPassword.value !== selectAgainPassword.value ) {
+  hasPassword.value = await checkNull(selectPassword.value)
+  hasAgainPassword.value = await checkNull(selectAgainPassword.value)
+  if (hasPassword && hasAgainPassword) {
+    if (selectPassword.value !== selectAgainPassword.value) {
       passwordNotSame.value = true
       return
     }
-    const res = await editUserPassword({password:selectPassword.value}, itemUUID.value)
+    const res = await updateUserPassword({ password: selectPassword.value }, itemUUID.value)
   }
   emit('initData')
 }
-    
+
 
 // Group Name
-async function openGroupDiag(uuid:string) {
-  const res = (await getUserGroup(uuid)).data
-  userGorup.value = res ? res : []
-  groupList.value = (await getsGroup()).data
-  if ( itemUUID.value != uuid ) {
-    itemUUID.value = uuid
-  }
+async function openGroupDiag(uuid: string, userGroups: string[]) {
+  userGroup.value = userGroups
+  groupList.value = (await getGroups()).data
+  if (itemUUID.value != uuid) itemUUID.value = uuid
 }
 
-async function editGroup(groupID:number) {
-  // change has group
-  let hasGroup = false
-  for ( const group of groupList.value) {
-    if ( userGorup.value.includes(group.name) ) {
+async function editGroup(groupID: number, groupName: string) {
+  let hasGroup: boolean = false
+  let myGroup = [...userGroup.value]
+  let name = ''
+  for (const group of groupList.value) {
+    if (myGroup.includes(group.name) && group.name === groupName) {
       hasGroup = true
-      await removeUserGroup({id:groupID}, itemUUID.value)
-    } 
+    }
+
+    if (groupID === group.id) {
+      name = group.name;
+    }
   }
-  // if not, add the group
-  if ( !hasGroup ) {
-    await addUserGroup({id:groupID}, itemUUID.value)
+
+  if (hasGroup) {
+    myGroup = myGroup.filter(e => e !== name)
+    await deleteUserGroup({ id: groupID }, itemUUID.value)
+  } else {
+    myGroup.push(name)
+    await createUserGroup({ id: groupID }, itemUUID.value)
   }
-  // init data
-  openGroupDiag(itemUUID.value)
+  await openGroupDiag(itemUUID.value, myGroup)
   emit('initData')
 }
 </script>

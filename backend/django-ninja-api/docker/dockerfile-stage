@@ -1,0 +1,32 @@
+# FROM python:3.10.12-slim
+FROM python:3.12.5-slim
+
+WORKDIR /app
+COPY ./django-ninja-api .
+
+# Basis
+RUN apt-get update -y
+RUN apt-get install -y build-essential
+RUN apt-get install -y libpq-dev
+RUN pip install --upgrade pip
+
+# api tool
+RUN apt-get install -y opencc
+RUN pip install opencc
+RUN pip install hyper
+RUN pip install googletrans==4.0.0-rc1
+
+# server
+RUN pip install Django==4.2.7
+RUN pip install django-ninja
+RUN pip install django-ninja-jwt
+RUN pip install django-cors-headers
+RUN pip install django-redis
+RUN pip install orjson
+
+# db
+# RUN pip install psycopg2-binary
+RUN pip install "psycopg[binary]"
+RUN pip install python-dotenv
+
+RUN pip install uvicorn

@@ -1,4 +1,19 @@
+// https://stackoverflow.com/questions/38268776/why-does-typescript-ignore-my-tsconfig-json-inside-visual-studio-code
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "compilerOptions": {
+      "sourceMap": true,
+      "target": "es6",
+      "experimentalDecorators": true,
+      "noImplicitAny": false
+  },
+  "exclude": [
+      "node_modules"
+  ],
+  "extends": "./.nuxt/tsconfig.json",
+  "filesGlob": [
+      "src/**/*.ts",
+      "test/**/*.ts",
+      "./types/type.d.ts",
+      "./types/api_type.d.ts"
+  ]
 }
