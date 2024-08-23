@@ -20,7 +20,7 @@ docker compose up -d
 
 ## 項目架構
 
-![](https://github.com/AnsonCar/PiggyFlow/blob/v0.0.7/_document/vitepress/src/public/MainWorkFlow.png?raw=true)
+![](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/v0.0.7/_document/vitepress/src/public/MainWorkFlow.png)
 
 ### 技術棧
 #### 前端
@@ -31,7 +31,7 @@ docker compose up -d
 
 ### 后端
 **主用語言**: Python 3.12.5  
-**API框架**: Django-ninja| Django 5.1  
+**API框架**: Django-ninja | Django 5.1  
 **其他**: Django-ninja-jwt ...  
 
 ## 項目結構
