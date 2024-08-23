@@ -11,10 +11,28 @@
 </main>
 
 ## 快速部署
+
 ### docker
+
 ```bash
 docker compose up -d
 ```
+
+## 項目架構
+
+![](https://github.com/AnsonCar/PiggyFlow/blob/v0.0.7/_document/vitepress/src/public/MainWorkFlow.png?raw=true)
+
+### 技術棧
+#### 前端
+**主用語言**: TypeScript
+**Web架框**: Nuxt 3 | Vue 3.4
+**組件庫**: DaisyUI | Tailwind css 
+**其他**: ...
+
+### 后端
+**主用語言**: Python 3.12.5
+**API框架**: Django-ninja| Django 5.1
+**其他**: Django-ninja-jwt ...
 
 ## 項目結構
 ```
@@ -23,7 +41,7 @@ docker compose up -d
 ├── README.md
 ├── _document
 ├── backend
-├── frontend 
+├── frontend
 ├── docker-compose-production.yml
 ├── docker-compose-stage.yml
 └── docker-compose.yml
