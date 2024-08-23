@@ -24,15 +24,15 @@ docker compose up -d
 
 ### 技術棧
 #### 前端
-**主用語言**: TypeScript
-**Web架框**: Nuxt 3 | Vue 3.4
-**組件庫**: DaisyUI | Tailwind css 
-**其他**: ...
+**主用語言**: TypeScript  
+**Web架框**: Nuxt 3 | Vue 3.4  
+**組件庫**: DaisyUI | Tailwind css  
+**其他**: ...  
 
 ### 后端
-**主用語言**: Python 3.12.5
-**API框架**: Django-ninja| Django 5.1
-**其他**: Django-ninja-jwt ...
+**主用語言**: Python 3.12.5  
+**API框架**: Django-ninja| Django 5.1  
+**其他**: Django-ninja-jwt ...  
 
 ## 項目結構
 ```
