@@ -29,7 +29,7 @@ async def update_todo_service(uuid: uuid.UUID, payload):
     data = await sync_to_async(get_object_or_404)(MyModel, uuid=uuid)
     for attr, value in payload.dict().items():
         setattr(data, attr, value)
-    await data.save()
+    await data.asave()
     return {"success": True}
 
 
