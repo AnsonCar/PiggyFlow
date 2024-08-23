@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-const selectDateTime = ref<string>(formatDateTime(new Date()));
+const selectDateTime = ref<string>(getDateTime(new Date()));
 const selectLabel = ref<string>('');
 
 const hasLabel = ref<boolean>(false);
@@ -33,10 +33,10 @@ const historyData = ref<ToDoOut[]>([]);
 
 async function saveTodo() {
   hasLabel.value = await checkNull(selectLabel.value)
-
   if (!hasLabel.value) {
+    console.log(selectDateTime.value)
     const data: ToDoIn = {
-      "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
+      "datetime": selectDateTime.value,
       "label": selectLabel.value
     }
     const res = await createTodo(data)

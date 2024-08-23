@@ -107,7 +107,7 @@ async function delAccount() {
 // Edit Data
 async function openEditDiag(data: { datetime: string, label: string, done?: boolean, uuid: string }) {
   isDelData.value = false
-  selectDateTime.value = formatDateTime(new Date(data.datetime))
+  selectDateTime.value = getDateTime(data.datetime)
   selectLabel.value = data.label
   itemUUID.value = data.uuid
 }
@@ -116,7 +116,7 @@ async function eidtData() {
   hasLabel.value = await checkNull(selectLabel.value)
   if (!hasLabel.value) {
     const data = {
-      "datetime": formatDateTimeZone(selectDateTime.value).toString(),
+      "datetime": getDateTime(selectDateTime.value),
       "label": selectLabel.value
     }
     const res = await updateTodo(data, itemUUID.value)
@@ -125,10 +125,7 @@ async function eidtData() {
 }
 
 async function editDone(done: boolean, uuid: string) {
-  console.log(uuid)
   await updateTodoDone({ done: done }, uuid)
   emit('initData')
 }
-
-
 </script>

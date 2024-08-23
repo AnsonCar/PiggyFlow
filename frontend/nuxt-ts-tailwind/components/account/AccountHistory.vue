@@ -100,13 +100,13 @@ async function openDelDiag(uuid: string) {
 
 async function delAccount() {
   await deleteTransaction(acconutUUID.value)
-  await emit('initData')
+  emit('initData')
 }
 
 // Edit Data
 async function openEditDiag(data: { datetime: string, label: string, price: number, uuid: string }) {
   isDelData.value = false
-  selectDateTime.value = formatDateTime(new Date(data.datetime))
+  selectDateTime.value = getDateTime(data.datetime)
   selectLabel.value = data.label
   selectPrice.value = data.price.toString()
   acconutUUID.value = data.uuid
@@ -118,7 +118,7 @@ async function eidtAcconut() {
 
   if (!hasLabel.value && !hasPrice.value) {
     const data: TransactionIn = {
-      "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
+      "datetime": selectDateTime.value,
       "label": selectLabel.value,
       "price": parseFloat(selectPrice.value)
     }

@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-const selectDateTime = ref<string>(formatDateTime(new Date()));
+const selectDateTime = ref<string>(getDateTime(new Date()));
 const selectLabel = ref<string>('');
 const selectPrice = ref<string>('');
 
@@ -41,7 +41,7 @@ async function saveAccount() {
 
   if (!hasLabel.value && !hasPrice.value) {
     const data: TransactionIn = {
-      "datetime": formatDateTime(new Date(selectDateTime.value)).toString(),
+      "datetime": selectDateTime.value,
       "label": selectLabel.value,
       "price": parseFloat(selectPrice.value)
     }

@@ -116,10 +116,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['initData'])
-// const inData = computed(() => { return props.data })
 
 // eidt 
-const selectDateTime = ref<string>('');
 const selectUserName = ref<string>('');
 const hasUserName = ref<boolean>(false);
 // edit password
@@ -149,7 +147,6 @@ async function delAccount() {
 // Edit Data
 async function openEditDiag(data: { datetime: string, label: string, done?: boolean, uuid: string }) {
   isDelData.value = false
-  selectDateTime.value = formatDateTime(new Date(data.datetime))
   selectUserName.value = data.label
   itemUUID.value = data.uuid
 }
@@ -194,13 +191,8 @@ async function editGroup(groupID: number, groupName: string) {
   let hasGroup: boolean = false
   let myGroup = [...userGroup.value]
   let name = ''
-
-  console.log('-------------------------------------')
-  console.log('now', myGroup)
-
   for (const group of groupList.value) {
     if (myGroup.includes(group.name) && group.name === groupName) {
-      console.log('---- includes', group.name)
       hasGroup = true
     }
 
@@ -210,17 +202,12 @@ async function editGroup(groupID: number, groupName: string) {
   }
 
   if (hasGroup) {
-    console.log('del')
     myGroup = myGroup.filter(e => e !== name)
     await deleteUserGroup({ id: groupID }, itemUUID.value)
   } else {
-    console.log('add')
-    console.log('push name', name)
     myGroup.push(name)
     await createUserGroup({ id: groupID }, itemUUID.value)
   }
-  console.log('update', myGroup)
-  console.log('-------------------------------------')
   await openGroupDiag(itemUUID.value, myGroup)
   emit('initData')
 }
