@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="192px" src="./docs/Logo/CY_Logo_Q2.png" >
+    <!-- <img width="192px" src="./docs/Logo/CY_Logo_Q2.png" > -->
 </p>
 <h1 align="center"><b>Piggy Flow</b></h1>
 
@@ -15,8 +15,22 @@
 ### docker
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
+
+如果是用於測試正式上線情況，請使用 stage 文件
+
+```
+docker compose -f docker-compose-stage.yml up -d --build
+```
+
+### 創建首個帳號
+
+1. 打開 http://127.0.0.1:8000/api/docs
+   <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user.png" alt="Demo user"   /></td>
+
+2. 打開 /api/user (post)，轉入 username 和 password，按 Execute
+   <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user-create.png" alt="Demo user create"   /></td>
 
 ## UI 展示
 
