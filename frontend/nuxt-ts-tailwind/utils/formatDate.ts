@@ -17,7 +17,6 @@ export function getTime(datetime: string) {
 }
 
 export function getDateTime(datetime: string | Date) {
-  console.log('getDateTime', datetime)
   let date: string | Date = datetime instanceof Date ? datetime : new Date(datetime);
   const year = date.getFullYear();
   const month = ('0' + (date.getMonth() + 1)).slice(-2);
