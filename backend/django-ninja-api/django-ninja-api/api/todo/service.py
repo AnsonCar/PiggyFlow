@@ -7,8 +7,8 @@ from asgiref.sync import sync_to_async
 MyModel = ToDo
 
 
-async def get_todos_service():
-    data = [data async for data in MyModel.objects.all().order_by('id')]
+async def get_todos_service(user_uuid: uuid.UUID):
+    data = [data async for data in MyModel.objects.filter(user_uuid=user_uuid).order_by('id')]
     return data
 
 
