@@ -26,11 +26,13 @@ docker compose -f docker-compose-stage.yml up -d --build
 
 ### 創建首個帳號
 
-1. 打開 http://127.0.0.1:8000/api/docs
-   <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user.png" alt="Demo user"   /></td>
+#### 1. 打開 http://127.0.0.1:8000/api/docs
 
-2. 打開 /api/user (post)，轉入 username 和 password，按 Execute
-   <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user-create.png" alt="Demo user create"   /></td>
+<img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user.png" alt="Demo user"/></td>
+
+#### 2. 打開 /api/user (post)，轉入 username 和 password，按 Execute
+
+<img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user-create.png" alt="Demo user create" /></td>
 
 ## UI 展示
 
