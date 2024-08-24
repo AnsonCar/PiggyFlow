@@ -98,10 +98,6 @@ DATABASES = {
     }
 }
 
-NINJA_JWT = {
-        "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5)
-    }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -124,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans' 
+LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'Asia/Singapore'
 USE_I18N = False
 USE_TZ = True
