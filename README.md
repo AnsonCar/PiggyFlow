@@ -7,8 +7,9 @@
 <p align="center">V 0.0.7</p>
 
 <main style="text-align: center;">
-
 </main>
+
+## 功能
 
 ## 快速部署
 
@@ -38,12 +39,20 @@ docker compose -f docker-compose-stage.yml up -d --build
 
 <table style="border-collapse: collapse; border: 1px solid black;">
   <tr>
-    <td style="padding: 5px;background-color:#fff;"><img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo1.png" alt="Demo1"   /></td>
-    <td style="padding: 5px;background-color:#fff;"><img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo2.png" alt="Demo2"   /></td>
+    <td style="width:40%;padding: 5px;background-color:#fff;">
+      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo1.png" alt="Demo1"   />
+    </td>
+    <td style="width:40%;padding: 5px;background-color:#fff;">
+      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo2.png" alt="Demo2"   />
+    </td>
   </tr>
   <tr>
-    <td style="padding: 5px;background-color:#fff;"><img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo3.png" alt="Demo3"   /></td>
-    <td style="padding: 5px;background-color:#fff;"><img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo4.png" alt="Demo4"   /></td>
+    <td style="width:40%;padding: 5px;background-color:#fff;">
+      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo3.png" alt="Demo3" />
+    </td>
+    <td style="width:40%;padding: 5px;background-color:#fff;">
+      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo4.png" alt="Demo4"/>
+    </td>
   </tr>
 </table>
 
