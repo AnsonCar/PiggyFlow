@@ -93,33 +93,10 @@ DATABASES = {
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": os.getenv("POSTGRES_SERVER"),
         "PORT": os.getenv("POSTGRES_PORT"),
-        "CONN_MAX_AGE": 60,
+        "CONN_MAX_AGE": 30,
         "client_encoding": 'UTF8'
     }
 }
-
-# if os.getenv("DJANGO_DEPLOY") == "local":
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.sqlite3",
-#             "NAME": BASE_DIR / "db.sqlite3",
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": os.getenv("POSTGRES_DB"),
-#             "USER": os.getenv("POSTGRES_USER"),
-#             "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-#             "HOST": os.getenv("POSTGRES_SERVER"),
-#             "PORT": os.getenv("POSTGRES_PORT"),
-#             "CONN_MAX_AGE": 60,
-#             "client_encoding": 'UTF8'
-#         }
-#     }
-
-NINJA_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=60)}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -143,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans' 
+LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'Asia/Singapore'
 USE_I18N = False
 USE_TZ = True
