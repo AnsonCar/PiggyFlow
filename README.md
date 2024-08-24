@@ -18,23 +18,40 @@
 docker compose up -d
 ```
 
+## UI 展示
+
+<table style="border-collapse: collapse; border: 1px solid black;">
+  <tr>
+    <td style="padding: 5px;background-color:#fff;"><img src= "" alt="Demo1"   /></td>
+    <td style="padding: 5px;background-color:#fff;"><img src= "" alt="Demo2"   /></td>
+  </tr>
+  <tr>
+    <td style="padding: 5px;background-color:#fff;"><img src= "" alt="Demo3"   /></td>
+    <td style="padding: 5px;background-color:#fff;"><img src= "" alt="Demo4"   /></td>
+  </tr>
+</table>
+
 ## 項目架構
 
 ![](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/v0.0.7/_document/vitepress/src/public/MainWorkFlow.png)
 
 ### 技術棧
+
 #### 前端
+
 **主用語言**: TypeScript  
-**Web架框**: Nuxt 3 | Vue 3.4  
+**Web 架框**: Nuxt 3 | Vue 3.4  
 **組件庫**: DaisyUI | Tailwind css  
-**其他**: ...  
+**其他**: ...
 
 ### 后端
+
 **主用語言**: Python 3.12.5  
-**API框架**: Django-ninja | Django 5.1  
-**其他**: Django-ninja-jwt ...  
+**API 框架**: Django-ninja | Django 5.1  
+**其他**: Django-ninja-jwt ...
 
 ## 項目結構
+
 ```
 .
 ├── LICENSE
