@@ -43,7 +43,8 @@ async function saveAccount() {
   hasPasswordAgain.value = await checkNull(selectPasswordAgain.value)
 
   const noteNullValue = !hasUserName.value && !hasPassword.value && !hasPasswordAgain.value
-  if (noteNullValue) {
+  const samePassword = selectPassword.value === selectPasswordAgain.value
+  if (noteNullValue && samePassword) {
     const data = {
       username: selectUserName.value,
       password: selectPassword.value

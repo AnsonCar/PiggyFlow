@@ -25,7 +25,8 @@ router = Router(tags=["todo"])
 
 @router.get("", response=ModelList, auth=AsyncJWTAuth())
 async def get_todos(request):
-    data = await get_todos_service()
+    user_uuid = request.user.uuid
+    data = await get_todos_service(user_uuid)
     return ModelList(data=data)
 
 

@@ -6,8 +6,8 @@ from asgiref.sync import sync_to_async
 MyModel = Transaction
 
 
-async def get_transactions_service():
-    data = [data async for data in MyModel.objects.all().order_by('id')]
+async def get_transactions_service(user_uuid: uuid.UUID):
+    data = [data async for data in MyModel.objects.filter(user_uuid=user_uuid).order_by('id')]
     return data
 
 
