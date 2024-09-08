@@ -1,0 +1,18 @@
+FROM python:3.12.5-bullseye
+
+# Basis
+RUN apt-get update -y
+RUN apt-get install -y build-essential
+RUN apt-get install -y libpq-dev
+
+RUN pip install --upgrade pip
+RUN pip install django==5.1
+RUN pip install django-ninja
+RUN pip install django-ninja-jwt
+RUN pip install django-cors-headers
+RUN pip install django-redis
+RUN pip install orjson
+RUN pip install uvicorn
+
+RUN pip install "psycopg[binary]"
+RUN pip install python-dotenv
