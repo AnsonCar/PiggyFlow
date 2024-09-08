@@ -41,6 +41,7 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ansoncar/django-ninja-api-basis:v0.7.0
+          tags: true
 
       - name: Build and push Docker image
         id: push
