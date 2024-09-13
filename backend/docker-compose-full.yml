@@ -1,0 +1,34 @@
+services:
+  django-ninja-api:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile
+    container_name: django-ninja-api
+    restart: always
+    ports:
+      - ${DJANGO_PORT}:${DJANGO_PORT}
+    volumes:
+      - ./django-ninja-api:/app
+    env_file:
+      - ./env/.env.local
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python main.py"
+
+  pgsql:
+    image: postgres:13
+    container_name: pgsql
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/local:/var/lib/postgresql/data/pgdata
+    env_file:
+      - ./env/.env.local
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  redis:
+    image: redis:6
+    ports:
+      - 6379:6379
+    restart: always
+    container_name: redis
