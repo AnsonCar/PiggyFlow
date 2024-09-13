@@ -1,0 +1,13 @@
+services:
+  django-ninja-api:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-production
+    container_name: django-ninja-api
+    restart: always
+    ports:
+      - ${DJANGO_PORT}:${DJANGO_PORT}
+    env_file:
+      - ./env/.env.production
+    depends_on:
+      - pgsql
