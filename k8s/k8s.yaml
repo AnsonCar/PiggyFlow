@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-ninja-api
+spec:
+  selector:
+    app: django-ninja-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-ninja-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-ninja-api
+  template:
+    metadata:
+      labels:
+        app: django-ninja-api
+    spec:
+      containers:
+        - name: django-ninja-api
+          image: piggyflow-django-ninja-api:latest
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /app
+              name: app-volume
+          env:
+            - name: DJANGO_PORT
+              value: "8000" # Set your desired Django port here
+          command:
+            [
+              "sh",
+              "-c",
+              "python manage.py makemigrations && python manage.py migrate && python main.py",
+            ]
+      volumes:
+        - name: app-volume
+          hostPath:
+            path: /path/to/django-ninja-api
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgsql
+spec:
+  selector:
+    app: pgsql
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgsql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgsql
+  template:
+    metadata:
+      labels:
+        app: pgsql
+    spec:
+      containers:
+        - name: pgsql
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data/pgdata
+              name: pgdata-volume
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+      volumes:
+        - name: pgdata-volume
+          hostPath:
+            path: /path/to/postgresql/data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:6
+          ports:
+            - containerPort: 6379
