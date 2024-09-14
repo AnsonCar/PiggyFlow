@@ -11,3 +11,4 @@ services:
       - ./env/.env.production
     depends_on:
       - pgsql
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python main.py"
