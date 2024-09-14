@@ -55,12 +55,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:*",
-    "http://127.0.0.1:*",
-    "http://127.0.0.1:3000",
-    "http://localhost:3000"
-]
+CORS_ALLOWED_ORIGINS = ["http://*", "https://*"]
 
 ALLOWED_HOSTS = ["*"]
 
