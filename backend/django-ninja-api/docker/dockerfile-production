@@ -30,5 +30,3 @@ RUN pip install python-dotenv
 RUN pip install uvicorn
 
 EXPOSE 8000
-
-CMD ["python manage.py makemigrations && python manage.py migrate && python main.py"]
