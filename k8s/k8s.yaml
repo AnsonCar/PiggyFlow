@@ -27,6 +27,7 @@ spec:
       containers:
         - name: django-ninja-api
           image: piggyflow-django-ninja-api:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8000
           volumeMounts:
@@ -35,12 +36,20 @@ spec:
           env:
             - name: DJANGO_PORT
               value: "8000" # Set your desired Django port here
-          command:
-            [
-              "sh",
-              "-c",
-              "python manage.py makemigrations && python manage.py migrate && python main.py",
-            ]
+            - name: POSTGRES_SERVER
+              value: "pgsql"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
+              value: "app"
+            - name: POSTGRES_USER
+              value: "admin"
+            - name: POSTGRES_PASSWORD
+              value: "admin"
+            - name: DJANGO_DEBUG
+              value: "False"
+            - name: DJANGO_DEPLOY
+              value: production
       volumes:
         - name: app-volume
           hostPath:
@@ -76,6 +85,7 @@ spec:
       containers:
         - name: pgsql
           image: postgres:13
+          imagePullPolicy: Never
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -119,5 +129,6 @@ spec:
       containers:
         - name: redis
           image: redis:6
+          imagePullPolicy: Never
           ports:
             - containerPort: 6379
