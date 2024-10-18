@@ -3,6 +3,7 @@ name: ci
 on:
   push:
     branches:
+      - build-dokcer-image
       - test-live
 
 env:
