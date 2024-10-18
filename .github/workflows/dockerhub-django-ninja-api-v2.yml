@@ -1,9 +1,9 @@
-name: ci
+name: Push Docker image to Docker Hub
 
 on:
   push:
     branches:
-      - build-dokcer-image
+      - build-docker-image
       - test-live
 
 env:
