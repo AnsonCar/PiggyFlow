@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piggyflow-django-ninja-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: piggyflow-django-ninja-api
+  template:
+    metadata:
+      labels:
+        app: piggyflow-django-ninja-api
+    spec:
+      containers:
+        - name: django-ninja-api
+          image: piggyflow-django-ninja-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_SERVER
+              value: "piggyflow-pgsql-service"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
+              value: "app"
+            - name: POSTGRES_USER
+              value: "admin"
+            - name: POSTGRES_PASSWORD
+              value: "admin"
+            - name: DJANGO_DEBUG
+              value: "False"
+            - name: DJANGO_DEPLOY
+              value: "production"
+          command:
+            - "sh"
+            - "-c"
+            - "python manage.py makemigrations && python manage.py migrate && python main.py"
