@@ -13,4 +13,6 @@ services:
       - ./django-ninja-api:/app
     env_file:
       - ./env/.env.local
+    depends_on:
+      - pgsql
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python main.py"
