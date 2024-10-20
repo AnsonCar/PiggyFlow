@@ -20,6 +20,14 @@
             ]
         },
         {
+            "name": "user",
+            "base": "admin",
+            "color": "light-blue-500",
+            "folderNames": [
+                "user",
+            ]
+        },
+        {
             "name": "django",
             "base": "api",
             "color": "green-800",
