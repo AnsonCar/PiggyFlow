@@ -1,0 +1,15 @@
+{
+    "editor.formatOnSave": true,
+    "python.analysis.autoFormatStrings": true,
+    "material-icon-theme.folders.customClones": [
+        {
+            "name": "test-app",
+            "base": "test",
+            "color": "light-blue-500",
+            "folderNames": [
+                "test-app",
+                "test-apps"
+            ]
+        }
+    ]
+}
