@@ -1,4 +1,5 @@
-FROM ansoncar/django-ninja-api-basis:v0.7.1
+ARG BASE_IMAGE_VERSION
+FROM ansoncar/django-ninja-api-basis:${BASE_IMAGE_VERSION}
 
 WORKDIR /app
 COPY ./django-ninja-api .

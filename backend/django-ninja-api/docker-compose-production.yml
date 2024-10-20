@@ -2,6 +2,8 @@ services:
   django-ninja-api:
     build:
       context: .
+      args:
+        - BASE_IMAGE_VERSION=${BASE_IMAGE_VERSION}
       dockerfile: ./docker/dockerfile-production
     container_name: django-ninja-api
     restart: always
