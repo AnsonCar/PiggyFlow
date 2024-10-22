@@ -4,7 +4,7 @@ services:
     ports:
       - 6379:6379
     restart: always
-    container_name: redis
+    container_name: ${PROJECT_NAME}-redis
 
 # https://docs.retool.com/self-hosted/reference/environment-variables/redis
 # https://django-redis-chs.readthedocs.io/zh-cn/latest/
