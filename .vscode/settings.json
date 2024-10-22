@@ -1,0 +1,77 @@
+{
+    "editor.formatOnSave": true,
+    "python.analysis.autoFormatStrings": true,
+    "material-icon-theme.folders.customClones": [
+        {
+            "name": "test-app",
+            "base": "test",
+            "color": "light-blue-500",
+            "folderNames": [
+                "test-app",
+                "test-apps"
+            ]
+        },
+        {
+            "name": "migrations",
+            "base": "temp",
+            "color": "light-blue-500",
+            "folderNames": [
+                "migrations",
+            ]
+        },
+        {
+            "name": "user",
+            "base": "admin",
+            "color": "light-blue-500",
+            "folderNames": [
+                "user",
+            ]
+        },
+        {
+            "name": "django",
+            "base": "api",
+            "color": "green-800",
+            "folderNames": [
+                "django-ninja-api",
+            ]
+        },
+        {
+            "name": "postgresql",
+            "base": "database",
+            "color": "green-500",
+            "folderNames": [
+                "postgresql",
+            ],
+        },
+        {
+            "name": "redis",
+            "base": "database",
+            "color": "red-500",
+            "folderNames": [
+                "redis",
+            ],
+        },
+        {
+            "name": "nuxt",
+            "base": "nuxt",
+            "color": "green-900",
+            "folderNames": [
+                "nuxt-ts-tailwind",
+            ],
+        },
+        {
+            "name": "vitepress",
+            "base": "vuepress",
+            "color": "green-900",
+            "folderNames": [
+                "vitepress",
+                ".vitepress"
+            ]
+        }
+    ],
+    "material-icon-theme.files.associations": {
+        "dockerfile-hub": "docker",
+        "dockerfile-stage": "docker",
+        "dockerfile-production": "docker",
+    }
+}

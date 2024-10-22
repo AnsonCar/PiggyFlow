@@ -2,8 +2,10 @@ services:
   django-ninja-api:
     build:
       context: .
+      args:
+        - BASE_IMAGE_VERSION=${BASE_IMAGE_VERSION}
       dockerfile: ./docker/dockerfile-stage
-    container_name: django-ninja-api
+    container_name: django-ninja-api-${BASE_IMAGE_VERSION}
     restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}

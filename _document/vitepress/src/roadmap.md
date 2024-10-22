@@ -1,36 +1,29 @@
 # Road Map
 
-# v0.1.0
-
-- [ ] 安全性
-
-# v0.0.9
+# v0.9.0
 
 - [ ] 加入 AutoAnimate (考慮)
 - [ ] 加入 i18n
 
-# v0.0.8
+# v0.8.0
+- [ ] auth
 
-- [ ] 上載文件功能
-- [ ] 卡名 - 生成器
-- [ ] 新增 固定支出 功能 (考慮)
-- [ ] test case
-  - [ ] backend
-  - [ ] frontend
-- [ ] ⁠ 所有 api 使用 cache redis（必要的 api）
+# v0.7.1
+- [x] change version name v0.0.7 to v0.7.1
+- [x] update backend django ninja api basis image platform: (amd64, arm64)
 
 # v0.0.7
 
 ## basis
 
 - [x] 畫 前後端圖
-- [ ] 寫文檔
-  - [ ] 簡介
-  - [ ] 功能
+- [x] 寫文檔
+  - [x] 簡介
+  - [x] 功能
 - [x] docker local 版
 - [x] docker stage 版
-- [ ] docker product 版
-- [ ] github action
+- [x] docker product 版
+- [x] github action
 
 ## backend
 
@@ -38,18 +31,6 @@
 - [x] 加入 api datetime ( create & update time)
 - [x] ⁠ 統一接格式程名
 - [x] openapi 生成 cli-side js
-
-## rex
-
-- [ ] 實時翻釋
-- [ ] ocr 功能
-
-## ds
-
-- [ ] 實時語音轉文字
-- [ ] 文字云
-- [ ] 地圖
-- [ ] NLP
 
 # v0.0.6
 
