@@ -3,15 +3,6 @@
     "python.analysis.autoFormatStrings": true,
     "material-icon-theme.folders.customClones": [
         {
-            "name": "test-app",
-            "base": "test",
-            "color": "light-blue-500",
-            "folderNames": [
-                "test-app",
-                "test-apps"
-            ]
-        },
-        {
             "name": "migrations",
             "base": "temp",
             "color": "light-blue-500",
