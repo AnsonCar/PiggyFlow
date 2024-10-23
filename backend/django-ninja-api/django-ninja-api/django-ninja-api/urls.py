@@ -1,4 +1,4 @@
-import os
+from .settings import NAME
 from django.urls import path
 from .parser import ORJSONParser
 from ninja_extra import NinjaExtraAPI
@@ -7,8 +7,6 @@ from api.transaction.router import router as transactionRouter
 from api.todo.router import router as todoRouter
 from ansc_auth.views import router as userRouter, routerGroup as userGroupRouter
 
-MODE = os.getenv("DJANGO_DEPLOY", "Null")
-NAME = f"DataBase NinjaExtra API | {MODE.capitalize()}"
 
 api = NinjaExtraAPI(app_name=NAME, title=NAME, parser=ORJSONParser())
 api.register_controllers(NinjaJWTDefaultController)
