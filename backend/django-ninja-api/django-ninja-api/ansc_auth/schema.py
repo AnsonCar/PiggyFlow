@@ -1,6 +1,22 @@
 import uuid
 from ninja import Schema
-from api.auth.user_group.schema import GroupOut
+
+
+class GroupIn(Schema):
+    name: str
+
+
+class GroupPut(Schema):
+    name: str
+
+
+class GroupOut(Schema):
+    id: int
+    name: str
+
+
+class GroupList(Schema):
+    data: list[GroupOut]
 
 
 class UserIn(Schema):

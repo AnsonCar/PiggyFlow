@@ -1,25 +1,22 @@
-"""
-URL configuration for django-ninja-api project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
+from .settings import NAME
 from django.urls import path
+from .parser import ORJSONParser
+from ninja_extra import NinjaExtraAPI
+from ninja_jwt.controller import NinjaJWTDefaultController
+from api.transaction.router import router as transactionRouter
+from api.todo.router import router as todoRouter
+from ansc_auth.views import router as userRouter, routerGroup as userGroupRouter
 
-from api.views import api
+
+api = NinjaExtraAPI(app_name=NAME, title=NAME, parser=ORJSONParser())
+api.register_controllers(NinjaJWTDefaultController)
+api.add_router("/user", userRouter)
+api.add_router("/group", userGroupRouter)
+api.add_router("/transaction", transactionRouter)
+api.add_router("/todo", todoRouter)
+
 
 urlpatterns = [
-    path('api/', api.urls),
+    path("api/", api.urls),
     # path('admin/', admin.site.urls),
 ]

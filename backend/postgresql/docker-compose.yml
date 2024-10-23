@@ -1,7 +1,7 @@
 services:
   pgsql:
     image: postgres:13
-    container_name: pgsql
+    container_name: ${PROJECT_NAME}-pgsql
     restart: always
     ports:
       - 5432:5432
