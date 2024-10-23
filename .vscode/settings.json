@@ -19,6 +19,14 @@
             ]
         },
         {
+            "name": "auth",
+            "base": "admin",
+            "color": "yellow-400",
+            "folderNames": [
+                "ansc_auth"
+            ]
+        },
+        {
             "name": "django",
             "base": "api",
             "color": "green-800",

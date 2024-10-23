@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-yd@f7r7azj0z*))6g=z_6(scgfq*m#ib5pp#i8_n9l&xx6ywyl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG"),
+DEBUG = (os.getenv("DJANGO_DEBUG"),)
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "ninja_extra",
     "ninja_jwt",
     "api",
+    "ansc_auth",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:*",
     "http://127.0.0.1:*",
     "http://127.0.0.1:3000",
-    "http://localhost:3000"
+    "http://localhost:3000",
 ]
 
 ALLOWED_HOSTS = ["*"]
@@ -94,7 +95,7 @@ DATABASES = {
         "HOST": os.getenv("POSTGRES_SERVER"),
         "PORT": os.getenv("POSTGRES_PORT"),
         "CONN_MAX_AGE": 30,
-        "client_encoding": 'UTF8'
+        "client_encoding": "UTF8",
     }
 }
 
@@ -120,8 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
-TIME_ZONE = 'Asia/Singapore'
+LANGUAGE_CODE = "zh-hans"
+TIME_ZONE = "Asia/Singapore"
 USE_I18N = False
 USE_TZ = True
 
@@ -135,7 +136,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "api.CustomUser"
+AUTH_USER_MODEL = "ansc_auth.CustomUser"
 
 CACHES = {
     "default": {
@@ -144,6 +145,6 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
-        }
+        },
     }
 }
