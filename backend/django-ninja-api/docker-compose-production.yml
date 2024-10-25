@@ -6,6 +6,7 @@ services:
         - BASE_IMAGE_VERSION=${BASE_IMAGE_VERSION}
       dockerfile: ./docker/dockerfile-production
     container_name: ${PROJECT_NAME}-django-ninja-api
+    image: ${PROJECT_NAME}-django-ninja-api:${BASE_IMAGE_VERSION}
     restart: always
     ports:
       - ${DJANGO_PORT}:${DJANGO_PORT}

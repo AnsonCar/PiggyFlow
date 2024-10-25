@@ -5,12 +5,14 @@ export default defineNuxtConfig({
   },
 
   devtools: { enabled: true },
+
   components: [
     {
       path: '~/components',
       pathPrefix: false, // [!code ++]
     },
   ],
+
   app: {
     head: {
       titleTemplate: 'PiggyFlow | %s',
@@ -37,5 +39,9 @@ export default defineNuxtConfig({
     },
   },
 
-  compatibilityDate: '2024-08-06'
+  i18n: {
+    vueI18n: './i18n/i18n.config.ts'
+  },
+  compatibilityDate: '2024-08-06',
+  modules: ['@nuxtjs/i18n']
 })

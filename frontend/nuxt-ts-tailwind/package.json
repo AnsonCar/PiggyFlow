@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/i18n": "^8.5.5",
     "@vueuse/core": "^10.11.0",
     "nuxt": "^3.12.3",
     "qrcode.vue": "^3.4.1"
