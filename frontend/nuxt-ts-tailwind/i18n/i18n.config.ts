@@ -1,3 +1,7 @@
+import { basis as zh } from './zh_tw/index'
+import { basis as en } from './en/index'
+import { basis as zh_cn } from './zh_cn/index'
+
 export default defineI18nConfig(() => ({
     legacy: false,
     defaultLocale: 'zh',
@@ -8,14 +12,8 @@ export default defineI18nConfig(() => ({
         { code: 'zh-CN', iso: 'zh-CN' }
     ],
     messages: {
-        en: {
-            welcome: 'Welcome'
-        },
-        zh: {
-            welcome: '你好'
-        },
-        'zh-CN': {
-            welcome: '你好'
-        }
+        en: en,
+        zh: zh,
+        'zh-CN': zh_cn
     }
 }))
