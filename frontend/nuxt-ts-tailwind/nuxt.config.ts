@@ -15,8 +15,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      titleTemplate: 'PiggyFlow | %s',
-      // title: 'PiggyFlow',
+      titleTemplate: `%s | ${process.env.PROJECT_NAME}`,
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
@@ -26,7 +25,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      DB_API_BASE_URL: process.env.DB_API_BASE_URL,
+      PROJECT_NAME: process.env.PROJECT_NAME,
+      DJANGO_URL: process.env.DJANGO_URL,
     },
   },
 
@@ -43,5 +43,5 @@ export default defineNuxtConfig({
     vueI18n: './i18n/i18n.config.ts'
   },
   compatibilityDate: '2024-08-06',
-  modules: ['@nuxtjs/i18n']
+  modules: ['@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt', '@nuxtjs/i18n']
 })

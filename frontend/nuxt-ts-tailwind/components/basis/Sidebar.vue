@@ -12,14 +12,15 @@
     <div class="drawer-side">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu bg-base-200 text-base-content text-md min-h-full w-64 p-4">
-        <div class="text-xl font-bold bg-base-200 text-base-content flex-center mb-4 ">
-          {{ props.title }}
+        <div class="text-xl font-bold bg-base-200 text-base-content flex items-center mb-4 ">
+          <TPLangButton />
+          <h1 class=" ml-4 ">{{ props.title }}</h1>
         </div>
         <hr>
         <!-- Sidebar content here -->
         <slot name="sidebaritem"></slot>
         <li class="mt-auto">
-          <div id="logoutBtn" @click="killToken">
+          <div id="logoutBtn" @click="authStore.logout">
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
               width="24px">
               <path
@@ -37,4 +38,6 @@
 const props = defineProps<{
   title: string
 }>()
+
+const authStore = useAuthStore()
 </script>
