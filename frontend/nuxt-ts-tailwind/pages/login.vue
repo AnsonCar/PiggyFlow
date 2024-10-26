@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: false });
+const authStore = useAuthStore();
 
 const username = ref<string>('');
 const password = ref<string>('');
@@ -47,15 +48,13 @@ const isError = ref<boolean>(false);
 async function login() {
   hasUsername.value = await checkNull(username.value)
   hasPassword.value = await checkNull(password.value)
-
   if (!hasUsername.value && !hasPassword.value) {
     const res: TokenObtainPairOutputSchema = await obtainToken({
       username: username.value,
       password: password.value
     })
     if (res.access && res.refresh) {
-      setCookie("token", res.access, 1)
-      setCookie("refresh", res.refresh, 1)
+      authStore.setToken(res.access, res.refresh,)
       navigateTo('/', { external: true })
     } else {
       isError.value = true
