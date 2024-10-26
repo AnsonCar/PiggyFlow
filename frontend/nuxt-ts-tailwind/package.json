@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build --host",
+    "build": "nuxt build --host --dotenv ./env/env.stage",
     "dev": "nuxt dev --host --open",
     "generate": "nuxt generate",
     "preview": "nuxt preview --host",

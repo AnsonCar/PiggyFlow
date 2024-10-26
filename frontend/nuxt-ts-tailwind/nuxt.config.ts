@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      titleTemplate: 'PiggyFlow | %s',
+      titleTemplate: `%s | ${process.env.PROJECT_NAME}`,
       // title: 'PiggyFlow',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
@@ -26,7 +26,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      DB_API_BASE_URL: process.env.DB_API_BASE_URL,
+      PROJECT_NAME: process.env.PROJECT_NAME,
+      DJANGO_URL: process.env.DJANGO_URL,
     },
   },
 
