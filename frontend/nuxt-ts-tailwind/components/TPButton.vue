@@ -1,5 +1,6 @@
 <template>
-  <button class="btn" :class="{ 'btn-square': !props.label, 'btn-success': props.active, 'btn-xs': props.size === 'xs', 'btn-sm': props.size === 'sm'}">
+  <button class="btn"
+    :class="{ 'btn-square': !props.label, 'btn-success': props.active, 'btn-xs': props.size === 'xs', 'btn-sm': props.size === 'sm' }">
     {{ props.label }}
     <TPIcon v-if="props.icon" :icon="props.icon" />
   </button>
@@ -10,6 +11,6 @@ const props = defineProps<{
   label?: string
   icon?: string
   active?: boolean
-  size?: 'xs' | 'sm'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
 }>()
 </script>

@@ -12,8 +12,9 @@
     <div class="drawer-side">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu bg-base-200 text-base-content text-md min-h-full w-64 p-4">
-        <div class="text-xl font-bold bg-base-200 text-base-content flex-center mb-4 ">
-          {{ props.title }}
+        <div class="text-xl font-bold bg-base-200 text-base-content flex items-center mb-4 ">
+          <TPLangButton />
+          <h1 class=" ml-4 ">{{ props.title }}</h1>
         </div>
         <hr>
         <!-- Sidebar content here -->
