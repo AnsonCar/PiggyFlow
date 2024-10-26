@@ -43,5 +43,5 @@ export default defineNuxtConfig({
     vueI18n: './i18n/i18n.config.ts'
   },
   compatibilityDate: '2024-08-06',
-  modules: ['@nuxtjs/i18n']
+  modules: ['@pinia/nuxt', '@nuxtjs/i18n']
 })
