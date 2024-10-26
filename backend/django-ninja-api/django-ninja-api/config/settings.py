@@ -58,7 +58,7 @@ CORS_ALLOWED_ORIGINS = [
 
 ALLOWED_HOSTS = ["*"]
 
-ROOT_URLCONF = "django-ninja-api.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django-ninja-api.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 DATABASES = {

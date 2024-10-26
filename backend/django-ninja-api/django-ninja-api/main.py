@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print("-" * 50)
 
     uvicorn.run(
-        "django-ninja-api.asgi:application",
+        "config.asgi:application",
         host="0.0.0.0",
         port=PORT,
         reload=DEBUG,
