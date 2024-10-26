@@ -15,8 +15,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      titleTemplate: 'PiggyFlow | %s',
-      // title: 'PiggyFlow',
+      titleTemplate: '%s | PiggyFlow',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
@@ -43,5 +42,5 @@ export default defineNuxtConfig({
     vueI18n: './i18n/i18n.config.ts'
   },
   compatibilityDate: '2024-08-06',
-  modules: ['@pinia/nuxt', '@nuxtjs/i18n']
+  modules: ['@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt', '@nuxtjs/i18n']
 })
