@@ -1,3 +1,8 @@
+type TAuth = {
+  token: string | undefined
+  refresh: string | undefined
+}
+
 type TTPSidebar = {
   text?: string
   items: TTPSidebarItem[]
