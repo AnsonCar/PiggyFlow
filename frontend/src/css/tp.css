@@ -1,0 +1,12 @@
+/*
+* BASE
+*/
+.flex-center {
+  @apply flex place-items-center justify-center;
+}
+
+/*
+* Tonya Puzzle
+*/
+@import './tp/input.css';
+@import './tp/card.css';

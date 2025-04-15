@@ -1,8 +1,0 @@
-FROM python:3.12.5-bullseye
-
-# Basis
-RUN apt-get update -y && \
-    apt-get install -y build-essential libpq-dev
-
-RUN pip install --upgrade pip && \
-    pip install django==5.1 django-cors-headers django-redis django-ninja django-ninja-jwt orjson uvicorn "psycopg[binary]"  python-dotenv

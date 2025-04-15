@@ -1,0 +1,7 @@
+./.vscode
+./.github
+./docker
+./.gitignore
+./README.md
+./docker-compose-production.yml
+./docker-compose-stage.yml

@@ -1,5 +1,5 @@
 include:
   - path:
       - backend/docker-compose-production.yml
-  # - path:
-  #   - frontend/production-compose.yml
+  - path:
+      - frontend/docker-compose-production.yml

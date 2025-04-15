@@ -1,7 +1,42 @@
-include:
-  - path :
-    - ./django-ninja-api/docker-compose-stage.yml
-  - path:
-    - ./postgresql/docker-compose-stage.yml
-  - path :
-    - ./redis/docker-compose.yml
+volumes:
+  db_data:
+    name: ${PROJECT_NAME}-stage-db-data
+
+services:
+  django-ninja-api:
+    build:
+      context: .
+      args:
+        - BASE_IMAGE_VERSION=${BASE_IMAGE_VERSION}
+      dockerfile: ./docker/dockerfile
+    container_name: ${PROJECT_NAME}-django-ninja-api
+    image: ${PROJECT_NAME}-django-ninja-api:${BASE_IMAGE_VERSION}
+    ports:
+      - 8000:8000
+    env_file:
+      - ./envs/.env.stage
+    volumes:
+      - ./ansc_auth:/app/ansc_auth
+      - ./config:/app/config
+    depends_on:
+      - pgsql
+    command: sh -c "./start.sh"
+    restart: always
+
+  pgsql:
+    image: postgres:13
+    container_name: ${PROJECT_NAME}-pgsql
+    ports:
+      - 5432:5432
+    env_file:
+      - ./envs/.env.stage
+    volumes:
+      - db_data:/var/lib/postgresql/data/pgdata
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    restart: always
+
+  redis:
+    image: redis:6
+    container_name: ${PROJECT_NAME}-redis
+    restart: always

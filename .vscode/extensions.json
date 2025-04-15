@@ -1,6 +1,31 @@
 {
   "recommendations": [
-    "Vue.volar",
-    "pkief.material-icon-theme"
+    "formulahendry.auto-rename-tag",
+    "ms-python.black-formatter",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "grapecity.gc-excelviewer",
+    "mhutchie.git-graph",
+    "ecmel.vscode-html-css",
+    "antfu.iconify",
+    "kisstkondoros.vscode-gutter-preview",
+    "oderwat.indent-rainbow",
+    "ms-python.isort",
+    "ms-vscode.vscode-typescript-next",
+    "firsttris.vscode-jest-runner",
+    "mariusalchimavicius.json-to-ts",
+    "ms-toolsai.jupyter",
+    "pkief.material-icon-theme",
+    "analytic-signal.preview-pdf",
+    "esbenp.prettier-vscode",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "donjayamanne.python-environment-manager",
+    "kevinrose.vsc-python-indent",
+    "mechatroner.rainbow-csv",
+    "wayou.vscode-todo-highlight",
+    "vue.volar"
   ]
 }

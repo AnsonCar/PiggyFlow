@@ -1,76 +1,91 @@
 {
+  /*
+   * BASE
+   */
+  "files.encoding": "utf8",
+  "editor.formatOnSave": true,
+  "editor.linkedEditing": true, // 使得同時編輯相同變數或符號更容易。
+  "editor.bracketPairColorization.enabled": true, // 啟用括號配對著色功能。
+  "editor.guides.bracketPairs": true, // 在括號間顯示視覺導引線
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 預設使用的程式碼格式化工具
+  "editor.rulers": [120], // 顯示程式碼寬度參考線
+  "editor.codeActionsOnSave": [
+    "source.organizeImports", // 保存時的整理導入。
+    "source.fixAll", // 保存時的自動修復在一輪中計算所有可能的修復
+    "addMissingImports" // 在保存時添加所有缺少的導入
+  ],
+  /*
+   * GIT
+   */
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  // ts and js
+  "typescript.format.semicolons": "insert",
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "javascript.format.semicolons": "insert",
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  // esLint
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "html", "markdown", "yaml", "toml", "xml", "gql", "graphql", "astro", "css", "less", "scss", "pcss", "postcss"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  /*
+   * PYTHON
+   */
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
-    "python.analysis.autoFormatStrings": true,
-    "material-icon-theme.folders.customClones": [
-        {
-            "name": "migrations",
-            "base": "temp",
-            "color": "light-blue-500",
-            "folderNames": [
-                "migrations",
-            ]
-        },
-        {
-            "name": "user",
-            "base": "admin",
-            "color": "light-blue-500",
-            "folderNames": [
-                "user",
-            ]
-        },
-        {
-            "name": "auth",
-            "base": "admin",
-            "color": "yellow-400",
-            "folderNames": [
-                "ansc_auth"
-            ]
-        },
-        {
-            "name": "django",
-            "base": "api",
-            "color": "green-800",
-            "folderNames": [
-                "django-ninja-api",
-            ]
-        },
-        {
-            "name": "postgresql",
-            "base": "database",
-            "color": "green-500",
-            "folderNames": [
-                "postgresql",
-            ],
-        },
-        {
-            "name": "redis",
-            "base": "database",
-            "color": "red-500",
-            "folderNames": [
-                "redis",
-            ],
-        },
-        {
-            "name": "nuxt",
-            "base": "nuxt",
-            "color": "green-900",
-            "folderNames": [
-                "nuxt-ts-tailwind",
-            ],
-        },
-        {
-            "name": "vitepress",
-            "base": "vuepress",
-            "color": "green-900",
-            "folderNames": [
-                "vitepress",
-                ".vitepress"
-            ]
-        }
-    ],
-    "material-icon-theme.files.associations": {
-        "dockerfile-hub": "docker",
-        "dockerfile-stage": "docker",
-        "dockerfile-production": "docker",
-    }
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "python.analysis.inlayHints.callArgumentNames": "all",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.autoIndent": true,
+  "python.analysis.autoFormatStrings": true, // 在字串內輸入“{”時，是否自動加上“f”前綴。
+  "python.analysis.completeFunctionParens": true, // 為函數補全添加括號。
+  "black-formatter.args": ["--line-length", "240"],
+  /*
+   * GOLANG
+   */
+  "go.useLanguageServer": true,
+  "[go]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "golang.go",
+    "editor.insertSpaces": true
+  },
+  "gopls": {
+    // go install golang.org/x/tools/gopls@latest
+    "ui.semanticTokens": true,
+    "formatting.gofumpt": true,
+    "formatting.goimports": true
+  },
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.compositeLiteralFields": true,
+  "go.inlayHints.compositeLiteralTypes": true,
+  "go.inlayHints.constantValues": true,
+  "go.inlayHints.rangeVariableTypes": true,
+  "go.inlayHints.parameterNames": true,
+  "go.inlayHints.functionTypeParameters": true,
+  /*
+   * NGINX
+   */
+  "[nginx]": {
+    "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
+  }
 }

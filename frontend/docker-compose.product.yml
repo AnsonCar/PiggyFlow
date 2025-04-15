@@ -1,0 +1,8 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile.product
+    container_name: ${PROJECT_NAME}-frontend
+    ports:
+      - 80:80

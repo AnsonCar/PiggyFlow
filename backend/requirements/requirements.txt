@@ -1,0 +1,4 @@
+django-admin-interface==0.29.4 # https://pypi.org/project/django-admin-interface/
+django-import-export==4.3.6 # https://pypi.org/project/django-import-export/4.3.6/
+opencc==1.1.9 # https://github.com/BYVoid/OpenCC
+openai==1.55.3
