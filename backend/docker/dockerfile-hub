@@ -1,0 +1,6 @@
+FROM python:3.12.5-slim-bullseye
+COPY ./requirements/base.txt ./requirements/base.txt
+RUN apt-get update -y && apt-get install -y build-essential && \
+    pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir  -r ./requirements/base.txt \
+    && rm -rf /root/.cache/pip && rm -rf ./requirements/base.txt

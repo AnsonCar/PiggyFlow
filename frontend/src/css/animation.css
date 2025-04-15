@@ -1,0 +1,44 @@
+.combined-animation {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transition:
+    opacity 1s ease-out,
+    transform 1.5s ease-out;
+}
+
+.combined-animation.animate {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 子元素初始狀態 */
+.combined-animation .item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+
+/* 子元素動畫狀態 */
+.combined-animation.animate .item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 為每個子元素設置不同的延遲 */
+.combined-animation.animate .item:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.combined-animation.animate .item:nth-child(2) {
+  transition-delay: 0.6s;
+}
+.combined-animation.animate .item:nth-child(3) {
+  transition-delay: 1s;
+}
+.combined-animation.animate .item:nth-child(4) {
+  transition-delay: 1.4s;
+}
+.combined-animation.animate .item:nth-child(5) {
+  transition-delay: 1.8s;
+}

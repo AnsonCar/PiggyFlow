@@ -1,0 +1,10 @@
+ARG BASE_IMAGE_VERSION
+FROM ansoncar/django-ninja-api-basis:${BASE_IMAGE_VERSION}
+
+WORKDIR /app
+COPY . .
+COPY ./build/start.sh /start.sh
+RUN chmod +x /start.sh && \
+    apt-get install -y opencc && \
+    pip install -r ./requirements/requirements.txt && \
+    rm -rf ./requirements
