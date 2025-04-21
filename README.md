@@ -3,7 +3,7 @@
 </p>
 <h1 align="center"><b>Piggy Flow</b></h1>
 
-<p align="center">V 0.8.0</p>
+<p align="center">V 0.9.0</p>
 
 <main style="text-align: center;">
 </main>
