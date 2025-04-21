@@ -63,6 +63,11 @@ type TAlert = {
 type TAlertItem = {
   level: 'info' | 'success' | 'warning' | 'error';
   message: string;
-  uuid: string;
+  uuid?: string;
   timeLog?: string;
+};
+
+type TAlertInputItem = {
+  level: 'info' | 'success' | 'warning' | 'error';
+  message: string;
 };
