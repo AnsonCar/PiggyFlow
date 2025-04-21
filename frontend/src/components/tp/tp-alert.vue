@@ -2,7 +2,7 @@
   <div class="absolute right-4 bottom-4 z-50 overflow-hidden">
     <TransitionGroup name="list" tag="div">
       <template v-for="alertItem in alertStore.alertList" :key="alertItem.uuid">
-        <div role="alert" :class="getAlertLevelStyle(alertItem)" class="mb-2 w-64 md:w-96">
+        <div role="alert" :class="getAlertLevelStyle(alertItem)" class="md::w-96 mb-2 w-80">
           <!-- info -->
           <svg v-if="alertItem.level === 'info'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
