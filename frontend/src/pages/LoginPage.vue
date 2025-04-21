@@ -1,11 +1,11 @@
 <template>
   <main class="bg-base-300 flex-center size-full flex-col">
-    <Login01 v-model:username="username" v-model:password="password" @login="login" />
+    <LoginBox v-model:username="username" v-model:password="password" @login="login" />
   </main>
 </template>
 
 <script setup lang="ts">
-import Login01 from '@/components/Login/Login01.vue';
+import LoginBox from '@/components/Login/LoginBox.vue';
 import { useAlertStore } from '@/stores/alertStore';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
