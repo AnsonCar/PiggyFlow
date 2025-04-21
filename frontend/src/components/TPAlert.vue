@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute right-4 bottom-4 z-50">
+  <div class="absolute right-4 bottom-4 z-50 overflow-hidden">
     <TransitionGroup name="list" tag="div">
       <template v-for="alertItem in alertStore.alertList" :key="alertItem.uuid">
         <div role="alert" :class="getAlertLevelStyle(alertItem)" class="mb-2 w-64 md:w-96">

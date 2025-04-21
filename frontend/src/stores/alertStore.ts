@@ -9,7 +9,7 @@ export const useAlertStore = defineStore('alertStore', {
     }) as TAlert,
   getters: {},
   actions: {
-    addItem(data: TAlertItem) {
+    addItem(data: TAlertInputItem) {
       const timeLog = new Date().toTimeString();
       this.alertList.push({ ...data, timeLog, uuid: generateUUID() });
       setTimeout(() => {
