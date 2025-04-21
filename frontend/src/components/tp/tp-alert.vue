@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { useAlertStore } from '../stores/alertStore';
+import { useAlertStore } from '../../stores/alertStore';
 const alertStore = useAlertStore();
 
 function getAlertLevelStyle(alert: TAlertItem) {
