@@ -1,45 +1,42 @@
 <template>
-  <Sidebar :title>
-    <Alert />
-    <template v-slot:navbar>
-      <Navbar :title> </Navbar>
-    </template>
-    <template v-slot:sidebaritem>
-      <SidebarItem :items="siderbaritems"></SidebarItem>
-    </template>
-    <router-view />
-  </Sidebar>
+  <Alert />
+  <main class="bg-base-300">
+    <TPSidebar button-label="main" :items="siderbaritems">
+      <TPTopbar class="lg:hidden" />
+      <main class="h-[calc(100%-64px)] overflow-y-scroll p-4 pt-0 lg:h-full lg:pt-4">
+        <router-view />
+      </main>
+    </TPSidebar>
+  </main>
 </template>
 
 <script lang="ts" setup>
-import Navbar from '../components/Navbar.vue';
-import Sidebar from '../components/Sidebar.vue';
-import SidebarItem from '../components/SidebarItem.vue';
-import Alert from '../components/tp/tp-alert.vue';
-
-const title = 'Piggy Flow';
+import TPSidebar from '@/components/tp/sidebar/tp-sidebar.vue';
+import TPTopbar from '@/components/tp/topbar/tp-topbar.vue';
+import Alert from '@/components/tp/tp-alert.vue';
 
 const siderbaritems = [
   {
     items: [
-      // { text: '儀表板', link: '/' },
+      { text: '儀表板', name: 'home' },
+      { text: '測試場', name: 'test' },
     ],
   },
-  {
-    text: '工具箱',
-    items: [
-      // { text: '要事', link: '/todo' },
-      // { text: '記帳', link: '/account' },
-      // { text: 'QRCode', link: '/qrcode' }
-    ],
-  },
-  {
-    text: '身份管理',
-    items: [
-      // { text: '用戶', link: '/user' },
-      // { text: '組別', link: '/group' }
-    ],
-  },
+  // {
+  //   text: '工具箱',
+  //   items: [
+  //     { text: '要事', name: 'todo' },
+  //     { text: '記帳', name: 'account' },
+  //     { text: 'QRCode', name: 'qrcode' },
+  //   ],
+  // },
+  // {
+  //   text: '身份管理',
+  //   items: [
+  //     { text: '用戶', name: 'user' },
+  //     { text: '組別', name: 'group' },
+  //   ],
+  // },
 ];
 </script>
 

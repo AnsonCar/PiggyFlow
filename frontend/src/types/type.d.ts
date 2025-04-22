@@ -10,9 +10,10 @@ type TTPSidebar = {
 
 type TTPSidebarItem = {
   text: string;
-  link: string;
+  name: string;
   items?: TTTPSidebar[];
 };
+
 type TTransactionTableFormData = {
   [key: string]: {
     uuid: string;
