@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: '/test',
-    component: BaseLayout,
+    component: MainLayout,
     children: [{ path: '', component: TestPage, name: 'test' }],
   },
 ];
@@ -39,7 +39,7 @@ const router = createRouter({
 // Middleware
 router.beforeEach(async (to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric) => {
   from;
-  if (to.name === 'test') return true;
+  // if (to.name === 'test') return true;
   const isLogin: boolean = await isLoggedIn();
   if (to.name !== 'login' && !isLogin) {
     return router.push({ name: 'login' });

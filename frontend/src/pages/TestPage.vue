@@ -1,16 +1,14 @@
 <template>
-  <div class="bg-base-300 flex-center size-full p-4">
-    <!-- Content -->
-    <div class="bg-base-100 size-[99%] rounded-3xl p-4">
-      <button class="btn" @click="onClick1">Test</button>
-      <button class="btn" @click="onClick2">Test</button>
-      <button class="btn" @click="onClick3">Test</button>
-      <button class="btn" @click="onClick4">Test</button>
-    </div>
-  </div>
+  <TPBox class="">
+    <button class="btn btn-info" @click="onClick1">Test Info</button>
+    <button class="btn btn-success" @click="onClick2">Test</button>
+    <button class="btn btn-warning" @click="onClick3">Test</button>
+    <button class="btn btn-error" @click="onClick4">Test</button>
+  </TPBox>
 </template>
 
 <script lang="ts" setup>
+import TPBox from '@/components/tp/tp-box.vue';
 import { useAlertStore } from '../stores/alertStore';
 const alertStore = useAlertStore();
 
