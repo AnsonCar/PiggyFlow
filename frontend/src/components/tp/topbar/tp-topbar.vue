@@ -7,7 +7,7 @@
       <a class="btn btn-ghost text-xl lg:hidden">{{ VITE_APP_NAME }}</a>
     </div>
     <div class="flex-none">
-      <slot name="navbarfuntion"></slot>
+      <slot name="navbar-funtion"></slot>
     </div>
   </nav>
 </template>
