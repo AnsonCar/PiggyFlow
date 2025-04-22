@@ -1,6 +1,6 @@
 <template>
   <main class="card bg-base-100 m-4 w-[86vw] transition-all duration-300 ease-out sm:w-sm">
-    <article class="card-body w-full">
+    <article class="card-body w-full" @keyup.enter="login">
       <!-- Tilte -->
       <h1 class="mb-4 w-full text-center text-4xl font-bold">{{ VITE_APP_NAME }}</h1>
       <!-- Input -->
