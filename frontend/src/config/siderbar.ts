@@ -13,11 +13,11 @@ export const siderItems = [
   //     { text: 'QRCode', name: 'qrcode' },
   //   ],
   // },
-  // {
-  //   text: '身份管理',
-  //   items: [
-  //     { text: '用戶', name: 'user' },
-  //     { text: '組別', name: 'group' },
-  //   ],
-  // },
+  {
+    text: '身份管理',
+    items: [
+      { text: '用戶', name: 'user' },
+      { text: '組別', name: 'group' },
+    ],
+  },
 ];
