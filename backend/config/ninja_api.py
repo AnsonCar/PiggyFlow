@@ -11,9 +11,9 @@ from .orjson_parser import ORJSONParser
 
 NAME = settings.NAME
 
-print("loadinf ninja api")
+print("loading ninja api")
 api = NinjaExtraAPI(app_name=NAME, title=NAME, parser=ORJSONParser())
 api.register_controllers(NinjaJWTDefaultController)
 api.add_router("/user", userRouter)
 api.add_router("/group", userGroupRouter)
-api.add_router("/todo", todoRouter)
+# api.add_router("/todo", todoRouter)
