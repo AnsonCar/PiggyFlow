@@ -1,7 +1,7 @@
 import { api, getHeaders } from "@/lib/Requester";
 
 export async function getUsers() {
-  const url = `/api/user/`;
+  const url = `/api/user`;
   const options = {
     method: 'get',
     headers: getHeaders(),
@@ -10,7 +10,7 @@ export async function getUsers() {
 }
 
 export async function createUser(data: UserIn) {
-  const url = `/api/user/`;
+  const url = `/api/user`;
   const options = {
     method: 'post',
     headers: getHeaders(),
@@ -20,7 +20,7 @@ export async function createUser(data: UserIn) {
 }
 
 export async function getUser(uuid: string) {
-  const url = `/api/user/${uuid}/`;
+  const url = `/api/user/${uuid}`;
   const options = {
     method: 'get',
     headers: getHeaders(),
@@ -29,7 +29,7 @@ export async function getUser(uuid: string) {
 }
 
 export async function updateUser(data: UserPut, uuid: string) {
-  const url = `/api/user/${uuid}/`;
+  const url = `/api/user/${uuid}`;
   const options = {
     method: 'put',
     headers: getHeaders(),
@@ -39,7 +39,7 @@ export async function updateUser(data: UserPut, uuid: string) {
 }
 
 export async function deleteUser(uuid: string) {
-  const url = `/api/user/${uuid}/`;
+  const url = `/api/user/${uuid}`;
   const options = {
     method: 'delete',
     headers: getHeaders(),
@@ -48,7 +48,7 @@ export async function deleteUser(uuid: string) {
 }
 
 export async function updateUserPassword(data: UserPutPassword, uuid: string) {
-  const url = `/api/user/${uuid}/password/`;
+  const url = `/api/user/${uuid}/password`;
   const options = {
     method: 'patch',
     headers: getHeaders(),
@@ -58,7 +58,7 @@ export async function updateUserPassword(data: UserPutPassword, uuid: string) {
 }
 
 export async function createUserGroup(data: UserGroup, uuid: string) {
-  const url = `/api/user/${uuid}/group/`;
+  const url = `/api/user/${uuid}/group`;
   const options = {
     method: 'post',
     headers: getHeaders(),
@@ -68,7 +68,7 @@ export async function createUserGroup(data: UserGroup, uuid: string) {
 }
 
 export async function deleteUserGroup(data: UserGroup, uuid: string) {
-  const url = `/api/user/${uuid}/group/`;
+  const url = `/api/user/${uuid}/group`;
   const options = {
     method: 'delete',
     headers: getHeaders(),

@@ -1,7 +1,7 @@
 import { api, getHeaders } from "@/lib/Requester";
 
 export async function obtainToken(data: TokenObtainPairInputSchema) {
-  const url = `/api/token/pair/`;
+  const url = `/api/token/pair`;
   const options = {
     method: 'post',
     headers: getHeaders(),
@@ -11,7 +11,7 @@ export async function obtainToken(data: TokenObtainPairInputSchema) {
 }
 
 export async function refreshToken(data: TokenRefreshInputSchema) {
-  const url = `/api/token/refresh/`;
+  const url = `/api/token/refresh`;
   const options = {
     method: 'post',
     headers: getHeaders(),
@@ -21,7 +21,7 @@ export async function refreshToken(data: TokenRefreshInputSchema) {
 }
 
 export async function verifyToken(data: TokenVerifyInputSchema) {
-  const url = `/api/token/verify/`;
+  const url = `/api/token/verify`;
   const options = {
     method: 'post',
     headers: getHeaders(),

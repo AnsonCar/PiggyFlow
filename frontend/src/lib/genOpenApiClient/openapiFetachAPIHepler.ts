@@ -124,7 +124,7 @@ function getApiName(summary: string): string {
  */
 function getPathName(path: string): string {
   const pathList = path.split('/');
-  const pathName = pathList.join('/').replace(/{/g, '${') + '/'; // 将 `{` 替换为 `${`
+  const pathName = pathList.join('/').replace(/{/g, '${'); // 将 `{` 替换为 `${`
   return pathName;
 }
 

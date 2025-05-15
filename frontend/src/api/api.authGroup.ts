@@ -1,7 +1,7 @@
 import { api, getHeaders } from "@/lib/Requester";
 
 export async function getGroups() {
-  const url = `/api/group/`;
+  const url = `/api/group`;
   const options = {
     method: 'get',
     headers: getHeaders(),
@@ -10,7 +10,7 @@ export async function getGroups() {
 }
 
 export async function createGroup(data: GroupIn) {
-  const url = `/api/group/`;
+  const url = `/api/group`;
   const options = {
     method: 'post',
     headers: getHeaders(),
@@ -20,7 +20,7 @@ export async function createGroup(data: GroupIn) {
 }
 
 export async function getGroup(uuid: number) {
-  const url = `/api/group/${uuid}/`;
+  const url = `/api/group/${uuid}`;
   const options = {
     method: 'get',
     headers: getHeaders(),
@@ -29,7 +29,7 @@ export async function getGroup(uuid: number) {
 }
 
 export async function updateGroup(data: GroupPut, uuid: number) {
-  const url = `/api/group/${uuid}/`;
+  const url = `/api/group/${uuid}`;
   const options = {
     method: 'put',
     headers: getHeaders(),
@@ -39,7 +39,7 @@ export async function updateGroup(data: GroupPut, uuid: number) {
 }
 
 export async function deleteGroup(uuid: number) {
-  const url = `/api/group/${uuid}/`;
+  const url = `/api/group/${uuid}`;
   const options = {
     method: 'delete',
     headers: getHeaders(),
