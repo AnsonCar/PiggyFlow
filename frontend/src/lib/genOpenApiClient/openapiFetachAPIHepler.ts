@@ -72,7 +72,6 @@ export function getOpenApiFetchAPI(openApiPaths: IPathsItems) {
   };
   return await ${fetchFunction}(url, options);
 }\n`;
-      console.log(apiFetch);
       if (!result[tag]) {
         result[tag] = [];
       }
