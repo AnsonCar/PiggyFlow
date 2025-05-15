@@ -41,3 +41,16 @@ export function formatOpenApiType(schema: ISchemasItem): string {
   let result = `interface ${schema.title} {\n${keys}\n}`;
   return result;
 }
+
+export function getOpenApiFetchAPI(pathName: string, pathsItem: TPathItem): string {
+  const methods = Object.keys(pathsItem).filter((key): key is keyof TPathItem => ['get', 'post', 'put', 'patch', 'delete'].includes(key));
+  console.log(pathName);
+  console.log(methods);
+  for (const method of methods) {
+    console.log(pathsItem[method]);
+  }
+  console.log();
+  return '';
+}
+
+export function exportTypeFile() {}

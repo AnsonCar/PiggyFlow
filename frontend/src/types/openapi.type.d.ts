@@ -5,15 +5,7 @@ interface IOpenApiSpec {
     version: string;
     description: string;
   };
-  paths: {
-    [path: string]: {
-      post?: any;
-      get?: any;
-      put?: any;
-      patch?: any;
-      delete?: any;
-    };
-  };
+  paths: IPathsItem;
   components: {
     schemas: {
       [schema: string]: ISchemasItem;
@@ -37,4 +29,20 @@ interface ISchemasItemProperties {
   anyOf?: [{ type: string }];
   title: string;
   type: string | 'string' | 'integer' | 'array';
+}
+
+interface IPathsItems {
+  [path: string]: TPathItem;
+}
+
+type TPathItem = Record<'post' | 'get' | 'put' | 'patch' | 'delete', IPathsItemData>;
+
+interface IPathsItemData {
+  operationId: string;
+  summary: string;
+  parameters: [[Object]];
+  responses: { '200': [Object] };
+  tags: string[];
+  requestBody?: { content: [Object]; required: true };
+  security?: [[Object]];
 }
