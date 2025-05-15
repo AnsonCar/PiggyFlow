@@ -40,9 +40,27 @@ type TPathItem = Record<'post' | 'get' | 'put' | 'patch' | 'delete', IPathsItemD
 interface IPathsItemData {
   operationId: string;
   summary: string;
-  parameters: [[Object]];
+  parameters: IPahrItemDataParameters[];
   responses: { '200': [Object] };
   tags: string[];
-  requestBody?: { content: [Object]; required: true };
+  requestBody?: IPathItemsDataRequestBody;
   security?: [[Object]];
+}
+
+interface IPathItemsDataRequestBody {
+  content: Record<'application/json', { schema: { $ref: string } }>;
+}
+
+interface IPahrItemDataParameters {
+  name: string;
+  in: string;
+  required: boolean;
+  schema: {
+    type: string;
+    format?: string;
+    items?: {
+      type: string;
+      format?: string;
+    };
+  };
 }
