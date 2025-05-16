@@ -1,3 +1,5 @@
+import GroupPage from '@/pages/auth/GroupPage.vue';
+import UserPage from '@/pages/auth/UserPage.vue';
 import { createRouter, createWebHistory, type RouteLocationNormalizedGeneric, type RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 import BaseLayout from '../layouts/BaseLayout.vue';
 import MainLayout from '../layouts/MainLayout.vue';
@@ -10,7 +12,16 @@ const routes = [
   {
     path: '',
     component: MainLayout,
-    children: [{ path: '', component: IndexPage, name: 'home' }],
+    children: [
+      { path: '', component: IndexPage, name: 'home' },
+      {
+        path: 'auth',
+        children: [
+          { path: 'user', component: UserPage, name: 'user' },
+          { path: 'group', component: GroupPage, name: 'group' },
+        ],
+      },
+    ],
   },
   {
     path: '/login',

@@ -8,7 +8,9 @@
   "editor.bracketPairColorization.enabled": true, // 啟用括號配對著色功能。
   "editor.guides.bracketPairs": true, // 在括號間顯示視覺導引線
   "editor.defaultFormatter": "esbenp.prettier-vscode", // 預設使用的程式碼格式化工具
-  "editor.rulers": [120], // 顯示程式碼寬度參考線
+  "editor.rulers": [
+    120
+  ], // 顯示程式碼寬度參考線
   "editor.codeActionsOnSave": [
     "source.organizeImports", // 保存時的整理導入。
     "source.fixAll", // 保存時的自動修復在一輪中計算所有可能的修復
@@ -35,7 +37,26 @@
   "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
   "javascript.inlayHints.variableTypes.enabled": true,
   // esLint
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "html", "markdown", "yaml", "toml", "xml", "gql", "graphql", "astro", "css", "less", "scss", "pcss", "postcss"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ],
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -59,7 +80,10 @@
   "python.analysis.autoIndent": true,
   "python.analysis.autoFormatStrings": true, // 在字串內輸入“{”時，是否自動加上“f”前綴。
   "python.analysis.completeFunctionParens": true, // 為函數補全添加括號。
-  "black-formatter.args": ["--line-length", "240"],
+  "black-formatter.args": [
+    "--line-length",
+    "240"
+  ],
   /*
    * GOLANG
    */
@@ -87,5 +111,16 @@
    */
   "[nginx]": {
     "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
-  }
+  },
+  /*
+   * PYTHON 2
+   */
+  "python.analysis.displayEnglishDiagnostics": true,
+  "python.analysis.disableTaggedHints": true,
+  "python.analysis.generateWithTypeAnnotation": true,
+  "python.analysis.includeAliasesFromUserFiles": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.typeEvaluation.strictDictionaryInference": true,
+  "python.analysis.typeEvaluation.strictListInference": true,
+  "python.analysis.typeEvaluation.strictSetInference": true
 }

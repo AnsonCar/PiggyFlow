@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
+import { obtainToken } from '@/api/api.token';
 import LoginBox from '@/components/Login/LoginBox.vue';
 import { useAlertStore } from '@/stores/alertStore';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/authStore';
-import { obtainToken } from '../utils/db_api';
 import { checkNull } from '../utils/func';
 
 const authStore = useAuthStore();
