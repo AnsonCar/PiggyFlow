@@ -51,25 +51,27 @@ const props = withDefaults(
   }
 );
 
+// 使用 defineModel 來實現 v-model
+const selectData = defineModel<any[]>('selectData', { default: () => [] });
+
 const displayData = computed<any[]>(() => {
   return props.data;
 });
 
 // Select Data
-const selectData = defineModel<any[]>('selectData', { default: () => [] });
 const selectAll = ref<boolean>(false);
-const selectIdArr = ref<(string | number)[]>([]);
-const selectArr = ref<any[]>([]);
+const selectIdArr = ref<(string | number)[]>(selectData.value.map(item => item[props.keyCol as string]));
 const stopUpdate = ref(false);
 
 watch(selectAll, (newVal) => {
   if (newVal) {
-    selectArr.value = displayData.value;
-    selectIdArr.value = displayData.value.map((item) => item[props.keyCol as string]);
+    const newSelectData = [...displayData.value];
+    selectIdArr.value = newSelectData.map((item) => item[props.keyCol as string]);
+    selectData.value = newSelectData;
   } else {
-    if (!stopUpdate.value || selectArr.value.length === displayData.value.length) {
-      selectArr.value = [];
+    if (!stopUpdate.value || selectData.value.length === displayData.value.length) {
       selectIdArr.value = [];
+      selectData.value = [];
     } else {
       stopUpdate.value = false;
     }
@@ -77,15 +79,23 @@ watch(selectAll, (newVal) => {
 });
 
 watch(selectIdArr, () => {
-  const selectData = props.data.filter((item) => selectIdArr.value.includes(item[props.keyCol as string]));
-  selectArr.value = selectData;
-  if (selectData.length === displayData.value.length) {
+  const newSelectData = props.data.filter((item) => selectIdArr.value.includes(item[props.keyCol as string]));
+  selectData.value = newSelectData;
+  if (newSelectData.length === displayData.value.length) {
     selectAll.value = true;
   } else {
     stopUpdate.value = true;
     selectAll.value = false;
   }
 });
+
+// 監聽外部 selectData 的變化
+watch(selectData, (newVal) => {
+  if (newVal) {
+    selectIdArr.value = newVal.map(item => item[props.keyCol as string]);
+    selectAll.value = newVal.length === displayData.value.length;
+  }
+}, { deep: true });
 
 const tableHeader = computed(() => {
   if (props.data.length > 0) {
