@@ -88,14 +88,13 @@ watch(selectAll, (newVal) => {
   }
 });
 
+// When updating from selectIdArr, avoid triggering selectData watcher unnecessarily
 watch(selectIdArr, () => {
-  const newSelectData = props.data.filter((item) => selectIdArr.value.includes(item[props.keyCol as string]));
-  selectData.value = newSelectData;
-  if (newSelectData.length === displayData.value.length) {
-    selectAll.value = true;
-  } else {
-    stopUpdate.value = true;
-    selectAll.value = false;
+  const newSelectData = props.data.filter((item) =>
+    selectIdArr.value.includes(item[props.keyCol as string])
+  );
+  if (JSON.stringify(selectData.value) !== JSON.stringify(newSelectData)) {
+    selectData.value = newSelectData;
   }
 });
 
