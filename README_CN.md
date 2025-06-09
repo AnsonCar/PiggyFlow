@@ -12,9 +12,7 @@
   <img src="https://img.shields.io/badge/Docker-Supported-blue" alt="Docker">
 </p>
 
-# English Version
-
-For English documentation, please see [README.md](/README.md).
+> For English documentation, please see [README.md](/README.md).
 
 ## 概述
 

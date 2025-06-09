@@ -12,9 +12,7 @@
   <img src="https://img.shields.io/badge/Docker-Supported-blue" alt="Docker">
 </p>
 
-## Chinese Version
-
-中文版本的介紹, 請查看 [README_CN.md](/README_CN.md).
+> 中文版本的介紹, 請查看 [README_CN.md](/README_CN.md).
 
 ## Overview
 
