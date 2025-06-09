@@ -1,89 +1,73 @@
 <p align="center">
-    <!-- <img width="192px" src="./docs/Logo/CY_Logo_Q2.png" > -->
+  <!-- <img width="192px" src="https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/MainWorkFlow.png" > -->
 </p>
+
 <h1 align="center"><b>Piggy Flow</b></h1>
 
-<p align="center">V 0.9.0</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.9.0-blue" alt="Version">
+  <img src="https://img.shields.io/github/license/AnsonCar/PiggyFlow" alt="License">
+  <img src="https://img.shields.io/badge/Vue-3.4-green" alt="Vue">
+  <img src="https://img.shields.io/badge/Django-5.1-green" alt="Django">
+  <img src="https://img.shields.io/badge/Docker-Supported-blue" alt="Docker">
+</p>
 
-<main style="text-align: center;">
-</main>
+> 中文版本的介紹, 請查看 [README_CN.md](/README_CN.md).
 
-## 功能
+## Overview
 
-## 快速部署
+Piggy Flow is a full-stack template project built with Vite Vue 3 and Django 5.
 
-### docker
+## Features
+
+- User authentication system
+- RESTful API with Django Ninja
+- Modern Vue 3 frontend
+- Dockerized deployment
+- Internationalization support
+
+## Tech Stack
+
+### Frontend
+
+- **Framework**: Vue 3 + Vite
+- **UI**: DaisyUI + Tailwind CSS
+- **State**: Pinia
+- **Language**: TypeScript
+
+### Backend
+
+- **Framework**: Django 5 + Django Ninja
+- **Authentication**: Django Ninja JWT
+- **Database**: PostgreSQL
+- **Async Tasks**: Celery + Redis
+
+## Quick Start
 
 ```bash
+# Development
 docker compose up -d --build
+
+# Production
+docker compose -f docker-compose-production.yml up -d --build
 ```
 
-如果是用於測試正式上線情況，請使用 stage 文件
+## UI Showcase
 
-```
-docker compose -f docker-compose-stage.yml up -d --build
-```
+| Login Screen                                                                                                      | Dashboard                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| ![Login](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo1.png) | ![Dashboard](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo2.png) |
 
-### 創建首個帳號
+| User Management                                                                                                   | API Docs                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![Users](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo3.png) | ![API](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo4.png) |
 
-#### 1. 打開 http://127.0.0.1:8000/api/docs
-
-<img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user.png" alt="Demo user"/></td>
-
-#### 2. 打開 /api/user (post)，轉入 username 和 password，按 Execute
-
-<img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo-user-create.png" alt="Demo user create" /></td>
-
-## UI 展示
-
-<table style="border-collapse: collapse; border: 1px solid black;">
-  <tr>
-    <td style="width:40%;padding: 5px;background-color:#fff;">
-      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo1.png" alt="Demo1"   />
-    </td>
-    <td style="width:40%;padding: 5px;background-color:#fff;">
-      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo2.png" alt="Demo2"   />
-    </td>
-  </tr>
-  <tr>
-    <td style="width:40%;padding: 5px;background-color:#fff;">
-      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo3.png" alt="Demo3" />
-    </td>
-    <td style="width:40%;padding: 5px;background-color:#fff;">
-      <img src= "https://raw.githubusercontent.com/AnsonCar/PiggyFlow/main/_document/vitepress/src/public/demo/demo4.png" alt="Demo4"/>
-    </td>
-  </tr>
-</table>
-
-## 項目架構
-
-![](https://raw.githubusercontent.com/AnsonCar/PiggyFlow/v0.0.7/_document/vitepress/src/public/MainWorkFlow.png)
-
-### 技術棧
-
-#### 前端
-
-**主用語言**: TypeScript  
-**Web 架框**: Nuxt 3 | Vue 3.4  
-**組件庫**: DaisyUI | Tailwind css  
-**其他**: ...
-
-### 后端
-
-**主用語言**: Python 3.12.5  
-**API 框架**: Django-ninja | Django 5.1  
-**其他**: Django-ninja-jwt ...
-
-## 項目結構
+## Project Structure
 
 ```
 .
-├── LICENSE
-├── README.md
-├── _document
-├── backend
-├── frontend
-├── docker-compose-production.yml
-├── docker-compose-stage.yml
-└── docker-compose.yml
+├── backend/       # Django backend
+├── frontend/      # Vue frontend
+├── _document/     # Documentation
+└── docker-compose.*.yml  # Docker configurations
 ```

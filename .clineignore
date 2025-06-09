@@ -1,0 +1,47 @@
+# Ignore environment variables
+
+.env
+.env.\*
+\*.env
+
+# Ignore IDE and editor files
+
+.idea/
+_.swp
+_.swo
+
+# Ignore build artifacts
+
+dist/
+build/
+node_modules/
+.quasar/
+
+# Ignore logs and databases
+
+_.log
+_.sqlite
+\*.db
+
+# Ignore OS generated files
+
+.DS_Store
+Thumbs.db
+
+# Ignore Python cache and bytecode
+
+**pycache**/
+\*.py[cod]
+
+# Ignore local development files
+
+docker-compose.override.yml
+
+# Testing
+
+/coverage/
+
+# Large data files
+
+_.csv
+_.xlsx
