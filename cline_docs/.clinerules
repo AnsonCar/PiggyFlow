@@ -1,0 +1,51 @@
+# Project Configuration
+
+## Tech Stack
+
+### Frontend
+
+- Vue 3 + Vite
+- TypeScript
+- DaisyUI + Tailwind CSS
+- Pinia for state management
+
+### Backend
+
+- Django 5 + Django Ninja
+- PostgreSQL database
+- Celery + Redis for async tasks
+- JWT authentication
+
+## Project Structure
+
+```
+.
+├── backend/       # Django backend
+│   ├── ansc_auth/ # Authentication app
+│   ├── config/    # Django settings
+│   ├── todo/      # Example app
+│   └── utils/     # Utility functions
+├── frontend/      # Vue frontend
+│   ├── src/       # Source code
+│   │   ├── api/   # API clients
+│   │   ├── components/ # UI components
+│   │   └── stores/ # State management
+└── docker-compose.*.yml  # Docker configurations
+```
+
+## Development Workflow
+
+- Use Docker for local development:
+  ```bash
+  docker compose up -d --build
+  ```
+- Database migrations are managed via Django migrations
+- Frontend and backend are developed separately but integrated via API
+
+## Security Rules
+
+DO NOT access or modify:
+
+- Any .env or environment configuration files
+- Database credentials or API keys
+- Production configuration files
