@@ -1,6 +1,13 @@
 <template>
   <TPBox>
-    <h1 class="text-xl">User</h1>
+    <header class="flex justify-between">
+      <h1 class="text-xl">User</h1>
+      <div>
+        <TPCrudBtn class="ml-2" mode="add" @click="() => { }" />
+        <TPCrudBtn class="ml-2" mode="edit" @click="() => { }" />
+        <TPCrudBtn class="ml-2" mode="delete" @click="() => { }" />
+      </div>
+    </header>
     <TDataTable :data="displayData" :hide-col="['uuid']" v-model:selectData="selectData" />
   </TPBox>
 </template>
@@ -8,6 +15,7 @@
 <script setup lang="ts">
 import { getUsers } from '@/api/api.authUser';
 import TPBox from '@/components/tp/tp-box.vue';
+import TPCrudBtn from '@/components/tp/tp-crud-btn.vue';
 import TDataTable from '@/components/tp/tp-data-table.vue';
 import { onMounted, ref } from 'vue';
 
