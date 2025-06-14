@@ -4,13 +4,16 @@ import { useAuthStore } from '@/stores/authStore';
 export async function api(url: string, options: RequestInit | undefined) {
   // 取得 url 資源 和 選項
   const BasisApiURL = 'http://localhost:8000';
-  const authStore = useAuthStore();
-  authStore.isLogin();
-
   const alertStore = useAlertStore();
   try {
     // 請求
     const res = await fetch(`${BasisApiURL}${url}`, options);
+    const authStore = useAuthStore();
+
+    if (!url.startsWith('/api/token')) {
+      authStore.reFresh();
+    }
+
     if (res.status !== 200) {
       alertStore.addItem({
         message: res.statusText,

@@ -15,12 +15,18 @@ export const useAuthStore = defineStore('authStore', {
         if (Object.keys(res).length === 0) {
           return true;
         } else {
-          const refreshRes = await refreshToken({ refresh: this.refresh });
-          if (refreshRes.refresh && refreshRes.access) {
-            this.token = refreshRes.access;
-            this.refresh = refreshRes.refresh;
-            return true;
-          }
+          return this.reFresh();
+        }
+      }
+      return false;
+    },
+    async reFresh() {
+      if (this.token && this.refresh) {
+        const refreshRes = await refreshToken({ refresh: this.refresh });
+        if (refreshRes.refresh && refreshRes.access) {
+          this.token = refreshRes.access;
+          this.refresh = refreshRes.refresh;
+          return true;
         }
       }
       return false;
