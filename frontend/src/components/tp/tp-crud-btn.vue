@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" @click="emit('click')" :class="getClass()">
+  <button class="btn" :class="getClass()">
     {{ mode }}
   </button>
 </template>
@@ -9,10 +9,6 @@
 const props = defineProps<{
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   mode: 'add' | 'edit' | 'delete';
-}>();
-
-const emit = defineEmits<{
-  (e: 'click'): void;
 }>();
 
 function getClass() {

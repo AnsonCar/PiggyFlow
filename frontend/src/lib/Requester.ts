@@ -1,12 +1,29 @@
+import { useAlertStore } from '@/stores/alertStore';
 import { useAuthStore } from '@/stores/authStore';
 
 export async function api(url: string, options: RequestInit | undefined) {
   // 取得 url 資源 和 選項
   const BasisApiURL = 'http://localhost:8000';
+  const alertStore = useAlertStore();
   try {
     // 請求
     const res = await fetch(`${BasisApiURL}${url}`, options);
+    if (res.status !== 200) {
+      alertStore.addItem({
+        message: res.statusText,
+        level: 'error',
+      });
+    }
+
     const data = await res.json();
+
+    if ('detail' in data) {
+      alertStore.addItem({
+        message: data.detail,
+        level: 'error',
+      });
+    }
+
     return data;
   } catch (error) {
     // 如果 請求失敗（Server 死咗 ）

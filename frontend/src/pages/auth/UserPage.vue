@@ -10,42 +10,36 @@
     </header>
     <TDataTable :data="displayData" :hide-col="['uuid']" v-model:selectData="selectData" />
     <!-- add diag -->
-    <KeepAlive>
-      <TPDiag id="add">
-        <h3 class="text-lg font-bold mb-3">Add</h3>
-        <div method="dialog flex flex-col">
-          <TPInput type="text" label="username" class="w-full mb-3" />
-          <TPInput type="text" label="password" class="w-full mb-3" />
-          <TPCrudBtn class="w-full" mode="add" />
-        </div>
-      </TPDiag>
-    </KeepAlive>
+    <TPDiag id="add">
+      <h3 class="text-lg font-bold mb-3">Add</h3>
+      <div method="dialog flex flex-col" @keyup.enter="addUser">
+        <TPInput type="text" label="username" class="w-full mb-3" v-model="username" />
+        <TPInput type="text" label="password" class="w-full mb-3" v-model="password" />
+        <TPCrudBtn class="w-full" mode="add" @click="addUser" />
+      </div>
+    </TPDiag>
     <!-- edit diag -->
-    <KeepAlive>
-      <TPDiag id="edit">
-        <h3 class="text-lg font-bold">Edit</h3>
-        <div class="modal-action">
-          <form method="dialog">
-            <TPCrudBtn class="ml-2" mode="edit" />
-          </form>
-        </div>
-      </TPDiag>
-    </KeepAlive>
+    <TPDiag id="edit">
+      <h3 class="text-lg font-bold">Edit</h3>
+      <div class="modal-action">
+        <form method="dialog">
+          <TPCrudBtn class="ml-2" mode="edit" />
+        </form>
+      </div>
+    </TPDiag>
     <!-- delect diag -->
     <TPDiag id="delect">
       <h3 class="text-lg font-bold">Hello!</h3>
       <p class="py-4">Press ESC key or click the button below to close</p>
       <div class="modal-action">
-        <form method="dialog">
-          <TPCrudBtn class="ml-2" mode="delete" />
-        </form>
+        <TPCrudBtn class="ml-2" mode="delete" @click="delectUsers" />
       </div>
     </TPDiag>
   </TPBox>
 </template>
 
 <script setup lang="ts">
-import { getUsers } from '@/api/api.authUser';
+import { createUser, deleteUser, getUsers } from '@/api/api.authUser';
 import TPBox from '@/components/tp/tp-box.vue';
 import TPCrudBtn from '@/components/tp/tp-crud-btn.vue';
 import TDataTable from '@/components/tp/tp-data-table.vue';
@@ -56,6 +50,9 @@ import { onMounted, ref } from 'vue';
 const data = ref<UserOut[]>([]);
 const displayData = ref<any[]>([]);
 const selectData = ref<any[]>([]);
+
+const username = ref('');
+const password = ref('');
 async function fetchUserData() {
   const res = await getUsers();
   if ('data' in res) {
@@ -73,6 +70,26 @@ async function initDisplayData() {
       groups: e.groups.join(','),
     };
   });
+}
+
+async function addUser() {
+  await createUser({
+    username: username.value,
+    password: password.value
+  });
+  add.close();
+  await fetchUserData();
+  await initDisplayData();
+}
+
+
+async function delectUsers() {
+  for (const e of selectData.value) {
+    await deleteUser(e.uuid);
+  }
+  delect.close();
+  await fetchUserData();
+  await initDisplayData();
 }
 
 onMounted(async () => {
