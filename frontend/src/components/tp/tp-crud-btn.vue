@@ -16,11 +16,11 @@ const emit = defineEmits<{
 }>();
 
 function getClass() {
-  let className = [];
-  className.push(`btn-${props.size || 'md'}`);
+  let className: string[] = [];
+  className.push(`btn-${props.size || 'sm'}`);
   switch (props.mode) {
     case 'add':
-      className.push('btn-primary');
+      className.push('btn-info');
       break;
     case 'edit':
       className.push('btn-warning');

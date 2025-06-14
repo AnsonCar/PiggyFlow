@@ -3,12 +3,44 @@
     <header class="flex justify-between">
       <h1 class="text-xl">User</h1>
       <div>
-        <TPCrudBtn class="ml-2" mode="add" @click="() => { }" />
-        <TPCrudBtn class="ml-2" mode="edit" @click="() => { }" />
-        <TPCrudBtn class="ml-2" mode="delete" @click="() => { }" />
+        <TPCrudBtn class="ml-2" mode="add" onclick="add.showModal()" />
+        <TPCrudBtn class="ml-2" mode="edit" onclick="edit.showModal()" />
+        <TPCrudBtn class="ml-2" mode="delete" onclick="delect.showModal()" />
       </div>
     </header>
     <TDataTable :data="displayData" :hide-col="['uuid']" v-model:selectData="selectData" />
+    <!-- add diag -->
+    <KeepAlive>
+      <TPDiag id="add">
+        <h3 class="text-lg font-bold mb-3">Add</h3>
+        <div method="dialog flex flex-col">
+          <TPInput type="text" label="username" class="w-full mb-3" />
+          <TPInput type="text" label="password" class="w-full mb-3" />
+          <TPCrudBtn class="w-full" mode="add" />
+        </div>
+      </TPDiag>
+    </KeepAlive>
+    <!-- edit diag -->
+    <KeepAlive>
+      <TPDiag id="edit">
+        <h3 class="text-lg font-bold">Edit</h3>
+        <div class="modal-action">
+          <form method="dialog">
+            <TPCrudBtn class="ml-2" mode="edit" />
+          </form>
+        </div>
+      </TPDiag>
+    </KeepAlive>
+    <!-- delect diag -->
+    <TPDiag id="delect">
+      <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <TPCrudBtn class="ml-2" mode="delete" />
+        </form>
+      </div>
+    </TPDiag>
   </TPBox>
 </template>
 
@@ -17,6 +49,8 @@ import { getUsers } from '@/api/api.authUser';
 import TPBox from '@/components/tp/tp-box.vue';
 import TPCrudBtn from '@/components/tp/tp-crud-btn.vue';
 import TDataTable from '@/components/tp/tp-data-table.vue';
+import TPDiag from '@/components/tp/tp-diag.vue';
+import TPInput from '@/components/tp/tp-input.vue';
 import { onMounted, ref } from 'vue';
 
 const data = ref<UserOut[]>([]);

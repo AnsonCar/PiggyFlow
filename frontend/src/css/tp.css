@@ -6,7 +6,31 @@
 }
 
 /*
-* Tonya Puzzle
+* CARD
 */
-@import './tp/input.css';
-@import './tp/card.css';
+.tp-card {
+  @apply card bg-base-100 h-full w-full;
+}
+
+.tp-card-body {
+  @apply card-body p-3;
+}
+
+/*
+* INPUT
+*/
+.tp-input {
+  @apply input flex items-center gap-2;
+}
+
+.tp-input-body {
+  @apply input grow rounded-none border-0;
+}
+
+.tp-input-error {
+  @apply input input-error flex items-center gap-2;
+}
+
+.tp-input-body-error {
+  @apply input input-error grow rounded-none border-x-0;
+}
