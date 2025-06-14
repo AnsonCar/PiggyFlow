@@ -1,5 +1,5 @@
+import { refreshToken, verifyToken } from '@/api/api.token';
 import { defineStore } from 'pinia';
-import { refreshToken, verifyToken } from '../utils/db_api';
 
 export const useAuthStore = defineStore('authStore', {
   state: () =>

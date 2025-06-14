@@ -4,6 +4,9 @@ import { useAuthStore } from '@/stores/authStore';
 export async function api(url: string, options: RequestInit | undefined) {
   // 取得 url 資源 和 選項
   const BasisApiURL = 'http://localhost:8000';
+  const authStore = useAuthStore();
+  authStore.isLogin();
+
   const alertStore = useAlertStore();
   try {
     // 請求

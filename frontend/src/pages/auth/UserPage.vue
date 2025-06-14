@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { createUser, deleteUser, getUsers } from '@/api/api.authUser';
+import { createUser, deleteUser, getUsers, updateUser } from '@/api/api.authUser';
 import TPBox from '@/components/tp/tp-box.vue';
 import TPCrudBtn from '@/components/tp/tp-crud-btn.vue';
 import TDataTable from '@/components/tp/tp-data-table.vue';
@@ -53,6 +53,8 @@ const selectData = ref<any[]>([]);
 
 const username = ref('');
 const password = ref('');
+const selectUUID = ref('');
+
 async function fetchUserData() {
   const res = await getUsers();
   if ('data' in res) {
@@ -73,16 +75,26 @@ async function initDisplayData() {
 }
 
 async function addUser() {
-  await createUser({
+  const res = await createUser({
     username: username.value,
     password: password.value
   });
   add.close();
   await fetchUserData();
   await initDisplayData();
+  username.value = "";
+  password.value = "";
 }
 
-
+async function editUser() {
+  await updateUser({
+    username: username.value
+  }, selectUUID.value);
+  await fetchUserData();
+  await initDisplayData();
+  username.value = "";
+  password.value = "";
+}
 async function delectUsers() {
   for (const e of selectData.value) {
     await deleteUser(e.uuid);
