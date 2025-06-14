@@ -4,7 +4,7 @@
       <h1 class="text-xl">User</h1>
       <div>
         <TPCrudBtn class="ml-2" mode="add" onclick="add.showModal()" />
-        <TPCrudBtn class="ml-2" mode="edit" onclick="edit.showModal()" />
+        <TPCrudBtn class="ml-2" mode="edit" @click="openEditDiag" />
         <TPCrudBtn class="ml-2" mode="delete" onclick="delect.showModal()" />
       </div>
     </header>
@@ -21,11 +21,11 @@
     <!-- edit diag -->
     <TPDiag id="edit">
       <h3 class="text-lg font-bold">Edit</h3>
-      <div class="modal-action">
-        <form method="dialog">
-          <TPCrudBtn class="ml-2" mode="edit" />
-        </form>
+      <div method="dialog flex flex-col" @keyup.enter="editUser">
+        <TPInput type="text" label="username" class="w-full mb-3" v-model="username" />
+        <TPCrudBtn class="w-full" mode="add" @click="editUser" />
       </div>
+
     </TPDiag>
     <!-- delect diag -->
     <TPDiag id="delect">
@@ -45,8 +45,10 @@ import TPCrudBtn from '@/components/tp/tp-crud-btn.vue';
 import TDataTable from '@/components/tp/tp-data-table.vue';
 import TPDiag from '@/components/tp/tp-diag.vue';
 import TPInput from '@/components/tp/tp-input.vue';
+import { useAlertStore } from '@/stores/alertStore';
 import { onMounted, ref } from 'vue';
 
+const alertStore = useAlertStore();
 const data = ref<UserOut[]>([]);
 const displayData = ref<any[]>([]);
 const selectData = ref<any[]>([]);
@@ -75,17 +77,29 @@ async function initDisplayData() {
 }
 
 async function addUser() {
-  const res = await createUser({
+  await createUser({
     username: username.value,
     password: password.value
   });
-  add.close();
+  const add = document.getElementById('add');
+  (add as HTMLDialogElement).close();
   await fetchUserData();
   await initDisplayData();
   username.value = "";
   password.value = "";
 }
 
+async function openEditDiag() {
+  if (selectData.value.length === 1) {
+    const edit = document.getElementById('edit');
+    (edit as HTMLDialogElement).showModal();
+  } else {
+    alertStore.addItem({
+      message: 'Please select one user',
+      level: 'warning'
+    });
+  }
+}
 async function editUser() {
   await updateUser({
     username: username.value
@@ -99,7 +113,8 @@ async function delectUsers() {
   for (const e of selectData.value) {
     await deleteUser(e.uuid);
   }
-  delect.close();
+  const delect = document.getElementById('delect');
+  (delect as HTMLDialogElement).close();
   await fetchUserData();
   await initDisplayData();
 }
