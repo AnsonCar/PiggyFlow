@@ -125,8 +125,8 @@ watch(selectAll, (newVal) => {
     selectData.value = newSelectData;
   } else {
     if (!stopUpdate.value || selectData.value.length === displayData.value.length) {
-      selectIdArr.value = [];
-      selectData.value = [];
+      // selectIdArr.value = [];
+      // selectData.value = [];
     } else {
       stopUpdate.value = false;
     }
