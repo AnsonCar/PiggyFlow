@@ -118,38 +118,33 @@ const selectAll = ref<boolean>(false);
 const selectIdArr = ref<(string | number)[]>(selectData.value.map(item => item[props.keyCol as string]));
 const stopUpdate = ref(false);
 
-watch(selectAll, (newVal) => {
-  if (newVal) {
+watch(selectAll, (newVal, oldVal) => {
+  // false -> true
+  if (!oldVal && newVal) {
     const newSelectData = [...displayData.value];
     selectIdArr.value = newSelectData.map((item) => item[props.keyCol as string]);
     selectData.value = newSelectData;
-  } else {
-    if (!stopUpdate.value || selectData.value.length === displayData.value.length) {
-      // selectIdArr.value = [];
-      // selectData.value = [];
-    } else {
-      stopUpdate.value = false;
-    }
+  } else if (!stopUpdate.value && oldVal && !newVal) { // ture -> true
+    selectIdArr.value = [];
+    selectData.value = [];
+  }
+  if (stopUpdate.value) {
+    stopUpdate.value = false;
   }
 });
 
-// When updating from selectIdArr, avoid triggering selectData watcher unnecessarily
-watch(selectIdArr, () => {
+
+watch(selectIdArr, (newVal, oldVal) => {
   const newSelectData = props.data.filter((item) =>
     selectIdArr.value.includes(item[props.keyCol as string])
   );
-  if (JSON.stringify(selectData.value) !== JSON.stringify(newSelectData)) {
-    selectData.value = newSelectData;
+  if (newSelectData.length === displayData.value.length) {
+    selectAll.value = true;
+  } else if (selectAll.value && newSelectData.length !== displayData.value.length) {
+    stopUpdate.value = true;
+    selectAll.value = false;
   }
 });
-
-// 監聽外部 selectData 的變化
-watch(selectData, (newVal) => {
-  if (newVal) {
-    selectIdArr.value = newVal.map(item => item[props.keyCol as string]);
-    selectAll.value = newVal.length === displayData.value.length;
-  }
-}, { deep: true });
 
 const tableHeader = computed(() => {
   if (props.data.length > 0) {
