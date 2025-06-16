@@ -144,6 +144,7 @@ watch(selectIdArr, (newVal, oldVal) => {
     stopUpdate.value = true;
     selectAll.value = false;
   }
+  selectData.value = newSelectData;
 });
 
 const tableHeader = computed(() => {
