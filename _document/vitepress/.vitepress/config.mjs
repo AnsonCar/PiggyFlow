@@ -20,7 +20,7 @@ export default defineConfig({
 
     footer: {
       message: "Design By AnsonCar",
-      copyright: "Copyright © 2024 Cetopus | STAR | Carhyme",
+      copyright: "Copyright © 2024 | Carhyme AnsonCar",
     },
     socialLinks: [
       { icon: "github", link: "https://github.com/AnsonCar/PiggyFlow" },
