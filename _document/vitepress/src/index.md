@@ -4,23 +4,16 @@ layout: home
 
 hero:
   name: "Piggy Flow"
-  text: "工作小工具"
+  text: ""
   tagline: 說明及技術文檔
-  # image:
-  #   src: /logo.png
-  #   alt: VitePress
   actions:
     - theme: brand
-      text: 技術文檔
-      link: /development/overview
-  #   - theme: alt
-  #     text: 模塊功能
-  #     link: /module/overview
+      text: 开始探索
+      link: /architecture
 
 features:
-  - title: 簡單工具
-    details: 利用 python 和 javascript 所構建的跨平台工具，
-  - title: 共享資料
-    details: 利用帳號管理多人共用記帳簿。
+  - title: 全栈项目模板
+    details: 基于 Vue 3 和 Django 5 的全栈项目模板
+  - title: 自動 生成 OpenAPI 客戶端
+    details: 從後端 OpenAPI 規範生成 TypeScript 客戶端
 ---
-
