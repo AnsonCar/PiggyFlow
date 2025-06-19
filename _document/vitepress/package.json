@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "vitepress": "^1.0.1"
+    "vitepress": "^1.0.1",
+    "vitepress-plugin-llms": "^1.4.0"
   },
   "scripts": {
     "dev": "vitepress dev --host --port 8082",
