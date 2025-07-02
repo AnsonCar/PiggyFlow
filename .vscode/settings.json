@@ -16,6 +16,7 @@
     "source.fixAll", // 保存時的自動修復在一輪中計算所有可能的修復
     "addMissingImports" // 在保存時添加所有缺少的導入
   ],
+  "explorer.compactFolders": false,
   /*
    * GIT
    */
@@ -80,6 +81,15 @@
   "python.analysis.autoIndent": true,
   "python.analysis.autoFormatStrings": true, // 在字串內輸入“{”時，是否自動加上“f”前綴。
   "python.analysis.completeFunctionParens": true, // 為函數補全添加括號。
+  "python.analysis.displayEnglishDiagnostics": true,
+  "python.analysis.disableTaggedHints": true,
+  "python.analysis.generateWithTypeAnnotation": true,
+  "python.analysis.includeAliasesFromUserFiles": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.typeEvaluation.strictDictionaryInference": true,
+  "python.analysis.typeEvaluation.strictListInference": true,
+  "python.analysis.typeEvaluation.strictSetInference": true,
+  "python.analysis.typeEvaluation.analyzeUnannotatedFunctions": true,
   "black-formatter.args": [
     "--line-length",
     "240"
@@ -112,15 +122,4 @@
   "[nginx]": {
     "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
   },
-  /*
-   * PYTHON 2
-   */
-  "python.analysis.displayEnglishDiagnostics": true,
-  "python.analysis.disableTaggedHints": true,
-  "python.analysis.generateWithTypeAnnotation": true,
-  "python.analysis.includeAliasesFromUserFiles": true,
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.typeEvaluation.strictDictionaryInference": true,
-  "python.analysis.typeEvaluation.strictListInference": true,
-  "python.analysis.typeEvaluation.strictSetInference": true
 }
