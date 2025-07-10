@@ -15,9 +15,12 @@ from pathlib import Path
 
 from config.apps import INSTALLED_APPS
 from config.caches import CACHES
+from config.cors import CORS_ALLOW_ALL_ORIGINS, CORS_ALLOWED_ORIGINS
+from config.csrf import CSRF_TRUSTED_ORIGINS
 from config.database import DATABASES
 from config.debug import DEBUG
 from config.middleware import MIDDLEWARE
+from config.ninja_setting import NINJA_JWT
 
 from .celery import app as celery_app
 
@@ -108,7 +111,7 @@ Celery App
 """
 __all__ = ("celery_app",)
 
-CELERY_TIMEZONE = "Australia/Tasmania"
+CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 

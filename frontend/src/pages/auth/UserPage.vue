@@ -91,6 +91,7 @@ async function addUser() {
 
 async function openEditDiag() {
   if (selectData.value.length === 1) {
+    selectUUID.value = selectData.value[0].uuid;
     const edit = document.getElementById('edit');
     (edit as HTMLDialogElement).showModal();
   } else {
@@ -108,6 +109,8 @@ async function editUser() {
   await initDisplayData();
   username.value = "";
   password.value = "";
+  const edit = document.getElementById('edit');
+  (edit as HTMLDialogElement).close();
 }
 async function delectUsers() {
   for (const e of selectData.value) {
