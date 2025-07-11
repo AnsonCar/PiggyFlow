@@ -16,11 +16,10 @@ from pathlib import Path
 from config.apps import INSTALLED_APPS
 from config.caches import CACHES
 from config.cors import CORS_ALLOW_ALL_ORIGINS, CORS_ALLOWED_ORIGINS
-from config.csrf import CSRF_TRUSTED_ORIGINS
 from config.database import DATABASES
 from config.debug import DEBUG
 from config.middleware import MIDDLEWARE
-from config.ninja_setting import NINJA_JWT
+from config.ninja.ninja_setting import NINJA_JWT
 
 from .celery import app as celery_app
 
@@ -33,7 +32,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-p4g688@8rjryoa&_p1==$qzg*h)lv*!r_8g01#yt%7z7nh1560"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    ".localhost",
+    "127.0.0.1",
+]
 
 ROOT_URLCONF = "config.urls"
 
