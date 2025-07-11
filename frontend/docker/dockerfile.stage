@@ -1,0 +1,17 @@
+FROM node AS base
+WORKDIR /app
+COPY . .
+
+FROM base AS builder
+RUN npm i
+RUN npm run build
+
+FROM nginx:1.23.1-alpine
+
+WORKDIR /www
+
+COPY --from=builder /app/dist/ .
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

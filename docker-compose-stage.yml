@@ -2,4 +2,4 @@ include:
   - path:
       - backend/docker-compose-stage.yml
   - path:
-      - frontend/docker-compose-stage.yml
+      - frontend/docker-compose.stage.yml
