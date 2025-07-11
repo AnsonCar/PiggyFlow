@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from .ninja_api import api
+from .ninja.ninja_api import api
 
 urlpatterns = [
     path("api/", api.urls),
